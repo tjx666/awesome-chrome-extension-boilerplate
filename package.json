@@ -1,0 +1,28 @@
+{
+  "name": "awesome-chrome-extension-boilerplate",
+  "version": "1.0.0",
+  "description": "an awesome boilerplate for chrome extension development!",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
+  },
+  "keywords": [
+    "chrome",
+    "chrome-extension",
+    "boilerplate",
+    "typeScript",
+    "react",
+    "webpack",
+    "hot-reload"
+  ],
+  "author": "YuTengjing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
+  },
+  "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
+  "devDependencies": {
+  }
+}
