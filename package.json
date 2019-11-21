@@ -1,29 +1,37 @@
 {
-  "name": "awesome-chrome-extension-boilerplate",
-  "version": "1.0.0",
-  "description": "an awesome boilerplate for chrome extension development!",
-  "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
-  },
-  "keywords": [
-    "chrome",
-    "chrome-extension",
-    "boilerplate",
-    "typeScript",
-    "react",
-    "webpack",
-    "hot-reload"
-  ],
-  "author": "YuTengjing",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
-  },
-  "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
-  "devDependencies": {
-    "prettier": "^1.19.1"
-  }
+    "name": "awesome-chrome-extension-boilerplate",
+    "version": "1.0.0",
+    "description": "an awesome boilerplate for chrome extension development!",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
+    },
+    "keywords": [
+        "chrome",
+        "chrome-extension",
+        "boilerplate",
+        "typeScript",
+        "react",
+        "webpack",
+        "hot-reload"
+    ],
+    "author": "YuTengjing",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
+    },
+    "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.8.0",
+        "@typescript-eslint/parser": "^2.8.0",
+        "eslint": "^6.6.0",
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.16.0",
+        "eslint-plugin-react-hooks": "^1.7.0",
+        "prettier": "^1.19.1"
+    }
 }
