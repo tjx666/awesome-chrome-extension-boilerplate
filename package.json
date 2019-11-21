@@ -24,5 +24,6 @@
   },
   "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
   "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }
