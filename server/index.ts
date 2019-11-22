@@ -1,20 +1,27 @@
 import express from 'express';
 import chalk from 'chalk';
 import devMiddlewares from './middlewares/devMiddlewares';
+import serverConfig from './configs/server.config';
 
-const app = express();
-devMiddlewares(app);
+const devServer = express();
+devMiddlewares(devServer);
 
-app.listen(3000, '127.0.0.1', async error => {
+const { HOST, PORT } = serverConfig;
+devServer.listen(PORT, HOST, async error => {
     if (error) {
-        console.error('Start server error:', error);
+        console.error('Startup devServer occur a error!');
+        console.error(error);
     } else {
+        const address = `http://${HOST}:${PORT}`;
         console.log(
-            `Server started at http://127.0.0.1:3000! ${chalk.green('✓')}`
+            `DevServer successfully startup at ${chalk.cyan.bold.underline(
+                address
+            )} ${chalk.green('✓')}!`
         );
     }
 });
 
-process.addListener('uncaughtException', error => {
+process.addListener('unhandledRejection', error => {
+    console.error('You may have a promise not caught!');
     console.error(error);
 });

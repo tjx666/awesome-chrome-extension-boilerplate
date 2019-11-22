@@ -5,7 +5,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import devConfig from '../configs/webpack.dev';
 
 export default (app: Express): void => {
-    const options = {
+    const compiler = webpack(devConfig);
+    const devMiddlewareOptions: webpackDevMiddleware.Options = {
         publicPath: devConfig!.output!.publicPath!,
         headers: {
             'Access-Control-Allow-Origin': '*',
@@ -23,10 +24,6 @@ export default (app: Express): void => {
         },
         writeToDisk: true,
     };
-
-    const compiler = webpack(devConfig);
-    const middleware = webpackDevMiddleware(compiler, options);
-
-    app.use(middleware);
+    app.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
     app.use(webpackHotMiddleware(compiler, { path: '/__webpack_HMR__' }));
 };
