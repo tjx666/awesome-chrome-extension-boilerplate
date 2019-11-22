@@ -6,10 +6,8 @@
     },
     "extends": [
         "airbnb",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript",
-        "plugin:react/recommended",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
     ],
     "globals": {
@@ -24,13 +22,7 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint",
-        "import",
-        "react",
-        "jsx-a11y",
-        "react-hooks"
-    ],
+    "plugins": ["@typescript-eslint", "react"],
     "settings": {
         "import/resolver": {
             "node": {
@@ -43,11 +35,6 @@
         "react/jsx-filename-extension": [
             1,
             { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-        ],
-
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-
-        "no-unused-vars": "warn"
+        ]
     }
 }
