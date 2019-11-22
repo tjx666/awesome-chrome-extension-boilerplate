@@ -4,7 +4,14 @@
         "es6": true,
         "node": true
     },
-    "extends": ["airbnb", "plugin:prettier/recommended"],
+    "extends": [
+        "airbnb",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -17,6 +24,30 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint"],
-    "rules": {}
+    "plugins": [
+        "@typescript-eslint",
+        "import",
+        "react",
+        "jsx-a11y",
+        "react-hooks"
+    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+            }
+        }
+    },
+    "rules": {
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-filename-extension": [
+            1,
+            { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+        ],
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        "no-unused-vars": "warn"
+    }
 }
