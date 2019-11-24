@@ -3,9 +3,10 @@ import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const projectRoot = resolve(__dirname, '../../');
-
 const commonConfig: webpack.Configuration = {
     entry: resolve(projectRoot, 'src/options/index.tsx'),
     output: {
@@ -15,10 +16,15 @@ const commonConfig: webpack.Configuration = {
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
+    watchOptions: {
+        ignored: [/node_modules/, /dist/, /docs/, /server/],
+    },
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     },
     plugins: [
+        new CleanWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
         new HtmlWebpackPlugin({
             filename: 'options.html',
             title: 'Refined Nowcoder - 选项与帮助',
@@ -54,7 +60,7 @@ const commonConfig: webpack.Configuration = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                 ],
@@ -70,7 +76,7 @@ const commonConfig: webpack.Configuration = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                     {
@@ -92,7 +98,7 @@ const commonConfig: webpack.Configuration = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [autoprefixer({})],
+                            plugins: [autoprefixer()],
                         },
                     },
                     'sass-loader',
