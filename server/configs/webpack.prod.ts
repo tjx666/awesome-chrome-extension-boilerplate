@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-import webpack from 'webpack';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';

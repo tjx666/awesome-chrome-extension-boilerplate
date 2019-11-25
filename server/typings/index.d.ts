@@ -21,3 +21,12 @@ declare module 'speed-measure-webpack-plugin' {
 
     export = SpeedMeasurePlugin;
 }
+
+declare module 'progress-bar-webpack-plugin' {
+    import { Compiler } from 'webpack';
+
+    class ProgressBarPlugin {
+        apply(compiler: Compiler): void;
+    }
+    export = ProgressBarPlugin;
+}

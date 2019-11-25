@@ -1,4 +1,3 @@
-import path from 'path';
 import { Express } from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';

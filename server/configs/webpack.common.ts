@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 
 const projectRoot = resolve(__dirname, '../../');
 
@@ -38,6 +39,7 @@ const commonConfig: webpack.Configuration = {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     },
     plugins: [
+        new ProgressBarPlugin(),
         new CleanWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
         new HtmlWebpackPlugin({
