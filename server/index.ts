@@ -1,5 +1,4 @@
 /* eslint-disable global-require, @typescript-eslint/no-var-requires */
-
 const isProd = process.env.NODE_ENV !== 'development';
 
 if (isProd) {
