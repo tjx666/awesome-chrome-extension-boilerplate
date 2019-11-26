@@ -14,8 +14,16 @@ const HMRClientScript = `webpack-hot-middleware/client?path=${HMRSSEPath}&reload
 
 const devEntry: Record<string, string[]> = {
     background: [HMRClientScript, resolve(sourcePath, './background/index.ts')],
-    options: [HMRClientScript, resolve(sourcePath, './options/index.tsx')],
-    popup: [HMRClientScript, resolve(sourcePath, './popup/index.tsx')],
+    options: [
+        HMRClientScript,
+        'react-hot-loader/patch',
+        resolve(sourcePath, './options/index.tsx'),
+    ],
+    popup: [
+        HMRClientScript,
+        'react-hot-loader/patch',
+        resolve(sourcePath, './popup/index.tsx'),
+    ],
 };
 
 const prodEntry: Record<string, string[]> = {

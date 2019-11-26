@@ -25,6 +25,15 @@ const start = () => {
         console.error('You may have a promise not caught!');
         console.error(error);
     });
+
+    process.on('SIGINT', () => {
+        console.log(
+            chalk.greenBright.bold(
+                `\n${Math.random() > 0.5 ? 'See you again!' : 'Goodbye!'}`
+            )
+        );
+        process.exit();
+    });
 };
 
 export = start;

@@ -38,6 +38,7 @@ const commonConfig: Configuration = {
     resolve: {
         extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
         alias: {
+            'react-dom': '@hot-loader/react-dom',
             '@': resolve(projectRoot, 'src'),
             utils: resolve(projectRoot, 'src/utils'),
             styles: resolve(projectRoot, 'src/styles'),
@@ -51,9 +52,19 @@ const commonConfig: Configuration = {
         }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
+            chunks: ['options'],
             filename: 'options.html',
-            title: 'Refined Nowcoder - 选项与帮助',
+            title: 'options page',
             template: resolve(projectRoot, 'public/options.html'),
+            inject: 'body',
+            minify: false,
+            cache: true,
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['popup'],
+            filename: 'popup.html',
+            title: 'popup page',
+            template: resolve(projectRoot, 'public/popup.html'),
             inject: 'body',
             minify: false,
             cache: true,
