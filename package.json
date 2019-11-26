@@ -12,12 +12,17 @@
         "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
     },
     "keywords": [
+        "awesome-chrome-extension-boilerplate",
+        "awesome",
         "chrome",
         "chrome-extension",
         "boilerplate",
+        "template",
         "typeScript",
         "react",
+        "react hooks",
         "webpack",
+        "babel",
         "hot-reload"
     ],
     "author": "YuTengjing",
