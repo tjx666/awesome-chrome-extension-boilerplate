@@ -37,7 +37,7 @@ const plugins: Plugin[] = [
         hashDigest: 'hex',
         hashDigestLength: 20,
     }),
-    new SizePlugin(),
+    new SizePlugin({ writeFile: false }),
     new HardSourceWebpackPlugin({
         info: { mode: 'none', level: 'error' },
     }),

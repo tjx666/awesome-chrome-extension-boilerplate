@@ -33,8 +33,12 @@ declare module 'progress-bar-webpack-plugin' {
 
 declare module 'size-plugin' {
     import { Compiler } from 'webpack';
+    interface SizePluginOptions {
+        writeFile?: boolean;
+    }
 
     class SizePlugin {
+        constructor(options: SizePluginOptions);
         apply(compiler: Compiler): void;
     }
     export = SizePlugin;
