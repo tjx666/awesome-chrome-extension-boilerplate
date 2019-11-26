@@ -36,7 +36,7 @@ const commonConfig: webpack.Configuration = {
         ignored: [/node_modules/, /dist/, /docs/, /server/],
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+        extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
     },
     plugins: [
         new ProgressBarPlugin(),
@@ -48,10 +48,9 @@ const commonConfig: webpack.Configuration = {
             template: resolve(projectRoot, 'public/options.html'),
             inject: 'body',
             minify: false,
+            cache: true,
         }),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-        }),
+        new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     ],
     module: {
         rules: [

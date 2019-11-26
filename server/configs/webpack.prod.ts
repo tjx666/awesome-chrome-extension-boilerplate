@@ -1,17 +1,18 @@
 /* eslint-disable global-require, @typescript-eslint/no-var-requires */
 import { resolve } from 'path';
 import { argv } from 'yargs';
-import webpack from 'webpack';
+import { Plugin, HashedModuleIdsPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin as TempBundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CompressionPlugin from 'compression-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import commonConfig from './webpack.common';
 
 const projectRoot = resolve(__dirname, '../../');
 
-const plugins: webpack.Plugin[] = [
+const plugins: Plugin[] = [
     new CopyPlugin([
         {
             from: resolve(projectRoot, 'public'),
@@ -29,6 +30,11 @@ const plugins: webpack.Plugin[] = [
         threshold: 10240,
         minRatio: 0.9,
     }),
+    new HashedModuleIdsPlugin({
+        hashFunction: 'sha256',
+        hashDigest: 'hex',
+        hashDigestLength: 20,
+    }),
 ];
 
 if (argv.analyze) {
@@ -41,6 +47,22 @@ if (argv.analyze) {
 const mergedConfig = merge(commonConfig, {
     mode: 'production',
     plugins,
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true,
+                extractComments: false,
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+            }),
+        ],
+    },
 });
 
 const smp = new SpeedMeasurePlugin();
