@@ -2,7 +2,6 @@ import { resolve } from 'path';
 import { Configuration, HashedModuleIdsPlugin } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
@@ -45,7 +44,6 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
-        new ProgressBarPlugin(),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
             hashDigest: 'hex',

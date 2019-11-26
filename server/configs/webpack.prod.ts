@@ -3,8 +3,9 @@ import { resolve } from 'path';
 import { argv } from 'yargs';
 import { Plugin } from 'webpack';
 import merge from 'webpack-merge';
-import CopyPlugin from 'copy-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin as TempBundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -16,6 +17,7 @@ import commonConfig from './webpack.common';
 const projectRoot = resolve(__dirname, '../../');
 
 const plugins: Plugin[] = [
+    new ProgressBarPlugin({ clear: false }),
     new CopyPlugin([
         {
             from: resolve(projectRoot, 'public'),

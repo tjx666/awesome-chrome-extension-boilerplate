@@ -15,7 +15,6 @@ declare module 'speed-measure-webpack-plugin' {
 
     class SpeedMeasurePlugin {
         constructor(options?: Partial<SpeedMeasurePluginOptions>);
-
         wrap(webpackConfig: Configuration): Configuration;
     }
 
@@ -25,9 +24,16 @@ declare module 'speed-measure-webpack-plugin' {
 declare module 'progress-bar-webpack-plugin' {
     import { Compiler } from 'webpack';
 
+    interface ProgressBarPluginOptions {
+        format: string;
+        clear: boolean;
+    }
+
     class ProgressBarPlugin {
+        constructor(options?: Partial<ProgressBarPluginOptions>);
         apply(compiler: Compiler): void;
     }
+
     export = ProgressBarPlugin;
 }
 
@@ -38,8 +44,9 @@ declare module 'size-plugin' {
     }
 
     class SizePlugin {
-        constructor(options: SizePluginOptions);
+        constructor(options?: SizePluginOptions);
         apply(compiler: Compiler): void;
     }
+
     export = SizePlugin;
 }
