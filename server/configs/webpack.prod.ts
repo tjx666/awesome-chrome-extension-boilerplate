@@ -1,7 +1,7 @@
 /* eslint-disable global-require, @typescript-eslint/no-var-requires */
 import { resolve } from 'path';
 import { argv } from 'yargs';
-import { Plugin, HashedModuleIdsPlugin } from 'webpack';
+import { Plugin } from 'webpack';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
@@ -10,6 +10,7 @@ import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import commonConfig from './webpack.common';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -25,17 +26,13 @@ const plugins: Plugin[] = [
             to: 'manifest.json',
         },
     ]),
+    new ForkTsCheckerWebpackPlugin({ memoryLimit: 2048 }),
     new CompressionPlugin({
         test: /\.(js|css|html|svg)$/,
         algorithm: 'gzip',
         cache: true,
         threshold: 10240,
         minRatio: 0.9,
-    }),
-    new HashedModuleIdsPlugin({
-        hashFunction: 'sha256',
-        hashDigest: 'hex',
-        hashDigestLength: 20,
     }),
     new SizePlugin({ writeFile: false }),
     new HardSourceWebpackPlugin({

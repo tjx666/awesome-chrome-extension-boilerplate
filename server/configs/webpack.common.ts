@@ -1,11 +1,12 @@
 import { resolve } from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, HashedModuleIdsPlugin } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
+import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
 
@@ -24,7 +25,7 @@ const CSSLoaders = (importLoaders: number) => {
 };
 
 const commonConfig: Configuration = {
-    entry: resolve(projectRoot, 'src/options/index.tsx'),
+    entry,
     output: {
         publicPath: '/',
         path: resolve(projectRoot, 'dist'),
@@ -37,11 +38,20 @@ const commonConfig: Configuration = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
+        alias: {
+            '@': resolve(projectRoot, 'src'),
+            utils: resolve(projectRoot, 'src/utils'),
+            styles: resolve(projectRoot, 'src/styles'),
+        },
     },
     plugins: [
         new ProgressBarPlugin(),
+        new HashedModuleIdsPlugin({
+            hashFunction: 'sha256',
+            hashDigest: 'hex',
+            hashDigestLength: 20,
+        }),
         new CleanWebpackPlugin(),
-        new ForkTsCheckerWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'options.html',
             title: 'Refined Nowcoder - 选项与帮助',
@@ -51,6 +61,12 @@ const commonConfig: Configuration = {
             cache: true,
         }),
         new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
+        new CircularDependencyPlugin({
+            exclude: /node_modules/,
+            failOnError: true,
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+        }),
     ],
     module: {
         rules: [
