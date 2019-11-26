@@ -17,6 +17,7 @@ import commonConfig from './webpack.common';
 const projectRoot = resolve(__dirname, '../../');
 
 const plugins: Plugin[] = [
+    // TODO: try to apply this in dev mode when the two progress bug is solve
     new ProgressBarPlugin({ clear: false }),
     new CopyPlugin([
         {

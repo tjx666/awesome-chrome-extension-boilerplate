@@ -4,6 +4,7 @@
     "description": "an awesome boilerplate for chrome extension development!",
     "scripts": {
         "start": "cross-env NODE_ENV=development ts-node --files -P ./server/tsconfig.json ./server",
+        "devtools": "npm start -- --devtools",
         "build": "cross-env NODE_ENV=production ts-node --files -P ./server/tsconfig.json ./server",
         "build:analyze": "npm run build -- --analyze"
     },
@@ -112,6 +113,7 @@
         "postcss-loader": "^3.0.0",
         "prettier": "^1.19.1",
         "progress-bar-webpack-plugin": "^1.12.1",
+        "react-devtools": "^4.2.0",
         "rimraf": "^3.0.0",
         "sass-loader": "^8.0.0",
         "size-plugin": "^2.0.1",
