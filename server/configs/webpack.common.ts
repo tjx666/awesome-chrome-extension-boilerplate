@@ -1,11 +1,11 @@
 import { resolve } from 'path';
-import webpack from 'webpack';
+import { Configuration } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const projectRoot = resolve(__dirname, '../../');
 
@@ -23,7 +23,7 @@ const CSSLoaders = (importLoaders: number) => {
     ];
 };
 
-const commonConfig: webpack.Configuration = {
+const commonConfig: Configuration = {
     entry: resolve(projectRoot, 'src/options/index.tsx'),
     output: {
         publicPath: '/',

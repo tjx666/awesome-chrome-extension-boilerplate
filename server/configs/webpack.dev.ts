@@ -1,8 +1,8 @@
 import { resolve } from 'path';
-import webpack from 'webpack';
+import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
 import merge from 'webpack-merge';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import commonConfig from './webpack.common';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -17,8 +17,8 @@ const devConfig = merge(commonConfig, {
                 to: 'manifest.json',
             },
         ]),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
+        new HotModuleReplacementPlugin(),
+        new NamedModulesPlugin(),
         new CircularDependencyPlugin({
             exclude: /node_modules/,
             failOnError: true,
