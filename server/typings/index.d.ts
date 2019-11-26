@@ -30,3 +30,12 @@ declare module 'progress-bar-webpack-plugin' {
     }
     export = ProgressBarPlugin;
 }
+
+declare module 'size-plugin' {
+    import { Compiler } from 'webpack';
+
+    class SizePlugin {
+        apply(compiler: Compiler): void;
+    }
+    export = SizePlugin;
+}

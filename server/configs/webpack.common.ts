@@ -41,7 +41,7 @@ const commonConfig: webpack.Configuration = {
     plugins: [
         new ProgressBarPlugin(),
         new CleanWebpackPlugin(),
-        new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
+        new ForkTsCheckerWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'options.html',
             title: 'Refined Nowcoder - 选项与帮助',

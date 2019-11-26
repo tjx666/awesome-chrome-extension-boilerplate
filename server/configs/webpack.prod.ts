@@ -8,6 +8,8 @@ import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin as TempBundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import SizePlugin from 'size-plugin';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import commonConfig from './webpack.common';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -34,6 +36,10 @@ const plugins: Plugin[] = [
         hashFunction: 'sha256',
         hashDigest: 'hex',
         hashDigestLength: 20,
+    }),
+    new SizePlugin(),
+    new HardSourceWebpackPlugin({
+        info: { mode: 'none', level: 'error' },
     }),
 ];
 
