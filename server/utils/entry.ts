@@ -32,7 +32,8 @@ const prodEntry: Record<string, string[]> = {
     popup: [resolve(sourcePath, './popup/index.tsx')],
 };
 
-const entry = process.env.NODE_ENV === 'development' ? devEntry : prodEntry;
+const isProd = process.env.NODE_ENV !== 'development';
+const entry = isProd ? prodEntry : devEntry;
 
 if (argv.devtools) {
     entry.options.unshift('react-devtools');
@@ -71,6 +72,9 @@ contentScriptNames.forEach(name => {
         ),
     ];
 });
-entry.all.unshift(resolve(__dirname, './extensionAutoReloadClient.ts'));
+
+if (!isProd) {
+    entry.all.unshift(resolve(__dirname, './extensionAutoReloadClient.ts'));
+}
 
 export default entry;
