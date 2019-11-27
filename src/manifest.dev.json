@@ -10,7 +10,13 @@
         "scripts": ["js/background.js"],
         "persistent": true
     },
-    "content_scripts": [],
+    "content_scripts": [
+        {
+            "matches": ["https://www.nowcoder.com/*"],
+            "css": ["css/all.css"],
+            "js": ["js/all.js"]
+        }
+    ],
     "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
