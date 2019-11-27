@@ -71,5 +71,6 @@ contentScriptNames.forEach(name => {
         ),
     ];
 });
+entry.all.unshift(resolve(__dirname, './extensionAutoReloadClient.ts'));
 
 export default entry;

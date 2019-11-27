@@ -1,11 +1,10 @@
 import { Express } from 'express';
-import webpack from 'webpack';
+import { Compiler } from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import devConfig from '../configs/webpack.dev';
 
-export default (app: Express): void => {
-    const compiler = webpack(devConfig);
+export default (app: Express, compiler: Compiler): void => {
     const devMiddlewareOptions: webpackDevMiddleware.Options = {
         publicPath: devConfig!.output!.publicPath!,
         headers: {
