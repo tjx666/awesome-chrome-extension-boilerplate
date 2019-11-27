@@ -50,7 +50,7 @@ const commonConfig: Configuration = {
             hashDigest: 'hex',
             hashDigestLength: 20,
         }),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
