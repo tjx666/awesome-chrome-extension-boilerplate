@@ -39,7 +39,7 @@ Please make sure you have a basic understanding about chrome extension developme
 
    Any page injected with content scripts must be injected with `js / all.js` and`css / all.css`, in other words, their matches should be a parent set of matches for all other content scripts :
 
-   ```json
+   ```javascript
    "content_scripts": [
        {
            "matches": ["https://github.com/*"],

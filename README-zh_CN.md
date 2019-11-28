@@ -41,7 +41,7 @@ npm install
 
    默认的配置是:
 
-   ```json
+   ```javascript
    "content_scripts": [
        {
            "matches": ["https://github.com/*"],
