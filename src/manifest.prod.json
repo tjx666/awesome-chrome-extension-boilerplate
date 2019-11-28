@@ -4,12 +4,17 @@
     "description": "this is a chrome extension boilerplate!",
     "manifest_version": 2,
     "permissions": [],
-    "minimum_chrome_version": "68",
     "background": {
         "scripts": ["js/background.js"],
         "persistent": true
     },
-    "content_scripts": [],
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "css": ["css/all.css"],
+            "js": ["js/all.js"]
+        }
+    ],
     "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {

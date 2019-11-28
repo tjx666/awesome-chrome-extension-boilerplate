@@ -5,14 +5,13 @@
     "manifest_version": 2,
     "permissions": [],
     "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000; object-src 'self';",
-    "minimum_chrome_version": "68",
     "background": {
         "scripts": ["js/background.js"],
         "persistent": true
     },
     "content_scripts": [
         {
-            "matches": ["https://www.nowcoder.com/*"],
+            "matches": ["https://github.com/*"],
             "css": ["css/all.css"],
             "js": ["js/all.js"]
         }
