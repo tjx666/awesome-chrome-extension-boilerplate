@@ -31,7 +31,7 @@ npm install
 
 Please make sure you have a basic understanding about chrome extension development.
 
-### Adjust boilerplate
+### adjust boilerplate
 
 1. modify the manifest.dev.json/manifest.prod.json according to your needs like name, version, description, permission etc...
 
@@ -60,7 +60,7 @@ Please make sure you have a basic understanding about chrome extension developme
 
 2. icons and HTML templates for options and popup pages are placed in `public` directory，replace the icons to your own extension icons
 
-### Startup devServer
+### startup devServer
 
 run follow npm script:
 
