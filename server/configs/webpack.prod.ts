@@ -7,7 +7,6 @@ import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin as TempBundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
@@ -30,13 +29,6 @@ const plugins: Plugin[] = [
         },
     ]),
     new ForkTsCheckerWebpackPlugin({ memoryLimit: 2048 }),
-    new CompressionPlugin({
-        test: /\.(js|css|html|svg)$/,
-        algorithm: 'gzip',
-        cache: true,
-        threshold: 10240,
-        minRatio: 0.9,
-    }),
     new SizePlugin({ writeFile: false }),
     new HardSourceWebpackPlugin({
         info: { mode: 'none', level: 'error' },
