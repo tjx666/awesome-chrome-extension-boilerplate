@@ -31,7 +31,7 @@ npm install
 
 请确保你对 chrome 扩展开发已经有基本的了解。
 
-### 调整模板
+### 1. 调整模板
 
 1. 根据你的实际需求修改 manifest.dev.json/manifest.prod.json 像 name, version, description, permission 等等...
 
@@ -62,7 +62,7 @@ npm install
 
 2. 图标和 HTML 模板都被放置在 public 文件夹下面，将图标替换成你自己的扩展的图标。
 
-### 启动 devServer
+### 2. 启动 devServer
 
 执行下面的 npm 脚本:
 
@@ -70,11 +70,19 @@ npm install
 npm start
 ```
 
-### [background](https://developer.chrome.com/extensions/background_pages)
+由于 chrome 的限制，官方的 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome 扩展并不能审查 `chrome-extension://` 协议的页面如 options，popup 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
+
+```bash
+npm run devtools
+```
+
+### 3. 编写代码
+
+#### [background](https://developer.chrome.com/extensions/background_pages)
 
 如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 background 脚本的 入口，其它像选项和弹窗页面脚本也类似。你可以查看 webpack entry 配置 `src/server/utils/entry.ts` 了解更多细节。
 
-### [options](https://developer.chrome.com/extensions/options) and [popup](https://developer.chrome.com/extensions/browserAction#popups) page
+#### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
 他俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个普通的 web APP 一样开发它们。
 
@@ -88,13 +96,11 @@ npm start
 npm run devtools
 ```
 
-### [content scripts](https://developer.chrome.com/extensions/content_scripts)
+#### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
-> Content scripts 是那些运行在 web 页面环境的文件
+content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它不能被删除，因为这个 webpack entry 要注入用于支持 chrome 扩展自动刷新的功能的补丁。
 
-Content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，它不能被删除，因为这个 webpack entry 要注入用于支持 chrome 扩展自动刷新的功能的补丁。
-
-#### 举个例子:
+**举个例子:**
 
 当你要给 URL 是 `https://www.example.com/discuss` 页面开发 content script，你需要做下面两步:
 
@@ -130,4 +136,4 @@ npm run build:analyze
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-非常欢迎提交 PRs 和 issues。
+欢迎提交 pull requests 和 issues。

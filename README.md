@@ -1,6 +1,6 @@
 # awesome-chrome-extension-boilerplate
 
-[![dependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate)[![devDependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate?type=dev)
+[![dependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate) [![devDependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate?type=dev)
 
 English | [简体中文](./README-zh_CN.md)
 
@@ -31,7 +31,7 @@ npm install
 
 Please make sure you have a basic understanding about chrome extension development.
 
-### adjust boilerplate
+### 1. adjust boilerplate
 
 1. modify the manifest.dev.json/manifest.prod.json according to your needs like name, version, description, permission etc...
 
@@ -60,19 +60,27 @@ Please make sure you have a basic understanding about chrome extension developme
 
 2. icons and HTML templates for options and popup pages are placed in `public` directory，replace the icons to your own extension icons
 
-### startup devServer
+### 2. startup devServer
 
-run follow npm script:
+run following npm script:
 
 ```bash
 npm start
 ```
 
-### [background](https://developer.chrome.com/extensions/background_pages)
+Due to the limitations of chrome, the official [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome extension cannot review the pages of the `chrome-extension: //` protocol. Such as options, popup pages. So you need to use the independent [react devtools](https://www.npmjs.com/package/react-devtools), start the devServer and open the independent devtools window at the same time:
+
+```bash
+npm run devtools
+```
+
+### 3. coding
+
+#### [background](https://developer.chrome.com/extensions/background_pages)
 
 If you want to develop background script, you can write your code under `src/background` directory. `scr/background/index.ts` is the webpack entry for background script, other scripts like options and popup page is similar. You can check `src/server/utils/entry.ts` which is the webpack entry config for more details.
 
-### [options](https://developer.chrome.com/extensions/options) and [popup](https://developer.chrome.com/extensions/browserAction#popups) page
+#### [options](https://developer.chrome.com/extensions/options) and [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
 The entries of them are `src/options/index.tsx` and `src/popup/index.tsx` respectively. The two pages is similar, all is just a normal web page, so you can just develop them like normal web APP.
 
@@ -86,15 +94,13 @@ As the chrome limitation, the [react devtools](https://chrome.google.com/webstor
 npm run devtools
 ```
 
-### [content scripts](https://developer.chrome.com/extensions/content_scripts)
+#### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
-> Content scripts are files that run in the context of web pages
+content scripts are all under `src/contents`. The default content script all.js should be injected to all the pages you will inject content scripts. It can't be deleted because the extension auto reload patch code is injected to by entry.
 
-Content scripts are all under `src/contents`. The default content script all.js should be injected to all the pages you will inject content scripts. It can't be deleted because the extension auto reload patch code is injected to by entry.
+**For example:**
 
-#### For example:
-
-When you want to develop a content script for URL `https://www.example.com/discuss`, you should do follow two steps:
+When you want to develop a content script for URL `https://www.example.com/discuss`, you should do following two steps:
 
 1. add the content scripts and page URL mapping to `manifest.dev.json` and `manifest.prod.json`:
 
