@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2015",
+        "target": "ES2019",
         "module": "ESNext",
         "allowJs": true,
         "checkJs": true,
@@ -31,5 +31,5 @@
 
         "forceConsistentCasingInFileNames": true
     },
-    "exclude": ["dist", "docs", "node_modules", "public", "server"]
+    "include": ["src"]
 }
