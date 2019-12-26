@@ -1,43 +1,45 @@
 # awesome-chrome-extension-boilerplate
 
-[![dependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate) [![devDependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate?type=dev)
+[![Build Status](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate.svg?branch=master)](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate) [![dependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/status.svg)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate) [![devDependencies Status](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate/dev-status.svg)](https://david-dm.org/tjx666/awesome-chrome-extension-boilerplate?type=dev) [![Known Vulnerabilities](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate?targetFile=package.json) [![Percentage of issues still open](https://isitmaintained.com/badge/open/tjx666/awesome-chrome-extension-boilerplate.svg)](http://isitmaintained.com/project/tjx666/awesome-chrome-extension-boilerplate')
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README-en.md) | 简体中文
 
-> an awesome boilerplate for chrome extension development on top of **React** & **TypeScript** & **webpack**
+> 一个超棒的基于 React & TypeScript & webpack 的 chrome 扩展开发模板
 
-## :sparkles: Features
+## :sparkles: 特性
 
-- react & react hooks & react hot reload & react devtools ready for options and popup pages
-- The whole project is written by TypeScript, includes webpack configurations and devServer
-- Support extension auto reload when you modify the content scripts code
-- Support sass/less as CSS extension language. Use mini-css-extract-plugin to extracts CSS into separate content CSS scripts
-- Integrate many awesome webpack plugins to optimize webpack build and bundle analyze
-- Use eslint and related plugins to lint TypeScript, babel to compile TypeScript and fork-ts-checker-webpack-plugin to check TypeScript Types
+- 选项和弹窗页面支持 react & react hooks & react hot reload & react devtools
+- 整个页面包括 webpack 配置和 devServer 都是用 TypeScript 编写的
+- 支持修改 content scripts 代码自动刷新扩展和当前页面
+- 支持 sass/less CSS 扩展语言，使用 mini-css-extract-plugin 插件将 CSS 分离成 content CSS Script
+- 集成了很多的优秀 webpack 插件优化 webpack 构建和 bundle 分析
+- 使用 eslint 和相关插件 lint TypeScript，babel 编译 TypeScript，fork-ts-checker-webpack-plugin 检查 TypeScript 类型
 
-## :package: Installation
+## :package: 安装
 
 ```bash
-# clone the boilerplate
+# 克隆这个模板
 git clone git@github.com:tjx666/awesome-chrome-extension-boilerplate.git your-extension-name
 
-# install dependencies, recommand yarn
+# 安装依赖，推荐使用 yarn
 yarn
-# or you can use npm
+# 或者使用 npm
 npm install
 ```
 
-## :hammer_and_wrench: Development
+## :hammer_and_wrench: 开发
 
-Please make sure you have a basic understanding about chrome extension development.
+请确保你对 chrome 扩展开发已经有基本的了解。
 
-### 1. adjust boilerplate
+### 1. 调整模板
 
-1. modify the manifest.dev.json/manifest.prod.json according to your needs like name, version, description, permission etc...
+1. 根据你的实际需求修改 manifest.dev.json/manifest.prod.json 中的字段，像 name, version, description, permission 等等...
 
-   **notes:**
+   **注意:**
 
-   Any page injected with content scripts must be injected with `js / all.js` and`css / all.css`, in other words, their matches should be a parent set of matches for all other content scripts :
+   任何注入了 content scripts 的页面都必须被注入 `js/all.js` 和 `css/all.css` ，你看我取文件名都叫 all。也就是说，他俩的 matches 应该是其它所有 content scripts 的 matches 的父集。
+
+   默认的配置是:
 
    ```javascript
    "content_scripts": [
@@ -47,8 +49,8 @@ Please make sure you have a basic understanding about chrome extension developme
            "js": ["js/all.js"]
        },
        {
-           // There should also be a folder named pulls in the src/contents directory
-           // "https://github.com/pulls" is a subset of "https://github.com/*"
+           // src/contents 目录下也应该有 pulls 文件夹
+           // "https://github.com/pulls" 是 "https://github.com/*" 的子集
            "matches": ["https://github.com/pulls"],
            "css": ["css/pulls.css"],
            "js": ["js/pulls.js"]
@@ -56,53 +58,49 @@ Please make sure you have a basic understanding about chrome extension developme
    ]
    ```
 
-   The above configuration means that the matches of other content scripts are all a subset of `https: // github.com / *`, ensuring that all pages are injected with all.js and all.css when other content scripts are injected.If you don't need to develop content scripts, delete the above configuration directly.
+   上面的配置中，其它的 content scripts 的 matches `https://github.com/pulls` 是 `https://github.com/*` 的子集，确保了将 `js/pulls.js` 和 `css/pulls.css` 注入 `https://github.com/pulls` 页面时也注入了 `js/all.js` 和 `css/all.css`。如果你不需要开发 content scripts，直接删除上面的配置。
 
-2. icons and HTML templates for options and popup pages are placed in `public` directory，replace the icons to your own extension icons
+2. 图标和 HTML 模板等资源文件都被放置在 public 文件夹下面，将图标替换成你自己的扩展的图标，打包时会被自动 copy 到 dist 中。
 
-### 2. startup devServer
+### 2. 启动 devServer
 
-run following npm script:
+执行下面的 npm 脚本:
 
 ```bash
 npm start
 ```
 
-Due to the limitations of chrome, the official [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome extension cannot review the pages of the `chrome-extension: //` protocol. Such as options, popup pages. So you need to use the independent [react devtools](https://www.npmjs.com/package/react-devtools), start the devServer and open the independent devtools window at the same time:
+由于 chrome 的限制，官方的 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome 扩展并不能审查 `chrome-extension://` 协议的页面如 options，popup 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
 
 ```bash
 npm run devtools
 ```
 
-### 3. coding
+### 3. 编写代码
 
 #### [background](https://developer.chrome.com/extensions/background_pages)
 
-If you want to develop background script, you can write your code under `src/background` directory. `scr/background/index.ts` is the webpack entry for background script, other scripts like options and popup page is similar. You can check `src/server/utils/entry.ts` which is the webpack entry config for more details.
+如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 background 脚本的 入口，其它像选项和弹窗页面脚本也类似。你可以查看 webpack entry 配置 `src/server/utils/entry.ts` 了解更多实现细节。
 
-#### [options](https://developer.chrome.com/extensions/options) and [popup](https://developer.chrome.com/extensions/browserAction#popups)
+#### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
-The entries of them are `src/options/index.tsx` and `src/popup/index.tsx` respectively. The two pages is similar, all is just a normal web page, so you can just develop them like normal web APP.
+它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个普通的 web APP 一样开发它们。
 
-The boilerplate uses the latest react version, so you can use the react hooks to develop function component, eslint rules of react hooks is also integrated.
+这个模板使用的 react 的最新版本，因此你可以使用 react hooks 去开发函数组件，react hooks 的 eslint 规则也集成了。
 
-The boilerplate use [react-hot-reload](https://github.com/gaearon/react-hot-loader) to support react hot reload. When the [React Fast Refresh](https://github.com/facebook/react/issues/16604) supports webpack env, it would be replaced.
-
-As the chrome limitation, the [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) chrome extension can't be used in options and popup page, but we can use the standalone [react devtools](https://www.npmjs.com/package/react-devtools). The boilerplate will not startup the standalone devtools by default, startup the devtools at the same time as startup dev server using npm script:
-
-```bash
-npm run devtools
-```
+模板使用 [react-hot-reload](https://github.com/gaearon/react-hot-loader) 支持 react 的热更新。等到 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 webpack 环境了，它将被替换。
 
 #### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
-content scripts are all under `src/contents`. The default content script all.js should be injected to all the pages you will inject content scripts. It can't be deleted because the extension auto reload patch code is injected to by entry.
+这个模板会扫描 `src/contents` 文件夹，将所有子文件夹中的 `index.tsx`或 `index/ts` 作为 webpack entry。
 
-**For example:**
+content scripts 都放在 `src/contents` 目录下。默认有个 all.ts，也是个 webpack entry，它不能被删除，因为这个 webpack entry 被用于注入实现 chrome 扩展自动刷新的功能的补丁。
 
-When you want to develop a content script for URL `https://www.example.com/discuss`, you should do following two steps:
+**举个例子:**
 
-1. add the content scripts and page URL mapping to `manifest.dev.json` and `manifest.prod.json`:
+当你要给 URL 是 `https://www.example.com/discuss` 页面开发 content script，你需要做下面两步:
+
+1. 添加 content scripts 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
    ```json
    "content_scripts": [
@@ -114,22 +112,24 @@ When you want to develop a content script for URL `https://www.example.com/discu
    ],
    ```
 
-2. create a folder named `discuss` corresponds to above content js script path config under `src/contents`. The boilerplate will regard `src/discuss/index.tsx` or `src/discuss/index.ts` as entry. **mini-css-extract-plugin** will extracts the all the styles imported by the `discuss` entry to `discuss.css`, this is why you can set content CSS script `css/discuss.css` in manifest.json.
+2. 创建一个和上面 content js script 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 会被视为一个 webpack entry。 webpack 会通过这个 entry 最终产出 `js/discuss.js` 这个 chunk。
 
-## :construction_worker: Build
+   **mini-css-extract-plugin** 将所有被 `discuss` entry 导入的样式文件分离到 `dist/css/discuss.css`，这也是为什么上面的 manifest.json 中 content CSS script 可以使用 `css/discuss.css` 的原因
 
-Build a production level bundle just run:
+## :construction_worker: 构建
+
+构建生产级别的包直接运行：
 
 ```bash
 npm run build
 ```
 
-If you want to analyze the bundle, you can run:
+如果你想分析打包情况：
 
 ```bash
 npm run build:analyze
 ```
 
-## :handshake: Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Please feel free to make any PRs or submit an issue.
+欢迎提交 pull requests 和 issues。
