@@ -1,4 +1,4 @@
-/* eslint-disable global-require, @typescript-eslint/no-var-requires */
+/* eslint-disable global-require, prefer-destructuring */
 import { resolve } from 'path';
 import { argv } from 'yargs';
 import { Plugin } from 'webpack';
@@ -11,13 +11,13 @@ import TerserPlugin from 'terser-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+
 import commonConfig from './webpack.common';
 
 const projectRoot = resolve(__dirname, '../../');
 
 const plugins: Plugin[] = [
-    // TODO: try to apply this in dev mode when the two progress bug is solve
-    new ProgressBarPlugin({ clear: false }),
+    new ProgressBarPlugin(),
     new CopyPlugin([
         {
             from: resolve(projectRoot, 'public'),
@@ -36,7 +36,6 @@ const plugins: Plugin[] = [
 ];
 
 if (argv.analyze) {
-    // eslint-disable-next-line prefer-destructuring
     const BundleAnalyzerPlugin: typeof TempBundleAnalyzerPlugin = require('webpack-bundle-analyzer')
         .BundleAnalyzerPlugin;
     plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: true }));
@@ -64,6 +63,6 @@ const mergedConfig = merge(commonConfig, {
 });
 
 const smp = new SpeedMeasurePlugin();
-const devConfig = smp.wrap(mergedConfig);
+const prodConfig = smp.wrap(mergedConfig);
 
-export default devConfig;
+export default prodConfig;

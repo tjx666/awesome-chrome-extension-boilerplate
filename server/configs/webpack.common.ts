@@ -5,6 +5,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
+
 import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -45,6 +47,7 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
+        new FriendlyErrorsPlugin(),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
             hashDigest: 'hex',
@@ -111,7 +114,7 @@ const commonConfig: Configuration = {
                 ],
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.s[ac]ss$/,
                 use: [...CSSLoaders(2), 'sass-loader'],
             },
             {
@@ -121,7 +124,7 @@ const commonConfig: Configuration = {
                         loader: 'url-loader',
                         options: {
                             limit: 8192,
-                            name: '[name].[hash:8].[ext]',
+                            name: '[name].[hash].[ext]',
                             outputPath: 'images',
                         },
                     },
@@ -133,7 +136,7 @@ const commonConfig: Configuration = {
                     {
                         loader: 'url-loader',
                         options: {
-                            name: '[name]-[contenthash].[ext]',
+                            name: '[name]-[hash].[ext]',
                             outputPath: 'fonts',
                         },
                     },
