@@ -4,6 +4,7 @@ import fs from 'fs';
 import { argv } from 'yargs';
 import { exec as tempExec } from 'child_process';
 import tempUtils from 'util';
+
 import serverConfig from '../configs/server.config';
 
 const sourcePath = resolve(__dirname, '../../src');

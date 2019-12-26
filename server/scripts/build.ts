@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import chalk from 'chalk';
+
 import prodConfig from '../configs/webpack.prod';
 
 export = () => {
