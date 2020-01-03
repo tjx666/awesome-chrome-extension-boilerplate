@@ -1,10 +1,3 @@
-/* eslint-disable global-require, @typescript-eslint/no-var-requires */
-const isProd = process.env.NODE_ENV !== 'development';
+import { isProd } from './utils/env';
 
-if (isProd) {
-    require('./scripts/build')();
-} else {
-    require('./scripts/start')();
-}
-
-export default null;
+require(`./scripts/${isProd ? 'build' : 'start'}`);

@@ -11,7 +11,7 @@ import entry from '../utils/entry';
 
 const projectRoot = resolve(__dirname, '../../');
 
-const CSSLoaders = (importLoaders: number) => {
+const getCSSLoaders = (importLoaders: number) => {
     return [
         MiniCssExtractPlugin.loader,
         { loader: 'css-loader', options: { importLoaders } },
@@ -34,11 +34,8 @@ const commonConfig: Configuration = {
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
-    watchOptions: {
-        ignored: [/node_modules/, /dist/, /docs/, /server/],
-    },
     resolve: {
-        extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.json', '.js'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@': resolve(projectRoot, 'src'),
@@ -60,7 +57,6 @@ const commonConfig: Configuration = {
             title: 'options page',
             template: resolve(projectRoot, 'public/options.html'),
             inject: 'body',
-            minify: false,
             cache: true,
         }),
         new HtmlWebpackPlugin({
@@ -69,7 +65,6 @@ const commonConfig: Configuration = {
             title: 'popup page',
             template: resolve(projectRoot, 'public/popup.html'),
             inject: 'body',
-            minify: false,
             cache: true,
         }),
         new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
@@ -97,12 +92,12 @@ const commonConfig: Configuration = {
             },
             {
                 test: /\.css$/,
-                use: CSSLoaders(1),
+                use: getCSSLoaders(1),
             },
             {
                 test: /\.less$/,
                 use: [
-                    ...CSSLoaders(2),
+                    ...getCSSLoaders(2),
                     {
                         loader: 'less-loader',
                         options: {
@@ -114,8 +109,8 @@ const commonConfig: Configuration = {
                 ],
             },
             {
-                test: /\.s[ac]ss$/,
-                use: [...CSSLoaders(2), 'sass-loader'],
+                test: /\.scss$/,
+                use: [...getCSSLoaders(2), 'sass-loader'],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

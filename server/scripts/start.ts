@@ -3,28 +3,28 @@ import chalk from 'chalk';
 import webpack from 'webpack';
 import logSymbols from 'log-symbols';
 
-import devMiddlewares from '../middlewares/devMiddlewares';
-import extensionAutoReload from '../middlewares/extensionAutoReload';
+import webpackMiddlewares from '../middlewares/webpackMiddlewares';
+import extAutoReload from '../middlewares/extAutoReload';
 import serverConfig from '../configs/server.config';
 import devConfig from '../configs/webpack.dev';
 
-const start = () => {
+function start() {
     const devServer = express();
     const compiler = webpack(devConfig);
-    devMiddlewares(devServer, compiler);
-    devServer.use('/__extension_auto_reload__', extensionAutoReload(compiler));
+
+    webpackMiddlewares(devServer, compiler);
+    devServer.use('/__extension_auto_reload__', extAutoReload(compiler));
 
     const { HOST, PORT } = serverConfig;
     devServer.listen(PORT, HOST, async error => {
         if (error) {
-            console.error(
-                `${chalk.red.bold('ERROR')} Startup devServer occur a error!`
-            );
+            // prettier-ignore
+            console.error(`${chalk.bgRed.black(' ERROR ')} Startup devServer occur a error!`);
             console.error(error);
         } else {
             const address = `http://${HOST}:${PORT}`;
             // prettier-ignore
-            console.log(`${chalk.bgYellow.black.bold(' INFO ')} DevServer is running at ${chalk.magenta.bold.underline(address)} ${logSymbols.success}`);
+            console.log(`${chalk.bgYellow.black(' INFO ')} DevServer is running at ${chalk.magenta.underline(address)} ${logSymbols.success}`);
         }
     });
 
@@ -41,6 +41,6 @@ const start = () => {
         );
         process.exit();
     });
-};
+}
 
-export = start;
+start();

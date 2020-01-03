@@ -75,5 +75,3 @@ source.addEventListener(
     },
     false
 );
-
-export default null;

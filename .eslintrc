@@ -32,20 +32,36 @@
         }
     },
     "rules": {
+        "no-console": "off",
+        "func-names": "off",
+
         "react/jsx-indent": ["error", 4],
         "react/jsx-filename-extension": [
             1,
             { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
         ],
 
+        "import/extensions": "off",
         "import/no-extraneous-dependencies": [
             "error",
             { "devDependencies": true }
         ],
 
-        "no-console": "off",
-
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["server/**/*.ts"],
+            "rules": {
+                "global-require": "off",
+                "no-unused-expressions": "off",
+
+                "import/no-extraneous-dependencies": "off",
+                "import/no-dynamic-require": "off",
+
+                "@typescript-eslint/no-var-requires": "off"
+            }
+        }
+    ]
 }
