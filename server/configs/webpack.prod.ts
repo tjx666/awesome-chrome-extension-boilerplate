@@ -56,7 +56,6 @@ const mergedConfig = merge(commonConfig, {
         ],
     },
 });
-
 const smp = new SpeedMeasurePlugin();
 const prodConfig = smp.wrap(mergedConfig);
 

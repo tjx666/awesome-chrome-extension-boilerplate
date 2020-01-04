@@ -126,7 +126,7 @@ npm run build:analyze
 
 ## :loudspeaker: 注意事项
 
-`src/all` 包含了实现修改 content script 自动重载扩展和刷新当前页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
+`src/all` 和 `src/background`下的文件 含了实现修改 content script 自动重载扩展和刷新当前页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 

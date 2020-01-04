@@ -18,7 +18,6 @@ function start() {
     const { HOST, PORT } = serverConfig;
     devServer.listen(PORT, HOST, async error => {
         if (error) {
-            // prettier-ignore
             console.error(`${chalk.bgRed.black(' ERROR ')} Startup devServer occur a error!`);
             console.error(error);
         } else {
@@ -34,11 +33,7 @@ function start() {
     });
 
     process.on('SIGINT', () => {
-        console.log(
-            chalk.greenBright.bold(
-                `\n${Math.random() > 0.5 ? 'See you again' : 'Goodbye'}!`
-            )
-        );
+        console.log(chalk.greenBright.bold(`\n${Math.random() > 0.5 ? 'See you again' : 'Goodbye'}!`));
         process.exit();
     });
 }

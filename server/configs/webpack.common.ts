@@ -79,15 +79,8 @@ const commonConfig: Configuration = {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
-                use: [
-                    'thread-loader',
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            cacheDirectory: true,
-                        },
-                    },
-                ],
+                loader: 'babel-loader',
+                options: { cacheDirectory: true },
                 exclude: /node_modules/,
             },
             {
@@ -101,9 +94,8 @@ const commonConfig: Configuration = {
                     {
                         loader: 'less-loader',
                         options: {
-                            // use modifyVars to custom antd theme
-                            modifyVars: {},
                             javascriptEnabled: true,
+                            modifyVars: {},
                         },
                     },
                 ],

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2019",
+        "target": "ESNext",
         "module": "ESNext",
         "allowJs": true,
         "checkJs": true,
@@ -16,7 +16,6 @@
         "strictPropertyInitialization": true,
         "noImplicitThis": true,
         "alwaysStrict": true,
-
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
 

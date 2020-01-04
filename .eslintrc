@@ -32,8 +32,11 @@
         }
     },
     "rules": {
+        "prettier/prettier": "off",
+
         "no-console": "off",
         "func-names": "off",
+        "no-empty": "off",
 
         "react/jsx-indent": ["error", 4],
         "react/jsx-filename-extension": [

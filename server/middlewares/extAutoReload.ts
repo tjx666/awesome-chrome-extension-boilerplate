@@ -15,7 +15,6 @@ export default function(compiler: Compiler) {
         sseStream.pipe(res);
         let closed = false;
 
-        // prettier-ignore
         const contentScriptsModules = fs.readdirSync(resolve(__dirname, '../../src/contents'));
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });

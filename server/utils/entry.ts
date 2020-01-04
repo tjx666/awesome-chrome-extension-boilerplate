@@ -7,23 +7,13 @@ import serverConfig from '../configs/server.config';
 import { isProd } from './env';
 
 const src = resolve(__dirname, '../../src');
-const HMRSSEPath = encodeURIComponent(
-    `http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`
-);
+const HMRSSEPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
 const HMRClientScript = `webpack-hot-middleware/client?path=${HMRSSEPath}&reload=true`;
 
 const devEntry: Record<string, string[]> = {
     background: [HMRClientScript, resolve(src, './background/index.ts')],
-    options: [
-        HMRClientScript,
-        'react-hot-loader/patch',
-        resolve(src, './options/index.tsx'),
-    ],
-    popup: [
-        HMRClientScript,
-        'react-hot-loader/patch',
-        resolve(src, './popup/index.tsx'),
-    ],
+    options: [HMRClientScript, 'react-hot-loader/patch', resolve(src, './options/index.tsx')],
+    popup: [HMRClientScript, 'react-hot-loader/patch', resolve(src, './popup/index.tsx')],
 };
 
 const prodEntry: Record<string, string[]> = {
@@ -43,8 +33,8 @@ if (argv.devtools) {
 }
 
 const scriptNames = fs.readdirSync(resolve(src, 'contents'));
+const validExts = ['tsx', 'ts'];
 scriptNames.forEach(name => {
-    const validExts = ['tsx', 'ts'];
     const hasValid = validExts.some(ext => {
         const abs = resolve(src, `contents/${name}/index.${ext}`);
         if (fs.existsSync(abs)) {
@@ -55,14 +45,15 @@ scriptNames.forEach(name => {
         return false;
     });
 
-    const dir = resolve(src, `contents/${name}`);
     if (!hasValid) {
+        const dir = resolve(src, `contents/${name}`);
         console.error(`You must put index.tsx or index.is under ${dir}`);
     }
 });
 
 if (!isProd) {
-    entry.all.unshift(resolve(__dirname, './extAutoReloadClient.ts'));
+    entry.all.unshift(resolve(__dirname, './autoRefreshPatch.ts'));
+    entry.background.unshift(resolve(__dirname, './autoReloadPatch.ts'));
 }
 
 export default entry;

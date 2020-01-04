@@ -4,7 +4,7 @@
     "description": "this is a chrome extension boilerplate!",
     "manifest_version": 2,
     "permissions": [],
-    "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000; object-src 'self'; connect-src 'self' http://localhost:3000",
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
     "background": {
         "scripts": ["js/background.js"],
         "persistent": true
