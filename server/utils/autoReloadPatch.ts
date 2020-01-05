@@ -55,13 +55,14 @@ source.addEventListener(
                             },
                             ({ from, action }) => {
                                 if (!received && from === 'content script' && action === 'reload extension') {
+                                    received = true;
                                     source.close();
+
                                     tiza.color('green')
                                         .bold()
                                         .text(`Reload extension`)
                                         .info();
                                     chrome.runtime.reload();
-                                    received = true;
                                 }
                             }
                         );

@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { Configuration, HashedModuleIdsPlugin } from 'webpack';
+import { Configuration, HashedModuleIdsPlugin, DefinePlugin } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -44,6 +44,9 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
+        new DefinePlugin({
+            __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+        }),
         new FriendlyErrorsPlugin(),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
