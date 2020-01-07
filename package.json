@@ -2,11 +2,22 @@
     "name": "awesome-chrome-extension-boilerplate",
     "version": "1.0.0",
     "description": "an awesome boilerplate for chrome extension development!",
+    "private": true,
+    "author": "YuTengjing",
+    "license": "MIT",
+    "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
+    },
+    "bugs": {
+        "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
+    },
     "scripts": {
         "start": "cross-env NODE_ENV=development ts-node --files -P ./server/tsconfig.json ./server",
-        "devtools": "yarn start -- --devtools",
+        "devtools": "concurrently yarn:start react-devtools",
         "build": "cross-env NODE_ENV=production ts-node --files -P ./server/tsconfig.json ./server",
-        "build:analyze": "yarn run build -- --analyze",
+        "build-analyze": "yarn run build -- --analyze",
         "test": "yarn build",
         "lint": "yarn run lint-ts && yarn run lint-style",
         "lint-ts": "eslint -c .eslintrc --ext .ts,.tsx ./src/**/*.{ts,tsx}",
@@ -14,16 +25,6 @@
         "clean": "rimraf -rf ./dist",
         "reinstall": "rimraf -rf ./node_modules && yarn"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+ssh://git@github.com/tjx666/awesome-chrome-extension-boilerplate.git"
-    },
-    "author": "YuTengjing",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
-    },
-    "homepage": "https://github.com/tjx666/awesome-chrome-extension-boilerplate#readme",
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged"
@@ -51,6 +52,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.7.7",
+        "@babel/plugin-proposal-optional-chaining": "^7.7.5",
         "@babel/plugin-transform-runtime": "^7.7.6",
         "@babel/preset-env": "^7.7.7",
         "@babel/preset-react": "^7.7.4",
@@ -78,15 +80,16 @@
         "@types/webpack-hot-middleware": "^2.25.0",
         "@types/webpack-merge": "^4.1.5",
         "@types/yargs": "^13.0.4",
-        "@typescript-eslint/eslint-plugin": "^2.14.0",
-        "@typescript-eslint/parser": "^2.14.0",
+        "@typescript-eslint/eslint-plugin": "^2.15.0",
+        "@typescript-eslint/parser": "^2.15.0",
         "autoprefixer": "^9.7.3",
         "babel-loader": "^8.0.6",
+        "babel-plugin-lodash": "^3.3.4",
         "chalk": "^3.0.0",
         "circular-dependency-plugin": "^5.2.0",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.1.1",
-        "core-js": "^3.6.1",
+        "core-js": "^3.6.2",
         "cross-env": "^6.0.3",
         "css-loader": "^3.4.1",
         "eslint": "^6.8.0",
@@ -103,7 +106,7 @@
         "friendly-errors-webpack-plugin": "^1.7.0",
         "hard-source-webpack-plugin": "^0.13.1",
         "html-webpack-plugin": "^3.2.0",
-        "husky": "^3.1.0",
+        "husky": "^4.0.0",
         "less-loader": "^5.0.0",
         "lint-staged": "^9.5.0",
         "log-symbols": "^3.0.0",
