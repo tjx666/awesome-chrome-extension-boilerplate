@@ -6,12 +6,12 @@
 
 ## :sparkles: 特性
 
-- 选项和弹窗页面支持 react & react hooks & react hot reload & react devtools
-- 整个页面包括 webpack 配置和 devServer 都是用 TypeScript 编写的
-- 支持修改 content scripts 代码自动重载扩展和刷新当前页面（通过自定义 devServer 和 SSE）
+- 支持修改 content scripts 代码自动重载扩展和刷新注入了 content scripts 的页面（通过自定义 devServer 和 SSE）
+- 选项和弹窗页面支持 react & react hooks & react hot reload & react devtools，充分享受现代前端工程化的好处，让你从开发 SPA 无缝切换到 chrome 扩展开发。
+- 整个页面包括 webpack 配置和 devServer 都是用 TypeScript 编写的，使用 ts 配置 webpack 减少你查阅文档次数和手残的概率。
 - 支持 sass/less CSS 扩展语言，使用 mini-css-extract-plugin 插件将 CSS 分离成 content CSS Script
-- 集成了很多的优秀 webpack 插件优化 webpack 构建和 bundle 分析
-- 使用 eslint 和相关插件 lint TypeScript，babel 编译 TypeScript，fork-ts-checker-webpack-plugin 检查 TypeScript 类型
+- 集成了社区很多的优秀 webpack 插件优化 webpack 构建和 bundle 分析
+- 使用 eslint 和相关插件 lint TypeScript。使用 babel 编译 TypeScript，fork-ts-checker-webpack-plugin 检查 TypeScript 类型，在享受 babel 生态中各种实用的插件的同时还不丢失类型检查的能力。
 
 ## :package: 安装
 
@@ -31,7 +31,7 @@ npm install
 
 ### 调整模板
 
-1. 根据你的实际需求修改 src/manifest 中的字段
+1. 根据你的实际需求修改 src/manifest 中的字段。注意区分开发环境，manifest.dev.json 是开发时的清单文件，manifest.prod.json 则是最后打包时 copy 的清单文件，一般来说开发环境需要的权限和依赖都更多一点。
 
    **需要注意的是**：任何注入了 content scripts 的页面也必须被注入 `js/all.js` 和 `css/all.css` ，你看我取文件名都叫 all，就是所有的意思嘛。也就是说，它俩的 matches 应该是其它所有 content scripts 的 matches 的父集。
 
@@ -54,7 +54,9 @@ npm install
 
    上面的配置中，第二个 content script 的 matches `https://github.com/pulls` 是 `https://github.com/*` 的子集，确保了将 `js/pulls.js` 和 `css/pulls.css` 注入 `https://github.com/pulls` 页面时也注入了 `js/all.js` 和 `css/all.css`。
 
-2. 图标和 HTML 模板等资源文件都被放置在 public 文件夹下面，将图标替换成你自己的扩展的图标，打包时会被自动 copy 到 dist 中。
+2. 扩展图标和 HTML 模板等资源文件都被放置在 public 文件夹下面，将图标替换成你自己的扩展的图标，打包时会被自动 copy 到 dist 中，也就是扩展的根路径。
+
+3. 删除示例代码，模板的示例功能是修改 github 的导航栏的颜色。模板使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
 
 ### 启动 devServer
 
@@ -121,12 +123,12 @@ npm run build
 如果你想分析打包情况：
 
 ```bash
-npm run build:analyze
+npm run build-analyze
 ```
 
 ## :loudspeaker: 注意事项
 
-`src/all` 和 `src/background`下的文件 含了实现修改 content script 自动重载扩展和刷新当前页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
+`src/all` 和 `src/background`下的文件包含了实现修改 content script 自动重载扩展和刷新当前页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
