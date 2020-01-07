@@ -5,10 +5,7 @@
         "stylelint-config-prettier",
         "stylelint-prettier/recommended"
     ],
-    "plugins": [
-        "stylelint-order",
-        "stylelint-declaration-block-no-ignored-properties"
-    ],
+    "plugins": ["stylelint-order", "stylelint-declaration-block-no-ignored-properties"],
     "rules": {
         "comment-empty-line-before": null,
         "function-name-case": "lower",
@@ -16,5 +13,5 @@
         "no-descending-specificity": null,
         "declaration-empty-line-before": null
     },
-    "ignoreFiles": ["node_modules/**/*", "dist/**/*"]
+    "ignoreFiles": ["node_modules/**/*", "dist/**/*", "public/**/*"]
 }
