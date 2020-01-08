@@ -7,8 +7,8 @@
 ## :sparkles: 特性
 
 - 支持修改 content scripts 代码自动重载扩展和刷新注入了 content scripts 的页面（通过自定义 devServer 和 SSE）
-- 选项和弹窗页面支持 react & react hooks & react hot reload & react devtools，充分享受现代前端工程化的好处，让你从开发 SPA 无缝切换到 chrome 扩展开发。
-- 整个页面包括 webpack 配置和 devServer 都是用 TypeScript 编写的，使用 ts 配置 webpack 减少你查阅文档次数和手残的概率。
+- 选项和弹窗页面支持 react & react hooks & react hot reload & react devtools，充分享受现代前端工程化的便捷，让你从开发 SPA 无缝切换到 chrome 扩展开发。
+- 整个模板包括 webpack 配置和 devServer 都是用 TypeScript 编写的，使用 ts 配置 webpack 减少你查阅文档次数和手残的概率。
 - 支持 sass/less CSS 扩展语言，使用 mini-css-extract-plugin 插件将 CSS 分离成 content CSS Script
 - 集成了社区很多的优秀 webpack 插件优化 webpack 构建和 bundle 分析
 - 使用 eslint 和相关插件 lint TypeScript。使用 babel 编译 TypeScript，fork-ts-checker-webpack-plugin 检查 TypeScript 类型，在享受 babel 生态中各种实用的插件的同时还不丢失类型检查的能力。
@@ -76,13 +76,13 @@ npm run devtools
 
 #### [background](https://developer.chrome.com/extensions/background_pages)
 
-如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 background 脚本的 入口，其它像选项和弹窗页面脚本也类似。你可以查看 webpack entry 配置 `src/server/utils/entry.ts` 了解更多实现细节。
+如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 background 脚本的 入口，也是 webpack 的一个 entry，其它像选项和弹窗页面脚本也类似。你可以查看 webpack 的 entry 配置： `src/server/utils/entry.ts` 了解更多实现细节。
 
 #### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
 它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个普通的 web APP 一样开发它们。
 
-这个模板使用的 react 的最新版本，因此你可以使用 react hooks 去开发函数组件，react hooks 的 eslint 规则也集成了。
+这个模板使用了 react 的最新版本，因此你可以使用 react hooks 去开发函数组件，react hooks 的 eslint 规则也集成了。
 
 模板使用 [react-hot-reload](https://github.com/gaearon/react-hot-loader) 支持 react 的热更新。等到 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 webpack 环境了，它将被替换。
 
@@ -128,7 +128,7 @@ npm run build-analyze
 
 ## :loudspeaker: 注意事项
 
-`src/all` 和 `src/background`下的文件包含了实现修改 content script 自动重载扩展和刷新当前页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
+`src/all` 和 `src/background`下的文件包含了实现修改 content script 自动重载扩展和刷新注入了 content script 页面的功能的代码。除非你不开发 content scripts， 否则，不能删除它。
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
