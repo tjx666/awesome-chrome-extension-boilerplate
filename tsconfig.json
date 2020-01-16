@@ -2,10 +2,7 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "ESNext",
-        "allowJs": true,
-        "checkJs": true,
         "jsx": "react",
-        "removeComments": true,
         "isolatedModules": true,
 
         "strict": true,
