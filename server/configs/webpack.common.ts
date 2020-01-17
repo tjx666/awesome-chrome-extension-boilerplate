@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { argv } from 'yargs';
 import { Configuration, HashedModuleIdsPlugin, DefinePlugin } from 'webpack';
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -135,5 +136,9 @@ const commonConfig: Configuration = {
         ],
     },
 };
+
+if (argv.devtools) {
+    commonConfig.plugins!.shift();
+}
 
 export default commonConfig;
