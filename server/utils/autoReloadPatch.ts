@@ -1,14 +1,12 @@
 import tiza from 'tiza';
+import logInfoWithPrefix from './logger';
 
 const source = new EventSource('http://127.0.0.1:3000/__extension_auto_reload__');
 
 source.addEventListener(
     'open',
     () => {
-        tiza.color('green')
-            .bold()
-            .text('[EAR] connected to extension auto reload SSE server ✔')
-            .info();
+        logInfoWithPrefix('connected to extension auto reload SSE server ✔');
     },
     false
 );
@@ -16,7 +14,8 @@ source.addEventListener(
 source.addEventListener(
     'message',
     event => {
-        console.info('[EAR] received a no event name message, data:', event.data);
+        logInfoWithPrefix('received a no event name message, data:');
+        tiza.info(event.data);
     },
     false
 );
@@ -24,11 +23,7 @@ source.addEventListener(
 source.addEventListener(
     'pause',
     () => {
-        tiza.color('yellow')
-            .bold()
-            .text('[EAR] received pause message from server, ready to close connection!')
-            .info();
-
+        logInfoWithPrefix('received pause message from server, ready to close connection!');
         source.close();
     },
     false
@@ -40,10 +35,7 @@ source.addEventListener(
         const shouldReload = JSON.parse(event.data).action === 'reload-extension-and-refresh-current-page';
 
         if (shouldReload) {
-            tiza.color('green')
-                .bold()
-                .text(`[EAR] received the signal to reload chrome extension since modified the content scripts!`)
-                .info();
+            logInfoWithPrefix('received the signal to reload chrome extension since modified the content scripts!');
             chrome.tabs.query({}, tabs => {
                 tabs.forEach(tab => {
                     if (tab.id) {
@@ -61,10 +53,7 @@ source.addEventListener(
                                 if (!received && from === 'content script' && action === 'reload extension') {
                                     received = true;
                                     source.close();
-                                    tiza.color('green')
-                                        .bold()
-                                        .text(`Reload extension`)
-                                        .info();
+                                    logInfoWithPrefix('reload extension');
                                     chrome.runtime.reload();
                                 }
                             }

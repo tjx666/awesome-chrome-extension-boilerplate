@@ -12,7 +12,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import entry from '../utils/entry';
 import { projectRoot, copyright } from '../utils/env';
 
-const commonCssLoaders = [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 1 } }];
+function getCssLoaders(importLoaders = 0) {
+    return [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders } }];
+}
+
 const commonConfig: Configuration = {
     entry,
     output: {
@@ -72,7 +75,7 @@ const commonConfig: Configuration = {
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
-            chunkFilename: '[id].[contenthash].css',
+            chunkFilename: 'css/[id].[contenthash].css',
             ignoreOrder: false,
         }),
     ],
@@ -86,15 +89,15 @@ const commonConfig: Configuration = {
             },
             {
                 test: /\.css$/,
-                use: commonCssLoaders,
+                use: getCssLoaders(),
             },
             {
                 test: /\.less$/,
-                use: [...commonCssLoaders, 'less-loader'],
+                use: [...getCssLoaders(1), 'less-loader'],
             },
             {
                 test: /\.scss$/,
-                use: [...commonCssLoaders, 'sass-loader'],
+                use: [...getCssLoaders(1), 'sass-loader'],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

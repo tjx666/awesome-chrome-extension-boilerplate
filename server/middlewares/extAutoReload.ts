@@ -8,7 +8,8 @@ import SSEStream from 'ssestream';
 
 export default function(compiler: Compiler) {
     const extAutoReload: RequestHandler = (req, res, next) => {
-        console.log(chalk.yellow('[EAR] received connection!'));
+        const prefix = chalk.bgYellow.black(' EAR ');
+        console.log(`${prefix} received connection!`);
 
         res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
@@ -25,7 +26,7 @@ export default function(compiler: Compiler) {
                 contentScriptsModules.includes(modules[0].chunks[0] as string);
 
             if (shouldReload) {
-                console.log(chalk.yellow('[EAR] send extension-reload signal!'));
+                console.log(`${prefix} send extension-reload signal!`);
 
                 sseStream.write(
                     {
@@ -50,7 +51,7 @@ export default function(compiler: Compiler) {
 
         res.on('close', () => {
             closed = true;
-            console.log(chalk.yellow('SSE connection closed!'));
+            console.log(`${prefix} connection closed!`);
             sseStream.unpipe(res);
         });
 
