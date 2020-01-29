@@ -8,7 +8,7 @@ import extAutoReload from '../middlewares/extAutoReload';
 import serverConfig from '../configs/server.config';
 import devConfig from '../configs/webpack.dev';
 
-function start() {
+(function start() {
     const devServer = express();
     const compiler = webpack(devConfig);
 
@@ -21,9 +21,10 @@ function start() {
             console.error(`${chalk.bgRed.black(' ERROR ')} Startup devServer occur a error!`);
             console.error(error);
         } else {
-            const address = `http://${HOST}:${PORT}`;
-            // prettier-ignore
-            console.log(`${chalk.bgYellow.black(' INFO ')} DevServer is running at ${chalk.magenta.underline(address)} ${logSymbols.success}`);
+            const coloredAddress = chalk.magenta.underline(`http://${HOST}:${PORT}`);
+            console.log(
+                `${chalk.bgYellow.black(' INFO ')} DevServer is running at ${coloredAddress} ${logSymbols.success}`
+            );
         }
     });
 
@@ -32,10 +33,7 @@ function start() {
         console.error(error);
     });
 
-    process.on('SIGINT', () => {
+    process.on('exit', () => {
         console.log(chalk.greenBright.bold(`\n${Math.random() > 0.5 ? 'See you again' : 'Goodbye'}!`));
-        process.exit();
     });
-}
-
-start();
+})();

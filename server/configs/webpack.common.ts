@@ -1,31 +1,18 @@
 import { resolve } from 'path';
 import { argv } from 'yargs';
-import { Configuration, HashedModuleIdsPlugin, DefinePlugin } from 'webpack';
-import autoprefixer from 'autoprefixer';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { HashedModuleIdsPlugin, BannerPlugin, DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
+import WebpackBar from 'webpackbar';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import entry from '../utils/entry';
+import { projectRoot, copyright } from '../utils/env';
 
-const projectRoot = resolve(__dirname, '../../');
-
-const getCSSLoaders = (importLoaders: number) => {
-    return [
-        MiniCssExtractPlugin.loader,
-        { loader: 'css-loader', options: { importLoaders } },
-        {
-            loader: 'postcss-loader',
-            options: {
-                ident: 'postcss',
-                plugins: [autoprefixer()],
-            },
-        },
-    ];
-};
-
+const commonCssLoaders = [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 1 } }];
 const commonConfig: Configuration = {
     entry,
     output: {
@@ -45,16 +32,28 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
-        new DefinePlugin({
-            __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new BannerPlugin({
+            banner: `/** @preserve ${copyright} */`,
+            raw: true,
+        }),
+        new WebpackBar({
+            name: 'chrome extension',
+            color: '#0f9d58',
         }),
         new FriendlyErrorsPlugin(),
+        new CaseSensitivePathsPlugin(),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
             hashDigest: 'hex',
             hashDigestLength: 20,
         }),
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new CircularDependencyPlugin({
+            exclude: /node_modules/,
+            failOnError: true,
+            allowAsyncCycles: false,
+            cwd: projectRoot,
+        }),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
@@ -71,12 +70,10 @@ const commonConfig: Configuration = {
             inject: 'body',
             cache: true,
         }),
-        new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
-        new CircularDependencyPlugin({
-            exclude: /node_modules/,
-            failOnError: true,
-            allowAsyncCycles: false,
-            cwd: process.cwd(),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: '[id].[contenthash].css',
+            ignoreOrder: false,
         }),
     ],
     module: {
@@ -89,24 +86,15 @@ const commonConfig: Configuration = {
             },
             {
                 test: /\.css$/,
-                use: getCSSLoaders(1),
+                use: commonCssLoaders,
             },
             {
                 test: /\.less$/,
-                use: [
-                    ...getCSSLoaders(2),
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            javascriptEnabled: true,
-                            modifyVars: {},
-                        },
-                    },
-                ],
+                use: [...commonCssLoaders, 'less-loader'],
             },
             {
                 test: /\.scss$/,
-                use: [...getCSSLoaders(2), 'sass-loader'],
+                use: [...commonCssLoaders, 'sass-loader'],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -115,7 +103,7 @@ const commonConfig: Configuration = {
                         loader: 'url-loader',
                         options: {
                             limit: 8192,
-                            name: '[name].[hash].[ext]',
+                            name: '[name].[contenthash].[ext]',
                             outputPath: 'images',
                         },
                     },
@@ -127,7 +115,7 @@ const commonConfig: Configuration = {
                     {
                         loader: 'url-loader',
                         options: {
-                            name: '[name]-[hash].[ext]',
+                            name: '[name]-[contenthash].[ext]',
                             outputPath: 'fonts',
                         },
                     },
@@ -137,8 +125,12 @@ const commonConfig: Configuration = {
     },
 };
 
-if (argv.devtools) {
-    commonConfig.plugins!.shift();
+if (!argv.devtools) {
+    commonConfig.plugins!.push(
+        new DefinePlugin({
+            __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+        })
+    );
 }
 
 export default commonConfig;

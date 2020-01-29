@@ -12,9 +12,10 @@ export default (app: Express, compiler: Compiler): void => {
             'Access-Control-Allow-Origin': '*',
         },
         lazy: false,
-        stats: 'minimal',
+        stats: 'errors-warnings',
         writeToDisk: true,
     };
+
     app.use(webpackDevMiddleware(compiler, devMiddlewareOptions));
-    app.use(webpackHotMiddleware(compiler, { path: '/__webpack_HMR__' }));
+    app.use(webpackHotMiddleware(compiler, { path: '/__webpack_HMR__', overlay: true }));
 };

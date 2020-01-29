@@ -7,7 +7,7 @@ source.addEventListener(
     () => {
         tiza.color('green')
             .bold()
-            .text('Connected to extension auto reload SSE server!')
+            .text('[EAR] connected to extension auto reload SSE server ✔')
             .info();
     },
     false
@@ -16,7 +16,7 @@ source.addEventListener(
 source.addEventListener(
     'message',
     event => {
-        console.info('Received a no event name message, data:', event.data);
+        console.info('[EAR] received a no event name message, data:', event.data);
     },
     false
 );
@@ -26,8 +26,9 @@ source.addEventListener(
     () => {
         tiza.color('yellow')
             .bold()
-            .text('Received pause message from server, ready to close connection')
+            .text('[EAR] received pause message from server, ready to close connection!')
             .info();
+
         source.close();
     },
     false
@@ -41,7 +42,7 @@ source.addEventListener(
         if (shouldReload) {
             tiza.color('green')
                 .bold()
-                .text(`Receive the signal to reload chrome extension as modify the content script!`)
+                .text(`[EAR] received the signal to reload chrome extension since modified the content scripts!`)
                 .info();
             chrome.tabs.query({}, tabs => {
                 tabs.forEach(tab => {
@@ -53,11 +54,13 @@ source.addEventListener(
                                 from: 'background',
                                 action: 'refresh-current-page',
                             },
-                            ({ from, action }) => {
+                            res => {
+                                if (!res) return;
+
+                                const { from, action } = res;
                                 if (!received && from === 'content script' && action === 'reload extension') {
                                     received = true;
                                     source.close();
-
                                     tiza.color('green')
                                         .bold()
                                         .text(`Reload extension`)

@@ -1,4 +1,16 @@
 {
+    "search.exclude": {
+        "**/node_modules": true,
+        "dist": true,
+        "package-lock.json": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "dist": true,
+        "package-lock.json": true
+    },
     "path-intellisense.mappings": {
         "@": "${workspaceRoot}/src",
         "utils": "${workspaceRoot}/src/utils"

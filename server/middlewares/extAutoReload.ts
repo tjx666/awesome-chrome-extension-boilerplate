@@ -8,7 +8,7 @@ import SSEStream from 'ssestream';
 
 export default function(compiler: Compiler) {
     const extAutoReload: RequestHandler = (req, res, next) => {
-        console.log(chalk.yellow('Received a SSE client connection!'));
+        console.log(chalk.yellow('[EAR] received connection!'));
 
         res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
@@ -25,7 +25,7 @@ export default function(compiler: Compiler) {
                 contentScriptsModules.includes(modules[0].chunks[0] as string);
 
             if (shouldReload) {
-                console.log(chalk.yellow('Send extension reload signal!'));
+                console.log(chalk.yellow('[EAR] send extension-reload signal!'));
 
                 sseStream.write(
                     {

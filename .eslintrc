@@ -15,7 +15,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "plugins": ["@typescript-eslint", "react"],
@@ -34,7 +34,7 @@
         "no-empty": "off",
 
         "react/jsx-indent": ["error", 4],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".ts", ".tsx"] }],
 
         "import/extensions": "off",
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],

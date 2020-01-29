@@ -3,16 +3,13 @@ import chalk from 'chalk';
 
 import prodConfig from '../configs/webpack.prod';
 
-function build() {
+(function build() {
     const compiler = webpack(prodConfig);
-
     compiler.run((error, stats) => {
         const compileError: Error & { details?: string } = error;
 
         if (error) {
-            console.log(
-                `${chalk.bgRed.black(' ERROR ')} webpack configuration error!`
-            );
+            console.log(`${chalk.bgRed.black(' ERROR ')} webpack configuration error!`);
             console.error(error);
 
             if (compileError.details) {
@@ -22,12 +19,10 @@ function build() {
             return;
         }
 
-        console.log(
-            stats.toString({
-                colors: true,
-            })
-        );
+        const prodStatsOpts = {
+            preset: 'normal',
+            colors: true,
+        };
+        console.log(stats.toString(prodStatsOpts));
     });
-}
-
-build();
+})();
