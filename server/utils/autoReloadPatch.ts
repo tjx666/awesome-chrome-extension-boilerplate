@@ -1,41 +1,40 @@
-import tiza from 'tiza';
-import logInfoWithPrefix from './logger';
+import logWithPrefix from './logger';
 
 const source = new EventSource('http://127.0.0.1:3000/__extension_auto_reload__');
 
 source.addEventListener(
     'open',
     () => {
-        logInfoWithPrefix('connected to extension auto reload SSE server ✔');
+        logWithPrefix('connected');
     },
-    false
+    false,
 );
 
 source.addEventListener(
     'message',
     event => {
-        logInfoWithPrefix('received a no event name message, data:');
-        tiza.info(event.data);
+        logWithPrefix('received a no event name message, data:');
+        console.log(event.data);
     },
-    false
+    false,
 );
 
 source.addEventListener(
     'pause',
     () => {
-        logInfoWithPrefix('received pause message from server, ready to close connection!');
+        logWithPrefix('received pause message from server, ready to close connection!');
         source.close();
     },
-    false
+    false,
 );
 
 source.addEventListener(
-    'compiled-successfully',
+    'compiledSuccessfully',
     (event: EventSourceEvent) => {
-        const shouldReload = JSON.parse(event.data).action === 'reload-extension-and-refresh-current-page';
+        const shouldReload = JSON.parse(event.data).action === 'reload extension and refresh current page';
 
         if (shouldReload) {
-            logInfoWithPrefix('received the signal to reload chrome extension since modified the content scripts!');
+            logWithPrefix('received the signal to reload chrome extension');
             chrome.tabs.query({}, tabs => {
                 tabs.forEach(tab => {
                     if (tab.id) {
@@ -44,7 +43,7 @@ source.addEventListener(
                             tab.id,
                             {
                                 from: 'background',
-                                action: 'refresh-current-page',
+                                action: 'refresh current page',
                             },
                             res => {
                                 if (!res) return;
@@ -53,17 +52,17 @@ source.addEventListener(
                                 if (!received && from === 'content script' && action === 'reload extension') {
                                     received = true;
                                     source.close();
-                                    logInfoWithPrefix('reload extension');
+                                    logWithPrefix('reload extension');
                                     chrome.runtime.reload();
                                 }
-                            }
+                            },
                         );
                     }
                 });
             });
         }
     },
-    false
+    false,
 );
 
 source.addEventListener(
@@ -75,5 +74,5 @@ source.addEventListener(
             console.error(event);
         }
     },
-    false
+    false,
 );

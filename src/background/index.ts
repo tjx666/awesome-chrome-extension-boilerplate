@@ -1,6 +1,3 @@
-import tiza from 'tiza';
+console.log('This is background page!');
 
-tiza.color('green')
-    .bold()
-    .text('This is background page!')
-    .info();
+export default null;

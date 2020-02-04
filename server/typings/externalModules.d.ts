@@ -3,11 +3,7 @@ declare module 'speed-measure-webpack-plugin' {
 
     interface SpeedMeasurePluginOptions {
         disable: boolean;
-        outputFormat:
-            | 'json'
-            | 'human'
-            | 'humanVerbose'
-            | ((outputObj: object) => void);
+        outputFormat: 'json' | 'human' | 'humanVerbose' | ((outputObj: object) => void);
         outputTarget: string | ((outputObj: string) => void);
         pluginNames: object;
         granularLoaderData: boolean;
@@ -23,6 +19,7 @@ declare module 'speed-measure-webpack-plugin' {
 
 declare module 'size-plugin' {
     import { Plugin } from 'webpack';
+
     interface SizePluginOptions {
         writeFile?: boolean;
     }

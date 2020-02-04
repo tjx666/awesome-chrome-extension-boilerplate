@@ -5,7 +5,7 @@
         "node": true,
         "webextensions": true
     },
-    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended", "prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -27,27 +27,35 @@
         }
     },
     "rules": {
-        "prettier/prettier": "off",
-
         "func-names": "off",
+        "lines-between-class-members": "off",
         "no-console": "off",
         "no-empty": "off",
+        "no-unused-expressions": "off",
+        "no-useless-constructor": "off",
 
         "react/jsx-indent": ["error", 4],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".ts", ".tsx"] }],
 
         "import/extensions": "off",
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
 
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/no-useless-constructor": "error"
     },
     "overrides": [
+        {
+            "files": ["**/*.d.ts"],
+            "rules": {
+                "import/no-duplicates": "off",
+                "max-classes-per-file": "off"
+            }
+        },
         {
             "files": ["server/**/*.ts"],
             "rules": {
                 "global-require": "off",
-                "no-unused-expressions": "off",
 
                 "import/no-extraneous-dependencies": "off",
                 "import/no-dynamic-require": "off",

@@ -1,10 +1,11 @@
-import logInfoWithPrefix from './logger';
+import logWithPrefix from './logger';
 
 chrome.runtime.onMessage.addListener((request, _sender, sendResp) => {
-    const shouldRefresh = request.from === 'background' && request.action === 'refresh-current-page';
+    const shouldRefresh = request.from === 'background' && request.action === 'refresh current page';
     if (shouldRefresh) {
-        logInfoWithPrefix('received signal to refresh current page since modified the content scripts!');
-        setTimeout(() => window.location.reload(), 500);
+        const waitingMilliseconds = 500;
+        logWithPrefix(`current page will reload after ${waitingMilliseconds}`);
+        setTimeout(() => window.location.reload(), waitingMilliseconds);
         sendResp({ from: 'content script', action: 'reload extension' });
     }
 });
