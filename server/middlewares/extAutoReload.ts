@@ -1,20 +1,12 @@
 import fs from 'fs';
 import { resolve } from 'path';
-import chalk from 'chalk';
 import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
 
-const prefix = chalk.bgYellow.black(' EAR ');
-function logWithPrefix(str: string) {
-    console.log(`${prefix} ${str}`);
-}
-
 export default function(compiler: Compiler): RequestHandler {
     return (req, res, next) => {
-        logWithPrefix('received connection!');
-
         res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
         sseStream.pipe(res);
@@ -30,8 +22,6 @@ export default function(compiler: Compiler): RequestHandler {
                 contentScriptsModules.includes(modules[0].chunks[0] as string);
 
             if (shouldReload) {
-                logWithPrefix('send extension-reload signal!');
-
                 sseStream.write(
                     {
                         event: 'compiledSuccessfully',
@@ -55,7 +45,6 @@ export default function(compiler: Compiler): RequestHandler {
 
         res.on('close', () => {
             closed = true;
-            logWithPrefix('connection closed!');
             sseStream.unpipe(res);
         });
 

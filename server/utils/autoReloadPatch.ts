@@ -1,4 +1,4 @@
-import logWithPrefix from './logger';
+import logWithPrefix from './log';
 
 const source = new EventSource('http://127.0.0.1:3000/__extension_auto_reload__');
 

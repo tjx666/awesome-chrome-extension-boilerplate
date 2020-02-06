@@ -10,10 +10,16 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import entry from '../utils/entry';
-import { projectRoot, copyright } from '../utils/env';
+import { env, projectRoot, copyright } from '../utils/env';
 
 function getCssLoaders(importLoaders = 0) {
-    return [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders } }];
+    return [
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: { hmr: env === 'development' },
+        },
+        { loader: 'css-loader', options: { importLoaders } },
+    ];
 }
 
 const commonConfig: Configuration = {
@@ -132,7 +138,7 @@ if (!argv.devtools) {
     commonConfig.plugins!.push(
         new DefinePlugin({
             __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
-        })
+        }),
     );
 }
 

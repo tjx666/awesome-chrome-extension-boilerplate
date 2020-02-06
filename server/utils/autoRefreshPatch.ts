@@ -1,4 +1,4 @@
-import logWithPrefix from './logger';
+import logWithPrefix from './log';
 
 chrome.runtime.onMessage.addListener((request, _sender, sendResp) => {
     const shouldRefresh = request.from === 'background' && request.action === 'refresh current page';

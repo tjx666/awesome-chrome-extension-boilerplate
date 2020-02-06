@@ -10,9 +10,5 @@
         "**/node_modules/*/**": true,
         "dist": true,
         "yarn.lock": true
-    },
-    "path-intellisense.mappings": {
-        "@": "${workspaceRoot}/src",
-        "utils": "${workspaceRoot}/src/utils"
     }
 }

@@ -7,6 +7,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
@@ -44,8 +45,9 @@ const mergedConfig = merge(commonConfig, {
             new TerserPlugin({
                 cache: true,
                 parallel: true,
-                extractComments: false
+                extractComments: false,
             }),
+            new OptimizeCSSAssetsPlugin(),
         ],
     },
 });
