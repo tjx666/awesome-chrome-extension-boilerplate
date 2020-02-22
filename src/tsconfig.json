@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "target": "ES2020",
-        "module": "commonjs",
+        "jsx": "react",
+        "isolatedModules": true,
 
         /* Strict Type-Checking Options */
         "strict": true,

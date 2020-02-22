@@ -5,22 +5,25 @@ import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import commonConfig from './webpack.common';
-import { projectRoot } from '../utils/env';
+import { PROJECT_ROOT } from '../utils/constants';
 
 const devConfig = merge(commonConfig, {
     mode: 'development',
     devtool: 'eval-source-map',
     plugins: [
         new CopyPlugin([
-            { from: resolve(projectRoot, 'public'), ignore: ['*.html'] },
+            { from: resolve(PROJECT_ROOT, 'public'), ignore: ['*.html'] },
             {
-                from: resolve(projectRoot, 'src/manifest.dev.json'),
+                from: resolve(PROJECT_ROOT, 'src/manifest.dev.json'),
                 to: 'manifest.json',
             },
         ]),
         new HotModuleReplacementPlugin(),
         new NamedModulesPlugin(),
-        new ForkTsCheckerWebpackPlugin({ memoryLimit: 1024 }),
+        new ForkTsCheckerWebpackPlugin({
+            memoryLimit: 1024,
+            tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+        }),
     ],
 });
 

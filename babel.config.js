@@ -1,6 +1,6 @@
 /* eslint-disable import/no-dynamic-require, global-require */
 
-module.exports = (api) => {
+module.exports = api => {
     const isProd = api.env('production');
     const manifest = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`) || {};
     const chromeVersion = manifest.minimum_chrome_version || 'last 2 Chrome versions';
@@ -15,7 +15,7 @@ module.exports = (api) => {
 
     return {
         presets: ['@babel/preset-typescript', envPreset],
-        plugins: ['lodash', '@babel/plugin-transform-runtime', '@babel/plugin-proposal-optional-chaining'],
+        plugins: ['lodash', '@babel/plugin-transform-runtime'],
         env: {
             development: {
                 presets: [['@babel/preset-react', { development: true }]],
@@ -30,7 +30,5 @@ module.exports = (api) => {
                 ],
             },
         },
-        sourceMaps: true,
-        retainLines: true,
     };
 };

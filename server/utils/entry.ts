@@ -1,14 +1,12 @@
 import { resolve } from 'path';
 import fs from 'fs';
-import { argv } from 'yargs';
 import { command } from 'execa';
 
-import serverConfig from '../configs/server.config';
-import { isProd } from './env';
+import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
 
 const src = resolve(__dirname, '../../src');
-const HMRSSEPath = encodeURIComponent(`http://${serverConfig.HOST}:${serverConfig.PORT}/__webpack_HMR__`);
-const HMRClientScript = `webpack-hot-middleware/client?path=${HMRSSEPath}&reload=true`;
+const hmrUrl = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
+const HMRClientScript = `webpack-hot-middleware/client?path=${hmrUrl}&reload=true`;
 
 const backgroundPath = resolve(src, './background/index.ts');
 const optionsPath = resolve(src, './options/index.tsx');
@@ -24,9 +22,9 @@ const prodEntry: Record<string, string[]> = {
     options: [optionsPath],
     popup: [popupPath],
 };
-const entry = isProd ? prodEntry : devEntry;
+const entry = __DEV__ ? devEntry : prodEntry;
 
-if (argv.devtools) {
+if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
     command('npx react-devtools').catch(err => {
@@ -36,9 +34,9 @@ if (argv.devtools) {
 }
 
 const scriptNames = fs.readdirSync(resolve(src, 'contents'));
-const validExts = ['tsx', 'ts'];
+const validExtensions = ['tsx', 'ts'];
 scriptNames.forEach(name => {
-    const hasValid = validExts.some(ext => {
+    const hasValid = validExtensions.some(ext => {
         const abs = resolve(src, `contents/${name}/index.${ext}`);
         if (fs.existsSync(abs)) {
             entry[name] = [abs];
@@ -54,7 +52,7 @@ scriptNames.forEach(name => {
     }
 });
 
-if (entry.all && !isProd) {
+if (entry.all && __DEV__) {
     entry.all.unshift(resolve(__dirname, './autoRefreshPatch.ts'));
     entry.background.unshift(resolve(__dirname, './autoReloadPatch.ts'));
 }

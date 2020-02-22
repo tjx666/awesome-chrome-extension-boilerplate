@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-import { argv } from 'yargs';
 import { Plugin } from 'webpack';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
@@ -12,27 +11,30 @@ import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import commonConfig from './webpack.common';
-import { projectRoot } from '../utils/env';
+import { PROJECT_ROOT, ENABLE_ANALYZE } from '../utils/constants';
 
 const plugins: Plugin[] = [
     new CopyPlugin([
         {
-            from: resolve(projectRoot, 'public'),
+            from: resolve(PROJECT_ROOT, 'public'),
             ignore: ['*.html'],
         },
         {
-            from: resolve(projectRoot, 'src/manifest.prod.json'),
+            from: resolve(PROJECT_ROOT, 'src/manifest.prod.json'),
             to: 'manifest.json',
         },
     ]),
-    new ForkTsCheckerWebpackPlugin({ memoryLimit: 2048 }),
+    new ForkTsCheckerWebpackPlugin({
+        memoryLimit: 1024 * 2,
+        tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+    }),
     new SizePlugin({ writeFile: false }),
     new HardSourceWebpackPlugin({
         info: { mode: 'none', level: 'error' },
     }),
 ];
 
-if (argv.analyze) {
+if (ENABLE_ANALYZE) {
     plugins.push(new BundleAnalyzerPlugin());
 }
 

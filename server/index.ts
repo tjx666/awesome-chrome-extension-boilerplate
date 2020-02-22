@@ -1,3 +1,3 @@
-import { isProd } from './utils/env';
+import { __DEV__ } from './utils/constants';
 
-require(`./scripts/${isProd ? 'build' : 'start'}`);
+require(`./scripts/${__DEV__ ? 'start' : 'build'}`);

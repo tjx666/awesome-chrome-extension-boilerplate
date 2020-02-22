@@ -21,11 +21,16 @@ declare module 'size-plugin' {
     import { Plugin } from 'webpack';
 
     interface SizePluginOptions {
-        writeFile?: boolean;
+        pattern: string;
+        exclude: string;
+        filename: string;
+        publish: boolean;
+        writeFile: boolean;
+        stripHash: Function;
     }
 
     class SizePlugin extends Plugin {
-        constructor(options?: SizePluginOptions);
+        constructor(options?: Partial<SizePluginOptions>);
     }
 
     export = SizePlugin;

@@ -4,4 +4,5 @@ cache:
 install:
     - yarn
 script:
+    - yarn audit
     - yarn test

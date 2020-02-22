@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-import { argv } from 'yargs';
 import { HashedModuleIdsPlugin, BannerPlugin, DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import WebpackBar from 'webpackbar';
@@ -7,26 +6,41 @@ import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import entry from '../utils/entry';
-import { env, projectRoot, copyright } from '../utils/env';
+import { PROJECT_ROOT, COPYRIGHT, __DEV__, ENABLE_DEVTOOLS } from '../utils/constants';
 
-function getCssLoaders(importLoaders = 0) {
+function getCssLoaders(importLoaders: number) {
     return [
         {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: env === 'development' },
+            options: { hmr: __DEV__ },
         },
         { loader: 'css-loader', options: { importLoaders } },
     ];
 }
 
+const htmlMinifyOptions: HtmlMinifierOptions = {
+    collapseWhitespace: true,
+    collapseBooleanAttributes: true,
+    collapseInlineTagWhitespace: true,
+    removeComments: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    minifyCSS: true,
+    minifyJS: true,
+    minifyURLs: true,
+    useShortDoctype: true,
+};
+
 const commonConfig: Configuration = {
     entry,
     output: {
         publicPath: '/',
-        path: resolve(projectRoot, 'dist'),
+        path: resolve(PROJECT_ROOT, 'dist'),
         filename: 'js/[name].js',
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
@@ -35,15 +49,15 @@ const commonConfig: Configuration = {
         extensions: ['.ts', '.tsx', '.json', '.js'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
-            '@': resolve(projectRoot, 'src'),
-            utils: resolve(projectRoot, 'src/utils'),
-            styles: resolve(projectRoot, 'src/styles'),
+            '@': resolve(PROJECT_ROOT, 'src'),
+            utils: resolve(PROJECT_ROOT, 'src/utils'),
+            styles: resolve(PROJECT_ROOT, 'src/styles'),
         },
     },
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new BannerPlugin({
-            banner: `/** @preserve ${copyright} */`,
+            banner: `/** @preserve ${COPYRIGHT} */`,
             raw: true,
         }),
         new WebpackBar({
@@ -61,21 +75,22 @@ const commonConfig: Configuration = {
             exclude: /node_modules/,
             failOnError: true,
             allowAsyncCycles: false,
-            cwd: projectRoot,
+            cwd: PROJECT_ROOT,
         }),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
             title: 'options page',
-            template: resolve(projectRoot, 'public/options.html'),
+            template: resolve(PROJECT_ROOT, 'public/options.html'),
             inject: 'body',
             cache: true,
         }),
         new HtmlWebpackPlugin({
+            minify: __DEV__ ? false : htmlMinifyOptions,
             chunks: ['popup'],
             filename: 'popup.html',
             title: 'popup page',
-            template: resolve(projectRoot, 'public/popup.html'),
+            template: resolve(PROJECT_ROOT, 'public/popup.html'),
             inject: 'body',
             cache: true,
         }),
@@ -95,7 +110,7 @@ const commonConfig: Configuration = {
             },
             {
                 test: /\.css$/,
-                use: getCssLoaders(),
+                use: getCssLoaders(0),
             },
             {
                 test: /\.less$/,
@@ -111,7 +126,7 @@ const commonConfig: Configuration = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 8192,
+                            limit: 1024 * 10,
                             name: '[name].[contenthash].[ext]',
                             outputPath: 'images',
                         },
@@ -134,7 +149,7 @@ const commonConfig: Configuration = {
     },
 };
 
-if (!argv.devtools) {
+if (!ENABLE_DEVTOOLS) {
     commonConfig.plugins!.push(
         new DefinePlugin({
             __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
