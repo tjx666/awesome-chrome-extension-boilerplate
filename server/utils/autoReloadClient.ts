@@ -29,9 +29,10 @@ source.addEventListener(
 );
 
 source.addEventListener(
-    'compiledSuccessfully',
+    'compiled successfully',
     (event: EventSourceEvent) => {
-        const shouldReload = JSON.parse(event.data).action === 'reload extension and refresh current page';
+        const shouldReload =
+            JSON.parse(event.data).action === 'reload extension and refresh current page';
 
         if (shouldReload) {
             logWithPrefix('received the signal to reload chrome extension');
@@ -49,7 +50,11 @@ source.addEventListener(
                                 if (!res) return;
 
                                 const { from, action } = res;
-                                if (!received && from === 'content script' && action === 'reload extension') {
+                                if (
+                                    !received &&
+                                    from === 'content script' &&
+                                    action === 'reload extension'
+                                ) {
                                     received = true;
                                     source.close();
                                     logWithPrefix('reload extension');

@@ -27,6 +27,7 @@ const plugins: Plugin[] = [
     new ForkTsCheckerWebpackPlugin({
         memoryLimit: 1024 * 2,
         tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+        measureCompilationTime: true,
     }),
     new SizePlugin({ writeFile: false }),
     new HardSourceWebpackPlugin({

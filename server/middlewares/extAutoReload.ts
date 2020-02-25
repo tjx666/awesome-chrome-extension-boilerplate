@@ -1,17 +1,16 @@
 import fs from 'fs';
 import { resolve } from 'path';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
 
 export default function(compiler: Compiler): RequestHandler {
     return (req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
         const sseStream = new SSEStream(req);
         sseStream.pipe(res);
-        let closed = false;
 
+        let closed = false;
         const contentScriptsModules = fs.readdirSync(resolve(__dirname, '../../src/contents'));
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });
@@ -24,15 +23,15 @@ export default function(compiler: Compiler): RequestHandler {
             if (shouldReload) {
                 sseStream.write(
                     {
-                        event: 'compiledSuccessfully',
+                        event: 'compiled successfully',
                         data: {
                             action: 'reload extension and refresh current page',
                         },
                     },
                     'UTF-8',
-                    error => {
-                        if (error) {
-                            console.error(error);
+                    err => {
+                        if (err) {
+                            console.error(err);
                         }
                     },
                 );
@@ -40,7 +39,11 @@ export default function(compiler: Compiler): RequestHandler {
         }, 1000);
 
         // 断开链接后之前的 hook 就不要执行了
-        const plugin = (stats: Stats) => !closed && compileDoneHook(stats);
+        const plugin = (stats: Stats) => {
+            if (!closed) {
+                compileDoneHook(stats);
+            }
+        };
         compiler.hooks.done.tap('extension-auto-reload-plugin', plugin);
 
         res.on('close', () => {

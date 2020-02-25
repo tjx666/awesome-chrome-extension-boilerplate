@@ -1,21 +1,18 @@
-import express from 'express';
 import chalk from 'chalk';
 import webpack from 'webpack';
+import express from 'express';
 
-import webpackMiddlewares from '../middlewares/webpackMiddlewares';
-import extAutoReload from '../middlewares/extAutoReload';
 import devConfig from '../configs/webpack.dev';
-import { HOST, PORT, EXTENSION_AUTO_RELOAD_PATH } from '../utils/constants';
+import setupMiddlewares from '../middlewares';
+import { HOST, PORT } from '../utils/constants';
 
-const devServer = express();
 const compiler = webpack(devConfig);
+const devServer = express();
 
-webpackMiddlewares(devServer, compiler);
-devServer.use(EXTENSION_AUTO_RELOAD_PATH, extAutoReload(compiler));
-
-devServer.listen(PORT, HOST, async error => {
-    if (error) {
-        console.error(error);
+setupMiddlewares(devServer, compiler);
+devServer.listen(PORT, HOST, err => {
+    if (err) {
+        console.error(err);
         return;
     }
 

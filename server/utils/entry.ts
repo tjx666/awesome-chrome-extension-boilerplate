@@ -53,8 +53,8 @@ scriptNames.forEach(name => {
 });
 
 if (entry.all && __DEV__) {
-    entry.all.unshift(resolve(__dirname, './autoRefreshPatch.ts'));
-    entry.background.unshift(resolve(__dirname, './autoReloadPatch.ts'));
+    entry.all.unshift(resolve(__dirname, './autoRefreshClient.ts'));
+    entry.background.unshift(resolve(__dirname, './autoReloadClient.ts'));
 }
 
 export default entry;
