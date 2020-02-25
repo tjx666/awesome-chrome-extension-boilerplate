@@ -8,7 +8,7 @@
 
 - :fire: 支持修改 `content scripts` 代码自动重载扩展和刷新注入了 `content scripts`的页面，再也不用修改了 `content scripts` 后手动刷新扩展和页面了。
 - :palm_tree: `options` 和 `popup` 页面支持 `react` & `react hooks` & `react hot reload` & `react devtools`，充分享受现代前端工程化的便捷，让你从开发 `SPA` 无缝切换到 chrome 扩展开发。
-- :shield: 整个模板包括 **webpack 配置**都是用 `TypeScript` 编写的，使用 `TypeScript` 配置 `webpack` 减少查阅文档和手残的概率。
+- :shield: 整个模板包括 `webpack` 配置都是用 `TypeScript` 编写的，使用 `TypeScript` 配置 `webpack` 减少查阅文档和手残的概率。
 - :lipstick: ​ 支持 css/less/sass，使用 `mini-css-extract-plugin` 将 CSS 分离成 content CSS Script。
 - :hammer_and_pick: ​ 集成了社区很多的优秀的 `webpack`，`eslint` 和 `babel` 插件，优化开发，构建和打包分析体验。
 
@@ -57,7 +57,7 @@ npm install
 
 #### 添加静态资源
 
-`public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
+`public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接放到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
 
 ```json
 {
@@ -76,6 +76,8 @@ npm install
 npm start
 ```
 
+无论是开发环境还是生产环境都会在项目根目录生成 `extension` 文件夹，chrome 访问 [chrome://extensions/](chrome://extensions/) 也就是扩展管理页面，点击右上角的按钮开启开发者模式，选择加载已解压的扩展程序，再选择刚刚生成的 `extension` 文件夹即可加载扩展。
+
 由于 `chrome` 的限制，官方的 chrome 扩展 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 并不能审查 `chrome-extension://` 协议的页面如 `options`，`popup` 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
 
 ```bash
@@ -84,11 +86,11 @@ npm run devtools
 
 ### 编写代码
 
-模板默认的代码实现的功能是修改 github 导航栏的颜色模板，使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
+模板默认的代码实现的功能是修改 github 导航栏的颜色，模板使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
 
 #### [background](https://developer.chrome.com/extensions/background_pages)
 
-如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的 入口，也是 `webpack` 的一个 `entry`，其它像 options 和`popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
+如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的入口，也是 `webpack` 的一个 `entry`，其它像 options 和`popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
 
 #### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
@@ -122,7 +124,7 @@ npm run devtools
 
 2. 创建一个和上面 `content script` 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 将会被视为一个 webpack entry。 `webpack` 会通过这个 `entry` 最终产出 `js/discuss.js` 这个 `chunk`。
 
-   `mini-css-extract-plugin` 会将所有被 `discuss/index.ts` 导入的样式文件合并再分离到 `dist/css/discuss.css`，这也是为什么上面的 `manifest` 中 content CSS script 可以使用 `css/discuss.css` 的原因
+   `mini-css-extract-plugin` 会将所有被 `discuss/index.ts` 导入的样式文件合并再分离到 `extension/css/discuss.css`，这也是为什么上面的 `manifest` 中 content CSS script 可以使用 `css/discuss.css` 的原因
 
 ## :construction_worker: 打包
 

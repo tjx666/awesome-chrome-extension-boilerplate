@@ -40,7 +40,7 @@ const commonConfig: Configuration = {
     entry,
     output: {
         publicPath: '/',
-        path: resolve(PROJECT_ROOT, 'dist'),
+        path: resolve(PROJECT_ROOT, 'extension'),
         filename: 'js/[name].js',
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',

@@ -2,14 +2,14 @@
     "typescript.tsdk": "./node_modules/typescript/lib",
     "search.exclude": {
         "**/node_modules": true,
-        "dist": true,
+        "extension": true,
         "yarn.lock": true
     },
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
-        "dist": true,
+        "extension": true,
         "yarn.lock": true
     },
     "[javascript]": {

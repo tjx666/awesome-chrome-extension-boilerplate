@@ -22,7 +22,7 @@
         "lint": "yarn run eslint && yarn run lint-style",
         "eslint": "eslint -c .eslintrc.js --ext .ts,.tsx ./{src,server}/**/*.{ts,tsx}",
         "lint-style": "stylelint --config .stylelintrc.json src/**/*.{css,less,scss}",
-        "clean": "rimraf -rf ./dist",
+        "clean": "rimraf -rf ./extension",
         "reinstall": "rimraf -rf ./node_modules && yarn"
     },
     "husky": {
