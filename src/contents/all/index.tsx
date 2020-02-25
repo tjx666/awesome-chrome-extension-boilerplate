@@ -1,3 +1,3 @@
 import './style.scss';
 
-console.log('Current page url must prefix with https://github.com');
+console.log(`Current page's url must be prefixed with https://github.com`);

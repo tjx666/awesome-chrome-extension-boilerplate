@@ -1,6 +1,6 @@
 import logWithPrefix from './log';
 
-const source = new EventSource('http://127.0.0.1:3000/__extension_auto_reload__');
+const source = new EventSource('http://127.0.0.1:3600/__extension_auto_reload__');
 
 source.addEventListener(
     'open',
