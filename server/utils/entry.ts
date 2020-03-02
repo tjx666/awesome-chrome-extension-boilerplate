@@ -27,9 +27,9 @@ const entry = __DEV__ ? devEntry : prodEntry;
 if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
-    command('npx react-devtools').catch(err => {
+    command('npx react-devtools').catch(error => {
         console.error('Startup react-devtools occur error');
-        console.error(err);
+        console.error(error);
     });
 }
 

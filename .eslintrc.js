@@ -1,5 +1,4 @@
 const { resolve } = require;
-
 const OFF = 0;
 const ERROR = 2;
 
@@ -17,6 +16,8 @@ module.exports = {
         'plugin:import/typescript',
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:unicorn/recommended',
+        'plugin:promise/recommended',
         'prettier',
         'prettier/react',
         'prettier/@typescript-eslint',
@@ -33,7 +34,7 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint', 'react'],
+    plugins: ['@typescript-eslint', 'react', 'unicorn', 'promise'],
     settings: {
         'import/resolver': {
             node: {
@@ -51,6 +52,18 @@ module.exports = {
 
         'react/jsx-indent': [ERROR, 4],
         'react/jsx-filename-extension': [ERROR, { extensions: ['.ts', '.tsx', '.json', '.js'] }],
+
+        'unicorn/prevent-abbreviations': OFF,
+        'unicorn/filename-case': [
+            'error',
+            {
+                cases: {
+                    camelCase: true,
+                    pascalCase: true,
+                },
+            },
+        ],
+        'unicorn/no-process-exit': OFF,
 
         '@typescript-eslint/explicit-function-return-type': OFF,
         '@typescript-eslint/no-explicit-any': OFF,

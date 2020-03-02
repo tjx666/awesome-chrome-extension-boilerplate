@@ -146,9 +146,8 @@ npm run build-analyze
 
 ## :dart: TODO
 
-- [ ] 打包扩展成 .crx 文件
 - [ ] 集成测试
-- [ ] 给 manifest.json 增加 json 校验的 VSCode 扩展
+- [ ] 给 manifest.json 增加 json 校验
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 

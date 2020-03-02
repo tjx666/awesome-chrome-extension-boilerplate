@@ -9,5 +9,5 @@ ReactDOM.render(
     <HashRouter>
         <App />
     </HashRouter>,
-    document.getElementById('root')
+    document.querySelector('#root'),
 );

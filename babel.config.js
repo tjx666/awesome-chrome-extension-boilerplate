@@ -1,13 +1,14 @@
-/* eslint-disable import/no-dynamic-require, global-require */
+/* eslint-disable import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
 
 module.exports = api => {
     const isProd = api.env('production');
-    const manifest = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`) || {};
-    const chromeVersion = manifest.minimum_chrome_version || 'last 2 Chrome versions';
+    const { minimum_chrome_version } = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`);
     const envPreset = [
         '@babel/env',
         {
-            targets: { chrome: chromeVersion },
+            targets: minimum_chrome_version
+                ? `Chrome > ${minimum_chrome_version}`
+                : 'last 2 Chrome versions',
             useBuiltIns: 'usage',
             corejs: 3,
         },

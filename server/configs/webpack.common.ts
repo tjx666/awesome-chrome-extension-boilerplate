@@ -46,6 +46,7 @@ const commonConfig: Configuration = {
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
     resolve: {
+        modules: [resolve(PROJECT_ROOT, 'node_modules')],
         extensions: ['.ts', '.tsx', '.json', '.js'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
@@ -57,7 +58,7 @@ const commonConfig: Configuration = {
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new BannerPlugin({
-            banner: `/** @preserve ${COPYRIGHT} */`,
+            banner: COPYRIGHT,
             raw: true,
         }),
         new WebpackBar({
