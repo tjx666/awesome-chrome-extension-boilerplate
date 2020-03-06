@@ -1,5 +1,11 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
+    "json.schemas": [
+        {
+            "fileMatch": ["/**/src/manifest.dev.json", "/**/src/manifest.prod.json"],
+            "url": "http://json.schemastore.org/chrome-manifest"
+        }
+    ],
     "search.exclude": {
         "**/node_modules": true,
         "extension": true,

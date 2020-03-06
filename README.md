@@ -147,7 +147,7 @@ npm run build-analyze
 ## :dart: TODO
 
 - [ ] 集成测试
-- [ ] 给 manifest.json 增加 json 校验
+- [x] 给 manifest.json 增加 json 校验
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
