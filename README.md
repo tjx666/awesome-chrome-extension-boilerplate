@@ -78,11 +78,15 @@ npm start
 
 无论是开发环境还是生产环境都会在项目根目录生成 `extension` 文件夹，chrome 访问 [chrome://extensions/](chrome://extensions/) 也就是扩展管理页面，点击右上角的按钮开启开发者模式，选择加载已解压的扩展程序，再选择刚刚生成的 `extension` 文件夹即可加载扩展。
 
+![load extension](https://i.loli.net/2020/03/10/rlbXpmdyu6KitVW.png)
+
 由于 `chrome` 的限制，官方的 chrome 扩展 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 并不能审查 `chrome-extension://` 协议的页面如 `options`，`popup` 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
 
 ```bash
 npm run devtools
 ```
+
+![react devtools](https://i.loli.net/2020/03/10/DzK8MWHbN4YmeZU.png)
 
 ### 编写代码
 
@@ -90,11 +94,11 @@ npm run devtools
 
 #### [background](https://developer.chrome.com/extensions/background_pages)
 
-如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的入口，也是 `webpack` 的一个 `entry`，其它像 options 和`popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
+如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的入口，也是 `webpack` 的一个 `entry`，其它像 `options` 和 `popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
 
 #### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
-它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react SPA 一样开发它们。
+它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
 这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 eslint 规则也集成了。
 
@@ -102,15 +106,15 @@ npm run devtools
 
 #### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
-这个模板会扫描 `src/contents` 文件夹，将所有子文件夹中的 `index.tsx`或 `index/ts` 作为 `webpack entry`。
+这个模板会扫描 `src/contents` 文件夹，将所有子文件夹中的 `index.tsx` 或 `index.ts` 作为 `webpack entry`。
 
-`content scripts` 都放在 `src/contents` 目录下。默认有个 `all.ts`，也是个 webpack entry，它不能被删除，因为这个 webpack entry 被用于注入实现 chrome 扩展自动刷新的功能的补丁，`all.ts` 导入的样式将会被用于所有注入了 `content scripts` 的页面。
+`content scripts` 都放在 `src/contents` 目录下。默认有个 `all.ts`，也是个 webpack entry，它不能被删除，因为这个 webpack entry 被用于注入实现 chrome 扩展自动刷新功能的补丁。
 
 **举个 🌰:**
 
 当你要给 URL 是 `https://www.example.com/discuss` 页面开发 `content script`，你需要做下面两步:
 
-1. 添加 c`ontent scripts` 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
+1. 添加 `content scripts` 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
    ```json
    "content_scripts": [
@@ -142,12 +146,15 @@ npm run build-analyze
 
 ## :loudspeaker: 注意事项
 
-`src/all` 和 `src/background`下的文件包含了实现修改 content script 自动重载扩展和刷新注入了 content script 页面的功能的代码。除非你不开发 content scripts，否则，不能删除它。
+`src/all` 和 `src/background` 下的文件包含了实现修改 `content script` 自动重载扩展和刷新注入了 `content script` 页面的功能的代码。除非你不开发 `content scripts`，否则，**不能删除它**。
 
 ## :dart: TODO
 
-- [ ] 集成测试
-- [x] 给 manifest.json 增加 json 校验
+- [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。
+- [ ] 优化 webpack 打包速度
+- [ ] 支持 webpack dev server 代理和 API mock
+- [ ] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
+- [ ] 集成 jest 测试
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
