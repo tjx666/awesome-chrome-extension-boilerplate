@@ -1,16 +1,15 @@
 import { resolve } from 'path';
-import { HashedModuleIdsPlugin, BannerPlugin, DefinePlugin, Configuration } from 'webpack';
+import { DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import entry from '../utils/entry';
-import { PROJECT_ROOT, COPYRIGHT, __DEV__, ENABLE_DEVTOOLS } from '../utils/constants';
+import { PROJECT_ROOT, __DEV__, ENABLE_DEVTOOLS } from '../utils/constants';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -18,7 +17,7 @@ function getCssLoaders(importLoaders: number) {
             loader: MiniCssExtractPlugin.loader,
             options: { hmr: __DEV__ },
         },
-        { loader: 'css-loader', options: { importLoaders } },
+        { loader: 'css-loader', options: { modules: false, sourceMap: true, importLoaders } },
     ];
 }
 
@@ -57,21 +56,11 @@ const commonConfig: Configuration = {
     },
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-        new BannerPlugin({
-            banner: COPYRIGHT,
-            raw: true,
-        }),
         new WebpackBar({
             name: 'chrome extension',
             color: '#0f9d58',
         }),
         new FriendlyErrorsPlugin(),
-        new CaseSensitivePathsPlugin(),
-        new HashedModuleIdsPlugin({
-            hashFunction: 'sha256',
-            hashDigest: 'hex',
-            hashDigestLength: 20,
-        }),
         new CircularDependencyPlugin({
             exclude: /node_modules/,
             failOnError: true,
@@ -79,12 +68,11 @@ const commonConfig: Configuration = {
             cwd: PROJECT_ROOT,
         }),
         new HtmlWebpackPlugin({
+            minify: __DEV__ ? false : htmlMinifyOptions,
             chunks: ['options'],
             filename: 'options.html',
             title: 'options page',
             template: resolve(PROJECT_ROOT, 'public/options.html'),
-            inject: 'body',
-            cache: true,
         }),
         new HtmlWebpackPlugin({
             minify: __DEV__ ? false : htmlMinifyOptions,
@@ -92,8 +80,6 @@ const commonConfig: Configuration = {
             filename: 'popup.html',
             title: 'popup page',
             template: resolve(PROJECT_ROOT, 'public/popup.html'),
-            inject: 'body',
-            cache: true,
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
@@ -104,7 +90,7 @@ const commonConfig: Configuration = {
     module: {
         rules: [
             {
-                test: /\.(ts|js)x?$/,
+                test: /\.(js|ts|tsx)$/,
                 loader: 'babel-loader',
                 options: { cacheDirectory: true },
                 exclude: /node_modules/,
@@ -115,11 +101,23 @@ const commonConfig: Configuration = {
             },
             {
                 test: /\.less$/,
-                use: [...getCssLoaders(1), 'less-loader'],
+                use: [
+                    ...getCssLoaders(1),
+                    {
+                        loader: 'less-loader',
+                        options: { sourceMap: true },
+                    },
+                ],
             },
             {
                 test: /\.scss$/,
-                use: [...getCssLoaders(1), 'sass-loader'],
+                use: [
+                    ...getCssLoaders(1),
+                    {
+                        loader: 'sass-loader',
+                        options: { sourceMap: true },
+                    },
+                ],
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

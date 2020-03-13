@@ -20,8 +20,6 @@ git clone git@github.com:tjx666/awesome-chrome-extension-boilerplate.git your-ex
 
 # 安装依赖，推荐使用 yarn
 yarn
-# 或者使用 npm
-npm install
 ```
 
 ## :hammer_and_wrench: 开发
@@ -73,7 +71,7 @@ npm install
 ### 启动 devServer
 
 ```bash
-npm start
+yarn start
 ```
 
 无论是开发环境还是生产环境都会在项目根目录生成 `extension` 文件夹，chrome 访问 [chrome://extensions/](chrome://extensions/) 也就是扩展管理页面，点击右上角的按钮开启开发者模式，选择加载已解压的扩展程序，再选择刚刚生成的 `extension` 文件夹即可加载扩展。
@@ -135,13 +133,13 @@ npm run devtools
 构建生产级别的包直接运行：
 
 ```bash
-npm run build
+yarn run build
 ```
 
 如果你想分析打包情况：
 
 ```bash
-npm run build-analyze
+yarn run build-analyze
 ```
 
 ## :loudspeaker: 注意事项
@@ -151,7 +149,6 @@ npm run build-analyze
 ## :dart: TODO
 
 - [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。
-- [ ] 优化 webpack 打包速度
 - [ ] 支持 webpack dev server 代理和 API mock
 - [ ] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
 - [ ] 集成 jest 测试

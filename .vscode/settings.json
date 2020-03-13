@@ -1,5 +1,9 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
+    // stylelint 扩展自身的校验就够了
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
     "json.schemas": [
         {
             "fileMatch": ["/**/src/manifest.dev.json", "/**/src/manifest.prod.json"],
@@ -18,9 +22,6 @@
         "**/extension/**": true
     },
     "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {

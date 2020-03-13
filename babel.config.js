@@ -1,5 +1,4 @@
 /* eslint-disable import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
-
 module.exports = api => {
     const isProd = api.env('production');
     const { minimum_chrome_version } = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`);
@@ -16,7 +15,7 @@ module.exports = api => {
 
     return {
         presets: ['@babel/preset-typescript', envPreset],
-        plugins: ['lodash', '@babel/plugin-transform-runtime'],
+        plugins: ['@babel/plugin-transform-runtime', 'lodash'],
         env: {
             development: {
                 presets: [['@babel/preset-react', { development: true }]],

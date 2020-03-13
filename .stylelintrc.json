@@ -16,5 +16,5 @@
         "no-descending-specificity": null,
         "declaration-empty-line-before": null
     },
-    "ignoreFiles": ["node_modules/**/*", "extension/**/*", "public/**/*", "**/typings/**/*"]
+    "ignoreFiles": ["node_modules/**/*", "extension/**/*", "public/**/*", "**/*.d.ts"]
 }

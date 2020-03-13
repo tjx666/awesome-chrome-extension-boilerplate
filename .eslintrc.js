@@ -53,7 +53,6 @@ module.exports = {
         'react/jsx-indent': [ERROR, 4],
         'react/jsx-filename-extension': [ERROR, { extensions: ['.ts', '.tsx', '.json', '.js'] }],
 
-        'unicorn/prevent-abbreviations': OFF,
         'unicorn/filename-case': [
             'error',
             {
@@ -64,6 +63,7 @@ module.exports = {
             },
         ],
         'unicorn/no-process-exit': OFF,
+        'unicorn/prevent-abbreviations': OFF,
 
         '@typescript-eslint/explicit-function-return-type': OFF,
         '@typescript-eslint/no-explicit-any': OFF,
@@ -93,8 +93,8 @@ module.exports = {
 
                 '@typescript-eslint/no-var-requires': OFF,
 
-                'import/no-extraneous-dependencies': OFF,
                 'import/no-dynamic-require': OFF,
+                'import/no-extraneous-dependencies': OFF,
             },
         },
     ],

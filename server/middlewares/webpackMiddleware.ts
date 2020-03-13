@@ -12,7 +12,6 @@ export default function(compiler: Compiler) {
         stats: 'minimal',
         writeToDisk: true,
     };
-
     return [
         webpackDevMiddleware(compiler, devMiddlewareOptions),
         webpackHotMiddleware(compiler, { path: HRM_PATH, overlay: true }),

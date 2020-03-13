@@ -5,7 +5,7 @@ import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
 
-export default function(compiler: Compiler): RequestHandler {
+export default function extensionAutoReload(compiler: Compiler): RequestHandler {
     return (req, res, next) => {
         const sseStream = new SSEStream(req);
         sseStream.pipe(res);

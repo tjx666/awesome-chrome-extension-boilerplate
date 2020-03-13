@@ -5,8 +5,9 @@ import { command } from 'execa';
 import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
 
 const src = resolve(__dirname, '../../src');
-const hmrUrl = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
-const HMRClientScript = `webpack-hot-middleware/client?path=${hmrUrl}&reload=true`;
+const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
+// !: 必须指定 path 为 devServer 的地址，不然的话热更新 client 会向 chrome://xxx 请求
+const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=true`;
 
 const backgroundPath = resolve(src, './background/index.ts');
 const optionsPath = resolve(src, './options/index.tsx');
@@ -29,7 +30,9 @@ if (ENABLE_DEVTOOLS) {
     entry.popup.unshift('react-devtools');
     command('npx react-devtools').catch(error => {
         console.error('Startup react-devtools occur error');
-        console.error(error);
+        if (error) {
+            console.error(error);
+        }
     });
 }
 
@@ -48,7 +51,7 @@ scriptNames.forEach(name => {
 
     if (!hasValid) {
         const dir = resolve(src, `contents/${name}`);
-        console.error(`You must put index.tsx or index.is under ${dir}`);
+        throw new Error(`You must put index.tsx or index.is under ${dir}`);
     }
 });
 

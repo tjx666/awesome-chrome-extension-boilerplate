@@ -1,5 +1,8 @@
-import logWithPrefix from './log';
+function logWithPrefix(info: string) {
+    console.log(`[EAR] ${info}`);
+}
 
+// !: 如果服务器配置改了，这里也要做对应的修改
 const source = new EventSource('http://127.0.0.1:3600/__extension_auto_reload__');
 
 source.addEventListener(
