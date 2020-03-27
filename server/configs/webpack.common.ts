@@ -3,8 +3,8 @@ import { DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+// eslint-disable-next-line import/no-unresolved
 import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -17,7 +17,14 @@ function getCssLoaders(importLoaders: number) {
             loader: MiniCssExtractPlugin.loader,
             options: { hmr: __DEV__ },
         },
-        { loader: 'css-loader', options: { modules: false, sourceMap: true, importLoaders } },
+        {
+            loader: 'css-loader',
+            options: {
+                modules: false,
+                sourceMap: true,
+                importLoaders,
+            },
+        },
     ];
 }
 
@@ -36,17 +43,21 @@ const htmlMinifyOptions: HtmlMinifierOptions = {
 };
 
 const commonConfig: Configuration = {
+    context: PROJECT_ROOT,
     entry,
+    watchOptions: {
+        ignored: [/node_modules/, /extension/, /public/],
+    },
     output: {
         publicPath: '/',
         path: resolve(PROJECT_ROOT, 'extension'),
         filename: 'js/[name].js',
+        // 将热更新临时生成的补丁放到 hot 文件夹中
         hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
         hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     },
     resolve: {
-        modules: [resolve(PROJECT_ROOT, 'node_modules')],
-        extensions: ['.ts', '.tsx', '.json', '.js'],
+        extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@': resolve(PROJECT_ROOT, 'src'),
@@ -61,12 +72,6 @@ const commonConfig: Configuration = {
             color: '#0f9d58',
         }),
         new FriendlyErrorsPlugin(),
-        new CircularDependencyPlugin({
-            exclude: /node_modules/,
-            failOnError: true,
-            allowAsyncCycles: false,
-            cwd: PROJECT_ROOT,
-        }),
         new HtmlWebpackPlugin({
             minify: __DEV__ ? false : htmlMinifyOptions,
             chunks: ['options'],
@@ -105,7 +110,13 @@ const commonConfig: Configuration = {
                     ...getCssLoaders(1),
                     {
                         loader: 'less-loader',
-                        options: { sourceMap: true },
+                        options: {
+                            sourceMap: true,
+                            javascriptEnabled: true,
+                            modifyVars: {
+                                '@primary-color': '#1DA57A',
+                            },
+                        },
                     },
                 ],
             },
@@ -151,6 +162,7 @@ const commonConfig: Configuration = {
 if (!ENABLE_DEVTOOLS) {
     commonConfig.plugins!.push(
         new DefinePlugin({
+            // 移除控制台下载 react devtools 的提示
             __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
         }),
     );

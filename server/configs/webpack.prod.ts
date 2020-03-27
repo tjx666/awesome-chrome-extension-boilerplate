@@ -8,6 +8,8 @@ import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 
 import commonConfig from './webpack.common';
 import { PROJECT_ROOT, COPYRIGHT, ENABLE_ANALYZE } from '../utils/constants';
@@ -25,14 +27,14 @@ const mergedConfig = merge(commonConfig, {
                 to: 'manifest.json',
             },
         ]),
+        new BannerPlugin({
+            banner: COPYRIGHT,
+            raw: true,
+        }),
         new ForkTsCheckerWebpackPlugin({
             memoryLimit: 1024 * 2,
             tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
             measureCompilationTime: true,
-        }),
-        new BannerPlugin({
-            banner: COPYRIGHT,
-            raw: true,
         }),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
@@ -40,6 +42,8 @@ const mergedConfig = merge(commonConfig, {
             hashDigestLength: 20,
         }),
         new SizePlugin({ writeFile: false }),
+        new LodashModuleReplacementPlugin(),
+        new AntdDayjsWebpackPlugin(),
     ],
     optimization: {
         minimize: true,

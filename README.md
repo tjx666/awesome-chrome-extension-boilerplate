@@ -7,16 +7,17 @@
 ## :sparkles: 特性
 
 - :fire: 支持修改 `content scripts` 代码自动重载扩展和刷新注入了 `content scripts`的页面，再也不用修改了 `content scripts` 后手动刷新扩展和页面了。
-- :palm_tree: `options` 和 `popup` 页面支持 `react` & `react hooks` & `react hot reload` & `react devtools`，充分享受现代前端工程化的便捷，让你从开发 `SPA` 无缝切换到 chrome 扩展开发。
+- :palm_tree: `options` 和 `popup` 页面支持 `react hot reload` & `react devtools`，充分享受现代前端工程化的便捷，让你从开发 `SPA` 无缝切换到 chrome 扩展开发。
 - :shield: 整个模板包括 `webpack` 配置都是用 `TypeScript` 编写的，使用 `TypeScript` 配置 `webpack` 减少查阅文档和手残的概率。
 - :lipstick: ​ 支持 css/less/sass，使用 `mini-css-extract-plugin` 将 CSS 分离成 content CSS Script。
 - :hammer_and_pick: ​ 集成了社区很多的优秀的 `webpack`，`eslint` 和 `babel` 插件，优化开发，构建和打包分析体验。
+- :rainbow: 默认集成了 `lodash`，`antd` 等常用工具库，并对它们的打包进行了优化
 
 ## :package: 安装
 
 ```bash
 # 克隆这个模板
-git clone git@github.com:tjx666/awesome-chrome-extension-boilerplate.git your-extension-name
+git clone https://github.com/tjx666/awesome-chrome-extension-boilerplate.git
 
 # 安装依赖，推荐使用 yarn
 yarn
@@ -24,7 +25,7 @@ yarn
 
 ## :hammer_and_wrench: 开发
 
-:bell: 请确保你对 chrome 扩展开发已经有基本的了解，入门推荐：[Chrome 插件(扩展)开发全攻略](http://blog.haoji.me/chrome-plugin-develop.html)。
+:bell: 请确保你对 chrome 扩展开发已经有基本的了解，入门推荐：[Chrome 插件(扩展)开发全攻略](http://blog.haoji.me/chrome-plugin-develop.html)。如果你对项目的配置有疑问，不如先看看该项目的原型项目 [refined-nowcoder](https://github.com/tjx666/refined-nowcoder)。
 
 ### 准备工作
 
@@ -78,7 +79,7 @@ yarn start
 
 ![load extension](https://i.loli.net/2020/03/10/rlbXpmdyu6KitVW.png)
 
-由于 `chrome` 的限制，官方的 chrome 扩展 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 并不能审查 `chrome-extension://` 协议的页面如 `options`，`popup` 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，启动 devServer 的同时打开独立的 devtools 窗口：
+由于 `chrome` 的限制，官方的 chrome 扩展 [react devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 并不能审查 `chrome-extension://` 协议的页面如 `options`，`popup` 页面。所以需要使用独立的 [react devtools](https://www.npmjs.com/package/react-devtools)，使用下面的命令启动 devServer 的同时打开独立的 devtools 窗口：
 
 ```bash
 npm run devtools

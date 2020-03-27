@@ -54,7 +54,7 @@ module.exports = {
         'react/jsx-filename-extension': [ERROR, { extensions: ['.ts', '.tsx', '.json', '.js'] }],
 
         'unicorn/filename-case': [
-            'error',
+            ERROR,
             {
                 cases: {
                     camelCase: true,

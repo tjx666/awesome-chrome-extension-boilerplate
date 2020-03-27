@@ -36,6 +36,14 @@ declare module 'size-plugin' {
     export = SizePlugin;
 }
 
+declare module 'antd-dayjs-webpack-plugin' {
+    import { Plugin } from 'webpack';
+
+    class WebpackDayjsPlugin extends Plugin {}
+
+    export = WebpackDayjsPlugin;
+}
+
 declare module 'ssestream' {
     import { Request } from 'express';
     import { Transform } from 'stream';
