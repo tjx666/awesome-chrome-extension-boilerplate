@@ -29,6 +29,8 @@ module.exports = (api) => {
             '@babel/plugin-transform-runtime',
             '@babel/plugin-syntax-dynamic-import',
             '@babel/plugin-proposal-optional-chaining',
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
+            ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
             'lodash',
             importPlugin,
         ],
