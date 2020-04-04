@@ -114,7 +114,8 @@ const commonConfig: Configuration = {
                             sourceMap: true,
                             javascriptEnabled: true,
                             modifyVars: {
-                                '@primary-color': '#1DA57A',
+                                // 修改 antd 主题
+                                // '@primary-color': '#1DA57A',
                             },
                         },
                     },
