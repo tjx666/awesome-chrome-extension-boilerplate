@@ -46,6 +46,10 @@ const mergedConfig = merge(commonConfig, {
         new AntdDayjsWebpackPlugin(),
     ],
     optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+        },
         minimize: true,
         minimizer: [
             new TerserPlugin({

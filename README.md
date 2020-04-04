@@ -87,6 +87,14 @@ npm run devtools
 
 ![react devtools](https://i.loli.net/2020/03/10/DzK8MWHbN4YmeZU.png)
 
+你可以通过 `open` 参数配置启在 webpack 初次编译成功打开某个 URL：
+
+```javascript
+"scripts": {
+        "start": "cross-env-shell NODE_ENV=development ts-node --files -P ./server/tsconfig.json ./server --open=https://xxx.xxx.com",
+    },
+```
+
 ### 编写代码
 
 模板默认的代码实现的功能是修改 github 导航栏的颜色，模板使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
@@ -129,7 +137,7 @@ npm run devtools
 
    `mini-css-extract-plugin` 会将所有被 `discuss/index.ts` 导入的样式文件合并再分离到 `extension/css/discuss.css`，这也是为什么上面的 `manifest` 中 content CSS script 可以使用 `css/discuss.css` 的原因
 
-### 代理
+### dev server 代理
 
 你可以在 `server/configs/proxy.ts` 中配置 `dev server` 的代理，所有向 `dev serve`r 发送的请求都会根据你配置的规则被代理转发，修改配置后需要重启 `dev server` 才会生效，更多细节请查看使用的中间件 [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)。
 
@@ -163,7 +171,7 @@ yarn run build-analyze
 
 - [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。
 - [x] 支持 webpack dev server 代理
-- [ ] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
+- [x] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
 - [ ] 集成 jest 测试
 
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
