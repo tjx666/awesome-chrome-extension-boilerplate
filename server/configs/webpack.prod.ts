@@ -3,7 +3,6 @@ import { BannerPlugin, HashedModuleIdsPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
@@ -41,7 +40,6 @@ const mergedConfig = merge(commonConfig, {
             hashDigest: 'hex',
             hashDigestLength: 20,
         }),
-        new SizePlugin({ writeFile: false }),
         new LodashModuleReplacementPlugin(),
         new AntdDayjsWebpackPlugin(),
     ],
@@ -62,11 +60,12 @@ const mergedConfig = merge(commonConfig, {
     },
 });
 
+// eslint-disable-next-line import/no-mutable-exports
+let prodConfig = mergedConfig;
 if (ENABLE_ANALYZE) {
     mergedConfig.plugins!.push(new BundleAnalyzerPlugin());
+    const smp = new SpeedMeasurePlugin();
+    prodConfig = smp.wrap(mergedConfig);
 }
-
-const smp = new SpeedMeasurePlugin();
-const prodConfig = smp.wrap(mergedConfig);
 
 export default prodConfig;

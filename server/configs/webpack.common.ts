@@ -93,6 +93,7 @@ const commonConfig: Configuration = {
         }),
     ],
     module: {
+        noParse: /jquery/,
         rules: [
             {
                 test: /\.(js|ts|tsx)$/,

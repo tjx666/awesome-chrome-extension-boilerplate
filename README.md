@@ -11,7 +11,7 @@
 - :shield: 整个模板包括 `webpack` 配置都是用 `TypeScript` 编写的，使用 `TypeScript` 配置 `webpack` 减少查阅文档和手残的概率。
 - :lipstick: ​ 支持 css/less/sass，使用 `mini-css-extract-plugin` 将 CSS 分离成 content CSS Script。
 - :hammer_and_pick: ​ 集成了社区很多的优秀的 `webpack`，`eslint` 和 `babel` 插件，优化开发，构建和打包分析体验。
-- :rainbow: 默认集成了 `lodash`，`antd` 等常用工具库，并对它们的打包进行了优化
+- :rainbow: 默认集成了 `jquery`，`lodash`，`antd` 等常用工具库，并对它们的打包进行了优化
 
 ## :package: 安装
 
@@ -87,7 +87,7 @@ npm run devtools
 
 ![react devtools](https://i.loli.net/2020/03/10/DzK8MWHbN4YmeZU.png)
 
-你可以通过 `open` 参数配置启在 webpack 初次编译成功打开某个 URL：
+你可以通过 `open` 参数配置在 webpack 初次编译成功打开某个 URL：
 
 ```javascript
 "scripts": {
