@@ -7,7 +7,7 @@ import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
 const src = resolve(__dirname, '../../src');
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
 // !: 必须指定 path 为 devServer 的地址，不然的话热更新 client 会向 chrome://xxx 请求
-const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=true`;
+const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=true&overlay=true`;
 
 const backgroundPath = resolve(src, './background/index.ts');
 const optionsPath = resolve(src, './options/index.tsx');
@@ -28,7 +28,7 @@ const entry = __DEV__ ? devEntry : prodEntry;
 if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
-    command('npx react-devtools').catch(error => {
+    command('npx react-devtools').catch((error) => {
         console.error('Startup react-devtools occur error');
         if (error) {
             console.error(error);
@@ -38,8 +38,8 @@ if (ENABLE_DEVTOOLS) {
 
 const scriptNames = fs.readdirSync(resolve(src, 'contents'));
 const validExtensions = ['tsx', 'ts'];
-scriptNames.forEach(name => {
-    const hasValid = validExtensions.some(ext => {
+scriptNames.forEach((name) => {
+    const hasValid = validExtensions.some((ext) => {
         const abs = resolve(src, `contents/${name}/index.${ext}`);
         if (fs.existsSync(abs)) {
             entry[name] = [abs];

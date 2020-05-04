@@ -113,10 +113,12 @@ const commonConfig: Configuration = {
                         loader: 'less-loader',
                         options: {
                             sourceMap: true,
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                // 修改 antd 主题
-                                // '@primary-color': '#1DA57A',
+                            lessOptions: {
+                                javascriptEnabled: true,
+                                modifyVars: {
+                                    // 修改 antd 主题
+                                    // '@primary-color': '#1DA57A',
+                                },
                             },
                         },
                     },

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { resolve } from 'path';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
 import { Compiler, Stats } from 'webpack';
 import SSEStream from 'ssestream';
@@ -16,8 +16,7 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
             const { modules } = stats.toJson({ all: false, modules: true });
             const shouldReload =
                 !stats.hasErrors() &&
-                modules &&
-                modules.length === 1 &&
+                modules?.length === 1 &&
                 contentScriptsModules.includes(modules[0].chunks[0] as string);
 
             if (shouldReload) {
@@ -29,7 +28,7 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
                         },
                     },
                     'UTF-8',
-                    err => {
+                    (err) => {
                         if (err) {
                             console.error(err);
                         }
