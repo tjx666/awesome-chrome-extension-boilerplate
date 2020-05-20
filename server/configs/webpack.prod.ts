@@ -1,7 +1,6 @@
 import { resolve } from 'path';
 import { BannerPlugin, HashedModuleIdsPlugin } from 'webpack';
 import merge from 'webpack-merge';
-import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
@@ -16,16 +15,6 @@ import { PROJECT_ROOT, COPYRIGHT, ENABLE_ANALYZE } from '../utils/constants';
 const mergedConfig = merge(commonConfig, {
     mode: 'production',
     plugins: [
-        new CopyPlugin([
-            {
-                from: resolve(PROJECT_ROOT, 'public'),
-                ignore: ['*.html'],
-            },
-            {
-                from: resolve(PROJECT_ROOT, 'src/manifest.prod.json'),
-                to: 'manifest.json',
-            },
-        ]),
         new BannerPlugin({
             banner: COPYRIGHT,
             raw: true,

@@ -167,6 +167,10 @@ yarn run build-analyze
 
 `src/all` 和 `src/background` 下的文件包含了实现修改 `content script` 自动重载扩展和刷新注入了 `content script` 页面的功能的代码。除非你不开发 `content scripts`，否则，**不能删除它**。
 
+## :books: Blog
+
+核心原理：[使用 webpack 构建 chrome 扩展的热更新问题](https://zhuanlan.zhihu.com/p/103072251)
+
 ## :dart: TODO
 
 - [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。

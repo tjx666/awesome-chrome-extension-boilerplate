@@ -27,7 +27,7 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
                             action: 'reload extension and refresh current page',
                         },
                     },
-                    'UTF-8',
+                    'utf-8',
                     (err) => {
                         if (err) {
                             console.error(err);

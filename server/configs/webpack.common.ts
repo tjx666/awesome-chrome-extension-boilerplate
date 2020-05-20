@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -67,6 +68,21 @@ const commonConfig: Configuration = {
     },
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        // FIXME: @types/copy-webpack-plugin definition bug
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: resolve(PROJECT_ROOT, 'public'),
+                    globOptions: {
+                        ignore: ['*.html'],
+                    },
+                },
+                {
+                    from: resolve(PROJECT_ROOT, `src/manifest.${__DEV__ ? 'dev' : 'prod'}.json`),
+                    to: 'manifest.json',
+                },
+            ],
+        } as any),
         new WebpackBar({
             name: 'chrome extension',
             color: '#0f9d58',
@@ -88,7 +104,6 @@ const commonConfig: Configuration = {
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
-            chunkFilename: 'css/[id].[contenthash].css',
             ignoreOrder: false,
         }),
     ],
