@@ -68,13 +68,12 @@ const commonConfig: Configuration = {
     },
     plugins: [
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-        // FIXME: @types/copy-webpack-plugin definition bug
         new CopyPlugin({
             patterns: [
                 {
                     from: resolve(PROJECT_ROOT, 'public'),
                     globOptions: {
-                        ignore: ['*.html'],
+                        ignore: ['**/public/*.html'],
                     },
                 },
                 {
@@ -82,7 +81,7 @@ const commonConfig: Configuration = {
                     to: 'manifest.json',
                 },
             ],
-        } as any),
+        }),
         new WebpackBar({
             name: 'chrome extension',
             color: '#0f9d58',

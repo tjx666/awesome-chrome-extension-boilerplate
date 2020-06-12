@@ -8,7 +8,8 @@
         "dsznajder.es7-react-js-snippets",
         "mrmlnc.vscode-scss",
         "yutengjing.view-github-repository",
-        "yutengjing.open-in-external-app"
+        "yutengjing.open-in-external-app",
+        "yutengjing.vscode-fe-helper"
     ],
     "unwantedRecommendations": [
         "hookyqr.beautify",
