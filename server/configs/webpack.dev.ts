@@ -12,8 +12,10 @@ const devConfig = merge(commonConfig, {
     plugins: [
         new HotModuleReplacementPlugin(),
         new ForkTsCheckerWebpackPlugin({
-            memoryLimit: 1024,
-            tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+            typescript: {
+                memoryLimit: 1024,
+                configFile: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+            },
         }),
     ],
 });

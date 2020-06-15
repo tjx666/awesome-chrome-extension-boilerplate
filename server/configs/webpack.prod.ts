@@ -20,9 +20,11 @@ const mergedConfig = merge(commonConfig, {
             raw: true,
         }),
         new ForkTsCheckerWebpackPlugin({
-            memoryLimit: 1024 * 2,
-            tsconfig: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
-            measureCompilationTime: true,
+            typescript: {
+                memoryLimit: 1024 * 2,
+                configFile: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+                profile: ENABLE_ANALYZE,
+            },
         }),
         new HashedModuleIdsPlugin({
             hashFunction: 'sha256',
@@ -33,7 +35,6 @@ const mergedConfig = merge(commonConfig, {
         new AntdDayjsWebpackPlugin(),
     ],
     optimization: {
-        runtimeChunk: 'single',
         splitChunks: {
             chunks: 'all',
         },
