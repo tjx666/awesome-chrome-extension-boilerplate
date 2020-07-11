@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { HotModuleReplacementPlugin } from 'webpack';
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import commonConfig from './webpack.common';
