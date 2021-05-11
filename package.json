@@ -45,7 +45,7 @@
         "@hot-loader/react-dom": "^16.13.0",
         "antd": "^4.4.2",
         "jquery": "^3.5.1",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "normalize.css": "^8.0.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
