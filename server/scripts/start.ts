@@ -15,12 +15,7 @@ async function start() {
 
     setupMiddlewares(devServer, compiler);
     const PORT = await getPort(HOST, DEFAULT_PORT);
-    const httpServer = devServer.listen(PORT, HOST, (err) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
+    const httpServer = devServer.listen(PORT, HOST, () => {
         const coloredAddress = chalk.magenta.underline(`http://${HOST}:${PORT}`);
         console.log(
             `${chalk.bgYellow.black(' INFO ')} DevServer is running at ${coloredAddress} ✔`,

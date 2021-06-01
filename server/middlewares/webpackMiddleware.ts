@@ -6,7 +6,7 @@ import devConfig from '../configs/webpack.dev';
 import { HRM_PATH } from '../utils/constants';
 
 export default function (compiler: Compiler) {
-    const publicPath = devConfig.output!.publicPath!;
+    const publicPath = devConfig.output!.publicPath! as string;
     const devMiddlewareOptions: webpackDevMiddleware.Options = {
         publicPath,
         stats: 'minimal',
@@ -14,6 +14,6 @@ export default function (compiler: Compiler) {
     };
     return [
         webpackDevMiddleware(compiler, devMiddlewareOptions),
-        webpackHotMiddleware(compiler, { path: HRM_PATH }),
+        webpackHotMiddleware(compiler as any, { path: HRM_PATH }),
     ];
 }

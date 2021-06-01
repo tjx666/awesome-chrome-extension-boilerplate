@@ -3,9 +3,8 @@ import { DefinePlugin, Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import WebpackBar from 'webpackbar';
-import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
+import FriendlyErrorsPlugin from '@soda/friendly-errors-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-// eslint-disable-next-line import/no-unresolved
 import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -16,7 +15,6 @@ function getCssLoaders(importLoaders: number) {
     return [
         {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: __DEV__ },
         },
         {
             loader: 'css-loader',
@@ -47,15 +45,15 @@ const commonConfig: Configuration = {
     context: PROJECT_ROOT,
     entry,
     watchOptions: {
-        ignored: [/node_modules/, /extension/, /public/],
+        ignored: ['node_modules/**', 'extension/**', 'public/**'],
     },
     output: {
         publicPath: '/',
         path: resolve(PROJECT_ROOT, 'extension'),
         filename: 'js/[name].js',
         // 将热更新临时生成的补丁放到 hot 文件夹中
-        hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
-        hotUpdateMainFilename: 'hot/[hash].hot-update.json',
+        hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
+        hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
@@ -102,7 +100,8 @@ const commonConfig: Configuration = {
             template: resolve(PROJECT_ROOT, 'public/popup.html'),
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
+            filename: `css/[name]${__DEV__ ? '' : '.[contenthash]'}.css`,
+            chunkFilename: `css/[id]${__DEV__ ? '' : '.[contenthash]'}.css`,
             ignoreOrder: false,
         }),
     ],

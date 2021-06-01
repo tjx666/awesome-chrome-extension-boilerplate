@@ -12,7 +12,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://github.com/*"],
+            "matches": ["*://*/*"],
             "css": ["css/all.css"],
             "js": ["js/all.js"]
         }

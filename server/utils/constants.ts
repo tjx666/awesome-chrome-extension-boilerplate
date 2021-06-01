@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { argv } from 'yargs';
+import argv from './args';
 
 const HOST = '127.0.0.1';
 const PORT = 3600;
@@ -14,8 +14,10 @@ const HRM_PATH = '/__webpack_HMR__';
 const EXTENSION_AUTO_RELOAD_PATH = '/__extension_auto_reload__';
 
 const __DEV__ = process.env.NODE_ENV !== 'production';
-const ENABLE_DEVTOOLS = !!argv.devtools;
-const ENABLE_ANALYZE = !!argv.analyze;
+
+
+const ENABLE_DEVTOOLS = argv.devtools;
+const ENABLE_ANALYZE = argv.analyze;
 
 export {
     HOST,

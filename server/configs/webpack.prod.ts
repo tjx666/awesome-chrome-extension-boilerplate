@@ -1,13 +1,12 @@
 import { resolve } from 'path';
-import { BannerPlugin, HashedModuleIdsPlugin } from 'webpack';
+import { default as webpack, BannerPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 import commonConfig from './webpack.common';
 import { PROJECT_ROOT, COPYRIGHT, ENABLE_ANALYZE } from '../utils/constants';
@@ -26,13 +25,13 @@ const mergedConfig = merge(commonConfig, {
                 profile: ENABLE_ANALYZE,
             },
         }),
-        new HashedModuleIdsPlugin({
+        new webpack.ids.HashedModuleIdsPlugin({
             hashFunction: 'sha256',
             hashDigest: 'hex',
             hashDigestLength: 20,
         }),
-        new LodashModuleReplacementPlugin(),
         new AntdDayjsWebpackPlugin(),
+        new CssMinimizerPlugin(),
     ],
     optimization: {
         splitChunks: {
@@ -41,11 +40,9 @@ const mergedConfig = merge(commonConfig, {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                cache: true,
                 parallel: true,
                 extractComments: false,
             }),
-            new OptimizeCSSAssetsPlugin(),
         ],
     },
 });

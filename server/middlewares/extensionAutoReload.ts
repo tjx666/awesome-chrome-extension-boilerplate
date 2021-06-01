@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { resolve } from 'path';
 import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
@@ -11,14 +10,15 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
         sseStream.pipe(res);
 
         let closed = false;
-        const contentScriptsModules = fs.readdirSync(resolve(__dirname, '../../src/contents'));
+
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });
+            const updatedFileName = modules?.find(
+                (module) => module.type == 'module' && module.moduleType == 'javascript/auto',
+            )?.nameForCondition as string;
             const shouldReload =
                 !stats.hasErrors() &&
-                modules?.length === 1 &&
-                contentScriptsModules.includes(modules[0].chunks[0] as string);
-
+                updatedFileName?.startsWith(resolve(__dirname, '../../src/contents'));
             if (shouldReload) {
                 sseStream.write(
                     {

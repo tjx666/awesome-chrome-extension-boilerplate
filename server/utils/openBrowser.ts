@@ -1,6 +1,7 @@
-import { argv } from 'yargs';
 import open from 'open';
 import { Compiler, Stats } from 'webpack';
+
+import argv from './args';
 
 /**
  * 一个 webpack 插件，在第一次编译成功时打开浏览器访问 devServer 首页

@@ -15,5 +15,5 @@ compiler.run((error, stats) => {
         colors: true,
     };
 
-    console.log(stats.toString(ENABLE_ANALYZE ? analyzeStatsOpts : 'minimal'));
+    console.log(stats?.toString(ENABLE_ANALYZE ? analyzeStatsOpts : 'minimal'));
 });
