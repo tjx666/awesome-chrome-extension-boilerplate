@@ -1,4 +1,4 @@
-/* eslint-disable import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
+/* eslint-disable camelcase, import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires */
 module.exports = (api) => {
     const isProd = api.env('production');
     const { minimum_chrome_version } = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`);
