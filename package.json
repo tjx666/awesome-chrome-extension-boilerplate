@@ -23,12 +23,8 @@
         "eslint": "eslint -c .eslintrc.js --ext .ts,.tsx  ./src/**/*.tsx ./{src,server}/**/*.ts",
         "lint-style": "stylelint --config .stylelintrc.json src/**/*.{css,less,scss}",
         "clean": "rimraf -rf ./extension ./dist ./*.zip ./*.crx",
-        "reinstall": "rimraf -rf ./node_modules && yarn"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+        "reinstall": "rimraf -rf ./node_modules && yarn",
+        "prepare": "husky install"
     },
     "lint-staged": {
         "*.{ts,tsx,js}": [
@@ -118,7 +114,6 @@
         "get-port": "^5.1.1",
         "html-webpack-plugin": "^5.3.1",
         "http-proxy-middleware": "^2.0.0",
-        "husky": "^6.0.0",
         "less": "^4.1.1",
         "less-loader": "^9.0.0",
         "lint-staged": "^11.0.0",
@@ -148,6 +143,7 @@
         "webpack-hot-middleware": "^2.25.0",
         "webpack-merge": "^5.7.3",
         "webpackbar": "^5.0.0-3",
-        "yargs": "^17.0.1"
+        "yargs": "^17.0.1",
+        "husky": "^6.0.0"
     }
 }
