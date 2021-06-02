@@ -14,7 +14,7 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });
             const updatedFileName = modules?.find(
-                (module) => module.type == 'module' && module.moduleType == 'javascript/auto',
+                (module) => module.type === 'module' && module.moduleType === 'javascript/auto',
             )?.nameForCondition as string;
             const shouldReload =
                 !stats.hasErrors() &&

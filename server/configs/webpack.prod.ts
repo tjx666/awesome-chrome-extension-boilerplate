@@ -1,11 +1,12 @@
 import { resolve } from 'path';
-import { default as webpack, BannerPlugin } from 'webpack';
+import webpack, { BannerPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
+// eslint-disable-next-line import/no-unresolved
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 import commonConfig from './webpack.common';

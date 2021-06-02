@@ -1,7 +1,9 @@
+// eslint-disable-next-line unicorn/prefer-module
 const { resolve } = require;
 const OFF = 0;
 const ERROR = 2;
 
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
     env: {
         browser: true,
@@ -19,8 +21,6 @@ module.exports = {
         'plugin:unicorn/recommended',
         'plugin:promise/recommended',
         'prettier',
-        'prettier/react',
-        'prettier/@typescript-eslint',
     ],
     globals: {
         Atomics: 'readonly',
@@ -41,11 +41,13 @@ module.exports = {
                 extensions: ['.ts', '.tsx', '.js', '.json'],
             },
             typescript: {
-                directory: [resolve('./src/tsconfig.json'), resolve('./server/tsconfig.json')],
+                project: [resolve('./src/tsconfig.json'), resolve('./server/tsconfig.json')],
             },
         },
     },
     rules: {
+        'no-use-before-define': OFF,
+
         'eslint-comments/disable-enable-pair': [ERROR, { allowWholeFile: true }],
 
         'import/extensions': OFF,
@@ -62,7 +64,11 @@ module.exports = {
                 },
             },
         ],
+        'unicorn/import-style': OFF,
+        'unicorn/no-array-for-each': OFF,
         'unicorn/no-process-exit': OFF,
+        'unicorn/prefer-module': OFF,
+        'unicorn/prefer-node-protocol': OFF,
         'unicorn/prevent-abbreviations': OFF,
 
         '@typescript-eslint/explicit-function-return-type': OFF,

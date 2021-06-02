@@ -1,11 +1,17 @@
+import { StringDecoder } from 'string_decoder';
+
 declare module 'speed-measure-webpack-plugin' {
     import { Configuration, Plugin } from 'webpack';
 
     interface SpeedMeasurePluginOptions {
         disable: boolean;
-        outputFormat: 'json' | 'human' | 'humanVerbose' | ((outputObj: object) => void);
+        outputFormat:
+            | 'json'
+            | 'human'
+            | 'humanVerbose'
+            | ((outputObj: Record<StringDecoder, unknown>) => void);
         outputTarget: string | ((outputObj: string) => void);
-        pluginNames: object;
+        pluginNames: Record<StringDecoder, unknown>;
         granularLoaderData: boolean;
     }
 
@@ -48,9 +54,19 @@ declare module '@soda/friendly-errors-webpack-plugin' {
     }
 
     declare namespace FriendlyErrorsWebpackPlugin {
+        // eslint-disable-next-line no-shadow
         enum Severity {
             Error = 'error',
             Warning = 'warning',
+        }
+
+        interface WebpackError {
+            message: string;
+            file: string;
+            origin: string;
+            name: string;
+            severity: Severity;
+            webpackError: any;
         }
 
         interface Options {
@@ -62,15 +78,6 @@ declare module '@soda/friendly-errors-webpack-plugin' {
             clearConsole?: boolean;
             additionalFormatters?: Array<(errors: WebpackError[], type: Severity) => string[]>;
             additionalTransformers?: Array<(error: any) => any>;
-        }
-
-        interface WebpackError {
-            message: string;
-            file: string;
-            origin: string;
-            name: string;
-            severity: Severity;
-            webpackError: any;
         }
     }
 

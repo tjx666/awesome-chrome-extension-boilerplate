@@ -3,12 +3,10 @@ import React from 'react';
 
 import './App.scss';
 
-const App = () => {
-    return (
-        <div className="app">
-            <h1 className="title">popup page</h1>
-        </div>
-    );
-};
+const App = () => (
+    <div className="app">
+        <h1 className="title">popup page</h1>
+    </div>
+);
 
 export default hot(App);

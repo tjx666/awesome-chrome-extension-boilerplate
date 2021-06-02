@@ -5,6 +5,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import FriendlyErrorsPlugin from '@soda/friendly-errors-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+// eslint-disable-next-line import/no-unresolved
 import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
