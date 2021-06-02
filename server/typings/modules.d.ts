@@ -1,6 +1,5 @@
-import { StringDecoder } from 'string_decoder';
-
 declare module 'speed-measure-webpack-plugin' {
+    import { StringDecoder } from 'string_decoder';
     import { Configuration, Plugin } from 'webpack';
 
     interface SpeedMeasurePluginOptions {
