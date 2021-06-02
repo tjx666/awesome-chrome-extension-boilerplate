@@ -4900,7 +4900,7 @@ human-signals@^2.1.0:
 
 husky@^6.0.0:
   version "6.0.0"
-  resolved "https://registry.npm.taobao.org/husky/download/husky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
+  resolved "https://registry.npm.taobao.org/husky/download/husky-6.0.0.tgz?cache=0&sync_timestamp=1617004665096&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhusky%2Fdownload%2Fhusky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
   integrity sha1-gQ8RhprfUWBMMupXftvDd9f5MZ4=
 
 iconv-lite@0.4.24, iconv-lite@^0.4.4:

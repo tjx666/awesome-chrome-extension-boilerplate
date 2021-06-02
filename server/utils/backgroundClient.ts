@@ -15,7 +15,7 @@ source.addEventListener(
 
 source.addEventListener(
     'message',
-    event => {
+    (event) => {
         logWithPrefix('received a no event name message, data:');
         console.log(event.data);
     },
@@ -39,8 +39,8 @@ source.addEventListener(
 
         if (shouldReload) {
             logWithPrefix('received the signal to reload chrome extension');
-            chrome.tabs.query({}, tabs => {
-                tabs.forEach(tab => {
+            chrome.tabs.query({}, (tabs) => {
+                tabs.forEach((tab) => {
                     if (tab.id) {
                         let received = false;
                         chrome.tabs.sendMessage(
@@ -49,7 +49,7 @@ source.addEventListener(
                                 from: 'background',
                                 action: 'refresh current page',
                             },
-                            res => {
+                            (res) => {
                                 if (window.chrome.runtime.lastError && !res) return;
 
                                 const { from, action } = res;

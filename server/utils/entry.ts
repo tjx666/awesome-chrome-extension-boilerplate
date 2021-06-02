@@ -1,6 +1,7 @@
-import { resolve } from 'path';
 import fs from 'fs';
-import { command } from 'execa';
+import { resolve } from 'path';
+
+import execa from 'execa';
 
 import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
 
@@ -28,21 +29,19 @@ const entry = __DEV__ ? devEntry : prodEntry;
 if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
-    command('npx react-devtools').catch((error) => {
+    execa.command('npx react-devtools').catch((error) => {
         console.error('Startup react-devtools occur error');
-        if (error) {
-            console.error(error);
-        }
+        error && console.error(error);
     });
 }
 
-const scriptNames = fs.readdirSync(resolve(src, 'contents'));
+const contentsDirs = fs.readdirSync(resolve(src, 'contents'));
 const validExtensions = ['tsx', 'ts'];
-scriptNames.forEach((name) => {
+contentsDirs.forEach((contentScriptDir) => {
     const hasValid = validExtensions.some((ext) => {
-        const abs = resolve(src, `contents/${name}/index.${ext}`);
+        const abs = resolve(src, `contents/${contentScriptDir}/index.${ext}`);
         if (fs.existsSync(abs)) {
-            entry[name] = [abs];
+            entry[contentScriptDir] = [abs];
             return true;
         }
 
@@ -50,14 +49,15 @@ scriptNames.forEach((name) => {
     });
 
     if (!hasValid) {
-        const dir = resolve(src, `contents/${name}`);
-        throw new Error(`You must put index.tsx or index.is under ${dir}`);
+        const dir = resolve(src, `contents/${contentScriptDir}`);
+        throw new Error(`You must put index.tsx or index.ts under directory: ${dir}`);
     }
 });
 
+// NOTE: 有可能用户没打算开发 content script，所以 contents/all 这个文件夹可能不存在
 if (entry.all && __DEV__) {
-    entry.all.unshift(resolve(__dirname, './autoRefreshClient.ts'));
-    entry.background.unshift(resolve(__dirname, './autoReloadClient.ts'));
+    entry.all.unshift(resolve(__dirname, './allTabClient.ts'));
+    entry.background.unshift(resolve(__dirname, './backgroundClient.ts'));
 }
 
 export default entry;

@@ -13,11 +13,10 @@ const COPYRIGHT = `/**
 const HRM_PATH = '/__webpack_HMR__';
 const EXTENSION_AUTO_RELOAD_PATH = '/__extension_auto_reload__';
 
-const __DEV__ = process.env.NODE_ENV !== 'production';
-
-
 const ENABLE_DEVTOOLS = argv.devtools;
 const ENABLE_ANALYZE = argv.analyze;
+
+const __DEV__ = process.env.NODE_ENV !== 'production';
 
 export {
     HOST,
@@ -26,7 +25,7 @@ export {
     COPYRIGHT,
     HRM_PATH,
     EXTENSION_AUTO_RELOAD_PATH,
-    __DEV__,
     ENABLE_DEVTOOLS,
     ENABLE_ANALYZE,
+    __DEV__,
 };
