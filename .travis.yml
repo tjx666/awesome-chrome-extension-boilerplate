@@ -4,5 +4,5 @@ cache:
 install:
     - yarn
 script:
-    - npx audit-ci -m
+    - npx audit-ci -m -a 1693
     - yarn test
