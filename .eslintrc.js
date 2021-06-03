@@ -54,6 +54,8 @@ module.exports = {
 
         'react/jsx-indent': [ERROR, 4],
         'react/jsx-filename-extension': [ERROR, { extensions: ['.ts', '.tsx', '.json', '.js'] }],
+        'react/jsx-uses-react': OFF,
+        'react/react-in-jsx-scope': OFF,
 
         'unicorn/filename-case': [
             ERROR,

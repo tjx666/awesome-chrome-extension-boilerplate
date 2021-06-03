@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "jsx": "react",
+        "jsx": "react-jsx",
         "isolatedModules": true,
 
         /* Strict Type-Checking Options */

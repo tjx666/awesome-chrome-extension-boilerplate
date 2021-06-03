@@ -36,7 +36,7 @@ module.exports = (api) => {
         ],
         env: {
             development: {
-                presets: [['@babel/preset-react', { development: true }]],
+                presets: [['@babel/preset-react', { runtime: 'automatic', development: true }]],
                 plugins: ['react-hot-loader/babel'],
             },
             production: {
