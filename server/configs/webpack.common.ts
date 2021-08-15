@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { DefinePlugin, Configuration } from 'webpack';
+import { Configuration } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import WebpackBar from 'webpackbar';
@@ -9,7 +9,7 @@ import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import entry from '../utils/entry';
-import { PROJECT_ROOT, __DEV__, ENABLE_DEVTOOLS } from '../utils/constants';
+import { PROJECT_ROOT, __DEV__ } from '../utils/constants';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -174,14 +174,5 @@ const commonConfig: Configuration = {
         ],
     },
 };
-
-if (!ENABLE_DEVTOOLS) {
-    commonConfig.plugins!.push(
-        new DefinePlugin({
-            // 移除控制台下载 react devtools 的提示
-            __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
-        }),
-    );
-}
 
 export default commonConfig;
