@@ -16,8 +16,8 @@ const popupPath = resolve(src, './popup/index.tsx');
 
 const devEntry: Record<string, string[]> = {
     background: [HMRClientScript, backgroundPath],
-    options: [HMRClientScript, 'react-hot-loader/patch', optionsPath],
-    popup: [HMRClientScript, 'react-hot-loader/patch', popupPath],
+    options: [HMRClientScript, optionsPath],
+    popup: [HMRClientScript, popupPath],
 };
 const prodEntry: Record<string, string[]> = {
     background: [backgroundPath],

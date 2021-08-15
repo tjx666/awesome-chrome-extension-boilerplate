@@ -58,7 +58,6 @@ const commonConfig: Configuration = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
-            'react-dom': '@hot-loader/react-dom',
             '@': resolve(PROJECT_ROOT, 'src'),
             utils: resolve(PROJECT_ROOT, 'src/utils'),
             styles: resolve(PROJECT_ROOT, 'src/styles'),
