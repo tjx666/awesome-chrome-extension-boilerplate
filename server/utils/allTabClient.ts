@@ -7,3 +7,5 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResp) => {
         setTimeout(() => window.location.reload(), 100);
     }
 });
+
+export {};

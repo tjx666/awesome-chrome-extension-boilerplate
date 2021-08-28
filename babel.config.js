@@ -9,8 +9,9 @@ module.exports = (api) => {
             targets: minimum_chrome_version
                 ? `Chrome > ${minimum_chrome_version}`
                 : 'last 2 Chrome versions',
+            bugfixes: true,
             useBuiltIns: 'usage',
-            corejs: 3,
+            corejs: { version: '3.16.3' },
         },
     ];
 
@@ -27,9 +28,6 @@ module.exports = (api) => {
         presets: ['@babel/preset-typescript', envPreset],
         plugins: [
             '@babel/plugin-transform-runtime',
-            '@babel/plugin-syntax-dynamic-import',
-            '@babel/plugin-proposal-optional-chaining',
-            ['@babel/plugin-proposal-class-properties'],
             ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
             'lodash',
             importPlugin,
@@ -37,12 +35,11 @@ module.exports = (api) => {
         env: {
             development: {
                 presets: [['@babel/preset-react', { runtime: 'automatic', development: true }]],
-                plugins: ['react-hot-loader/babel'],
+                plugins: [require.resolve('react-refresh/babel')],
             },
             production: {
                 presets: ['@babel/preset-react'],
                 plugins: [
-                    'babel-plugin-dev-expression',
                     '@babel/plugin-transform-react-constant-elements',
                     '@babel/plugin-transform-react-inline-elements',
                 ],

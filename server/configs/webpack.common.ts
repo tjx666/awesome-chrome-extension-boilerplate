@@ -1,15 +1,14 @@
-import { resolve } from 'path';
-import { DefinePlugin, Configuration } from 'webpack';
+import FriendlyErrorsPlugin from '@soda/friendly-errors-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import WebpackBar from 'webpackbar';
-import FriendlyErrorsPlugin from '@soda/friendly-errors-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { Options as HtmlMinifierOptions } from 'html-minifier';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { resolve } from 'path';
+import { Configuration } from 'webpack';
+import WebpackBar from 'webpackbar';
 
+import { __DEV__, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
-import { PROJECT_ROOT, __DEV__, ENABLE_DEVTOOLS } from '../utils/constants';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -26,20 +25,6 @@ function getCssLoaders(importLoaders: number) {
         },
     ];
 }
-
-const htmlMinifyOptions: HtmlMinifierOptions = {
-    collapseWhitespace: true,
-    collapseBooleanAttributes: true,
-    collapseInlineTagWhitespace: true,
-    removeComments: true,
-    removeRedundantAttributes: true,
-    removeScriptTypeAttributes: true,
-    removeStyleLinkTypeAttributes: true,
-    minifyCSS: true,
-    minifyJS: true,
-    minifyURLs: true,
-    useShortDoctype: true,
-};
 
 const commonConfig: Configuration = {
     context: PROJECT_ROOT,
@@ -58,7 +43,6 @@ const commonConfig: Configuration = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
-            'react-dom': '@hot-loader/react-dom',
             '@': resolve(PROJECT_ROOT, 'src'),
             utils: resolve(PROJECT_ROOT, 'src/utils'),
             styles: resolve(PROJECT_ROOT, 'src/styles'),
@@ -86,14 +70,12 @@ const commonConfig: Configuration = {
         }),
         new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
-            minify: __DEV__ ? false : htmlMinifyOptions,
             chunks: ['options'],
             filename: 'options.html',
             title: 'options page',
             template: resolve(PROJECT_ROOT, 'public/options.html'),
         }),
         new HtmlWebpackPlugin({
-            minify: __DEV__ ? false : htmlMinifyOptions,
             chunks: ['popup'],
             filename: 'popup.html',
             title: 'popup page',
@@ -148,41 +130,31 @@ const commonConfig: Configuration = {
                 ],
             },
             {
-                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 1024 * 10,
-                            name: '[name].[contenthash].[ext]',
-                            outputPath: 'images',
-                        },
+                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024,
                     },
-                ],
+                },
+                generator: {
+                    filename: 'images/[hash][ext][query]',
+                },
             },
             {
                 test: /\.(ttf|woff|woff2|eot|otf)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            name: '[name]-[contenthash].[ext]',
-                            outputPath: 'fonts',
-                        },
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 10 * 1024,
                     },
-                ],
+                },
+                generator: {
+                    filename: 'fonts/[hash][ext][query]',
+                },
             },
         ],
     },
 };
-
-if (!ENABLE_DEVTOOLS) {
-    commonConfig.plugins!.push(
-        new DefinePlugin({
-            // 移除控制台下载 react devtools 的提示
-            __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
-        }),
-    );
-}
 
 export default commonConfig;

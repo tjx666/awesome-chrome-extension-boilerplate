@@ -6,6 +6,7 @@
     "minimum_chrome_version": "80",
     "permissions": [],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+    "web_accessible_resources": ["icons/*", "images/*", "fonts/*"],
     "background": {
         "scripts": ["js/background.js"],
         "persistent": true
