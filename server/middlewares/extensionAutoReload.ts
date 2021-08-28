@@ -1,8 +1,8 @@
-import { resolve } from 'path';
-import { debounce } from 'lodash';
 import { RequestHandler } from 'express';
-import { Compiler, Stats } from 'webpack';
+import { debounce } from 'lodash';
+import { resolve } from 'path';
 import SSEStream from 'ssestream';
+import { Compiler, Stats } from 'webpack';
 
 export default function extensionAutoReload(compiler: Compiler): RequestHandler {
     return (req, res, next) => {
@@ -13,12 +13,14 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
 
         const compileDoneHook = debounce((stats: Stats) => {
             const { modules } = stats.toJson({ all: false, modules: true });
-            const updatedFileName = modules?.find(
+            const updatedJsModules = modules?.filter(
                 (module) => module.type === 'module' && module.moduleType === 'javascript/auto',
-            )?.nameForCondition as string;
+            );
             const shouldReload =
                 !stats.hasErrors() &&
-                updatedFileName?.startsWith(resolve(__dirname, '../../src/contents'));
+                updatedJsModules?.some((module) =>
+                    module.nameForCondition?.startsWith(resolve(__dirname, '../../src/contents')),
+                );
             if (shouldReload) {
                 sseStream.write(
                     {

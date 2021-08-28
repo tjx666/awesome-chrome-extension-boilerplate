@@ -5,6 +5,7 @@
     "manifest_version": 2,
     "minimum_chrome_version": "80",
     "permissions": [],
+    "web_accessible_resources": ["icons/*", "images/*", "fonts/*"],
     "background": {
         "scripts": ["js/background.js"],
         "persistent": true
@@ -13,7 +14,7 @@
         {
             "matches": ["https://github.com/*"],
             "css": ["css/all.css"],
-            "js": ["js/all.js"]
+            "js": ["js/vendor.js", "js/all.js"]
         }
     ],
     "browser_action": {

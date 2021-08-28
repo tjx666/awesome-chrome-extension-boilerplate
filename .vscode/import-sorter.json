@@ -1,0 +1,18 @@
+{
+    "groupRules": [
+        ["^[@][^/]", {}],
+        [
+            "^@(/|$)",
+            "^apis?(/|$)",
+            "^assets(/|$)",
+            "^components?(/|$)",
+            "^features(/|$)",
+            "^styles?(/|$)",
+            "^typings?(/|$)",
+            "^utils(/|$)"
+        ],
+        { "flags": "named", "regex": "^[.]" },
+        { "flags": "scripts", "regex": "[.]((css)|(less)|(scss))$" }
+    ],
+    "wrappingStyle": "prettier"
+}
