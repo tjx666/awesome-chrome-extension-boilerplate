@@ -2,7 +2,6 @@ import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { resolve } from 'path';
-import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import webpack, { BannerPlugin } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -11,7 +10,7 @@ import merge from 'webpack-merge';
 import { COPYRIGHT, ENABLE_ANALYZE, PROJECT_ROOT } from '../utils/constants';
 import commonConfig from './webpack.common';
 
-const mergedConfig = merge(commonConfig, {
+const prodConfig = merge(commonConfig, {
     mode: 'production',
     plugins: [
         new BannerPlugin({
@@ -53,12 +52,8 @@ const mergedConfig = merge(commonConfig, {
     },
 });
 
-// eslint-disable-next-line import/no-mutable-exports
-let prodConfig = mergedConfig;
 if (ENABLE_ANALYZE) {
-    mergedConfig.plugins!.push(new BundleAnalyzerPlugin());
-    const smp = new SpeedMeasurePlugin();
-    prodConfig = smp.wrap(mergedConfig);
+    prodConfig.plugins!.push(new BundleAnalyzerPlugin());
 }
 
 export default prodConfig;
