@@ -10,7 +10,7 @@
 - :palm_tree: `options` 和 `popup` 页面支持 `react hot reload` & `react devtools`，充分享受现代前端工程化的便捷，让你从开发 `SPA` 无缝切换到 chrome 扩展开发。
 - :shield: 整个模板包括 `webpack` 配置都是用 `TypeScript` 编写的，使用 `TypeScript` 配置 `webpack` 减少查阅文档和手残的概率。
 - :lipstick: ​ 支持 css/less/sass，使用 `mini-css-extract-plugin` 将 CSS 分离成 content CSS Script。
-- :hammer_and_pick: ​ 集成了社区很多的优秀的 `webpack`，`eslint` 和 `babel` 插件，优化开发，构建和打包分析体验。
+- :hammer_and_pick: 集成了社区很多的优秀的 `webpack`，`eslint` 和 `babel` 插件，优化开发，构建和打包分析体验，还配置了 `husky` , `format-imports`, `stylelint`, `travis` 和 `audit-ci` 构建工具。
 - :rainbow: 默认集成了 `jquery`，`lodash`，`antd` 等常用工具库，并对它们的打包进行了优化
 
 ## :package: 安装
@@ -19,13 +19,13 @@
 # 克隆这个模板
 git clone https://github.com/tjx666/awesome-chrome-extension-boilerplate.git
 
-# 安装依赖，推荐使用 yarn
-yarn
+# 安装依赖，推荐使用 pnpm
+pnpm
 ```
 
 ## :hammer_and_wrench: 开发
 
-:bell: 请确保你对 chrome 扩展开发已经有基本的了解，入门推荐：[Chrome 插件(扩展)开发全攻略](http://blog.haoji.me/chrome-plugin-develop.html)。如果你对项目的配置有疑问，不如先看看该项目的原型项目 [refined-nowcoder](https://github.com/tjx666/refined-nowcoder)。
+:bell: 请确保你对 chrome 扩展开发已经有基本的了解，入门推荐：[Chrome 插件(扩展)开发全攻略](http://blog.haoji.me/chrome-plugin-develop.html)。如果你对项目的配置有疑问。
 
 ### 准备工作
 
@@ -39,7 +39,7 @@ yarn
 
 ```javascript
 "content_scripts": [
-    // 注入到所有注入了 content scripts 的页面
+    // 所有注入了 content scripts 的页面都注入了 js/all.js 和 css/all.css
     {
         "matches": ["https://github.com/*"],
         "css": ["css/all.css"],
@@ -58,7 +58,8 @@ yarn
 
 `public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接放到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
 
-```json
+```js
+// manifest.dev.json
 {
   "icons": {
     "16": "icons/extension-icon-x16.png",
@@ -97,19 +98,19 @@ npm run devtools
 
 ### 编写代码
 
-模板默认的代码实现的功能是修改 github 导航栏的颜色，模板使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
+模板默认的代码实现的功能是修改 `github` 导航栏的颜色，模板使用了 [normalize.css](https://github.com/necolas/normalize.css) 和一些自定义样式对 CSS 进行样式重置。
 
 #### [background](https://developer.chrome.com/extensions/background_pages)
 
-如果你想开发 background 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的入口，也是 `webpack` 的一个 `entry`，其它像 `options` 和 `popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
+如果你想开发 `background` 脚本，你可以在 `src/background` 文件夹编写你的代码。`src/background/index.ts` 是 `background` 脚本的入口，也是 `webpack` 的一个 `entry`，其它像 `options` 和 `popup` 页面也类似。你可以查看 `webpack` 的 `entry` 配置： `src/server/utils/entry.ts` 了解更多实现细节。
 
 #### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
 它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
-这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 eslint 规则也集成了。
+这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint `规则也集成了。
 
-模板使用 [react-hot-reload](https://github.com/gaearon/react-hot-loader) 支持 react 的热更新。等到 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 webpack 环境了，它将被替换。
+模板使用 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 `react` 的热更新。
 
 #### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
@@ -154,13 +155,13 @@ const proxyTable: ProxyTable = {
 构建生产级别的包直接运行：
 
 ```bash
-yarn run build
+pnpm build
 ```
 
 如果你想分析打包情况：
 
 ```bash
-yarn run build-analyze
+pnpm build-analyze
 ```
 
 ## :loudspeaker: 注意事项

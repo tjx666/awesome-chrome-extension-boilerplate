@@ -1,10 +1,6 @@
 {
     "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
-    "plugins": [
-        "stylelint-config-recess-order",
-        "stylelint-declaration-block-no-ignored-properties",
-        "stylelint-scss"
-    ],
+    "plugins": ["stylelint-declaration-block-no-ignored-properties", "stylelint-scss"],
     "rules": {
         "comment-empty-line-before": null,
         "function-name-case": "lower",

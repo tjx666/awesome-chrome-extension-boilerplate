@@ -30,7 +30,7 @@ const commonConfig: Configuration = {
     context: PROJECT_ROOT,
     entry,
     watchOptions: {
-        ignored: ['node_modules/**', 'extension/**', 'public/**'],
+        ignored: ['node_modules/**', 'extension/**'],
     },
     output: {
         publicPath: '/',
@@ -82,8 +82,7 @@ const commonConfig: Configuration = {
             template: resolve(PROJECT_ROOT, 'public/popup.html'),
         }),
         new MiniCssExtractPlugin({
-            filename: `css/[name]${__DEV__ ? '' : '.[contenthash]'}.css`,
-            chunkFilename: `css/[id]${__DEV__ ? '' : '.[contenthash]'}.css`,
+            filename: `css/[name].css`,
             ignoreOrder: false,
         }),
     ],
