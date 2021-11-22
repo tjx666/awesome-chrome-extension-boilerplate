@@ -1,6 +1,7 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
     // stylelint 扩展自身的校验就够了
+    "stylelint.validate": ["css", "less", "scss"],
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,

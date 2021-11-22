@@ -1,9 +1,14 @@
 language: node_js
 cache:
-    - yarn
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+before_install:
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+  - pnpm config set store-dir ~/.pnpm-store
 install:
-    - yarn
+  - pnpm install
 script:
     # postcss Regular Expression Denial of Service
     - npx audit-ci -m
-    - yarn test
+    - pnpm test

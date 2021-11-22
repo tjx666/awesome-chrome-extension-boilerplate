@@ -52,6 +52,7 @@ module.exports = {
 
         'import/extensions': OFF,
 
+        'react/function-component-definition': OFF,
         'react/jsx-indent': [ERROR, 4],
         'react/jsx-filename-extension': [ERROR, { extensions: ['.ts', '.tsx', '.json', '.js'] }],
         'react/jsx-uses-react': OFF,

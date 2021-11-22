@@ -43,7 +43,7 @@ declare module 'ssestream' {
     export = SSEStream;
 }
 
-declare module '@soda/friendly-errors-webpack-plugin' {
+declare module '@nuxt/friendly-errors-webpack-plugin' {
     import { Plugin, Compiler } from 'webpack';
 
     declare class FriendlyErrorsWebpackPlugin extends Plugin {

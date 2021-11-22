@@ -1,5 +1,9 @@
 {
-    "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-prettier",
+        "stylelint-config-recess-order"
+    ],
     "plugins": ["stylelint-declaration-block-no-ignored-properties", "stylelint-scss"],
     "rules": {
         "comment-empty-line-before": null,
@@ -8,5 +12,15 @@
         "no-descending-specificity": null,
         "declaration-empty-line-before": null
     },
+    "overrides": [
+        {
+            "files": ["**/*.scss"],
+            "customSyntax": "postcss-scss"
+        },
+        {
+            "files": ["**/*.less"],
+            "customSyntax": "postcss-less"
+        }
+    ],
     "ignoreFiles": ["node_modules/**/*", "extension/**/*", "public/**/*", "**/*.d.ts"]
 }
