@@ -6,6 +6,7 @@
         "stylelint.vscode-stylelint",
         "dsznajder.es7-react-js-snippets",
         "mrmlnc.vscode-scss",
+        "dozerg.tsimportsorter",
         "yutengjing.view-github-repository",
         "yutengjing.open-in-external-app",
         "yutengjing.vscode-fe-helper"
