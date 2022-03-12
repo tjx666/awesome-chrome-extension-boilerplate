@@ -9,7 +9,8 @@
         "dozerg.tsimportsorter",
         "yutengjing.view-github-repository",
         "yutengjing.open-in-external-app",
-        "yutengjing.vscode-fe-helper"
+        "yutengjing.vscode-fe-helper",
+        "YuTengjing.vscode-archive"
     ],
     "unwantedRecommendations": [
         "hookyqr.beautify",

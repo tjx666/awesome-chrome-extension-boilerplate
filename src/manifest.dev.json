@@ -2,14 +2,20 @@
     "name": "awesome chrome extension boilerplate",
     "version": "1.0",
     "description": "made by awesome-chrome-extension-boilerplate",
-    "manifest_version": 2,
-    "minimum_chrome_version": "80",
+    "manifest_version": 3,
+    "minimum_chrome_version": "98",
     "permissions": [],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
-    "web_accessible_resources": ["icons/*", "images/*", "fonts/*"],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' http://localhost; object-src 'self';"
+    },
+    "web_accessible_resources": [
+        {
+            "matches": ["<all_urls>"],
+            "resources": ["icons/*", "images/*", "fonts/*"]
+        }
+    ],
     "background": {
-        "scripts": ["js/background.js"],
-        "persistent": true
+        "service_worker": "js/background.js"
     },
     "content_scripts": [
         {
@@ -18,7 +24,7 @@
             "js": ["js/all.js"]
         }
     ],
-    "browser_action": {
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "icons/extension-icon-x16.png",
