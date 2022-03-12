@@ -1,14 +1,13 @@
+import execa from 'execa';
 import fs from 'fs';
 import { resolve } from 'path';
 
-import execa from 'execa';
-
-import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
+import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
 
 const src = resolve(__dirname, '../../src');
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
 // !: 必须指定 path 为 devServer 的地址，不然的话热更新 client 会向 chrome://xxx 请求
-const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=true&overlay=true`;
+const HMRClientScript = `@lukeapage/webpack-hot-middleware/client?path=${HMR_URL}&reload=true&overlay=true`;
 
 const backgroundPath = resolve(src, './background/index.ts');
 const optionsPath = resolve(src, './options/index.tsx');

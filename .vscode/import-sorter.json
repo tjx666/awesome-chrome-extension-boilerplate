@@ -3,16 +3,22 @@
         ["^[@][^/]", {}],
         [
             "^@(/|$)",
+            "^actions?(/|$)",
             "^apis?(/|$)",
             "^assets(/|$)",
             "^components?(/|$)",
-            "^features(/|$)",
+            "^features?(/|$)",
+            "^helpers?(/|$)",
+            "^pages?(/|$)",
+            "^sagas?(/|$)",
+            "^selectors?(/|$)",
             "^styles?(/|$)",
+            "^reducers?(/|$)",
             "^typings?(/|$)",
             "^utils(/|$)"
         ],
         { "flags": "named", "regex": "^[.]" },
-        { "flags": "scripts", "regex": "[.]((css)|(less)|(scss))$" }
+        [{ "flags": "scripts" }, { "flags": "scripts", "regex": "[.]((css)|(less)|(scss))$" }]
     ],
     "wrappingStyle": "prettier"
 }

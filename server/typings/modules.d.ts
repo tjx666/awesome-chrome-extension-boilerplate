@@ -43,8 +43,8 @@ declare module 'ssestream' {
     export = SSEStream;
 }
 
-declare module '@soda/friendly-errors-webpack-plugin' {
-    import { Plugin, Compiler } from 'webpack';
+declare module '@nuxt/friendly-errors-webpack-plugin' {
+    import type { Plugin, Compiler } from 'webpack';
 
     declare class FriendlyErrorsWebpackPlugin extends Plugin {
         constructor(options?: FriendlyErrorsWebpackPlugin.Options);
@@ -81,4 +81,10 @@ declare module '@soda/friendly-errors-webpack-plugin' {
     }
 
     export = FriendlyErrorsWebpackPlugin;
+}
+
+declare module '@lukeapage/webpack-hot-middleware' {
+    import webpackHotMiddleware from '@types/webpack-hot-middleware';
+
+    export = webpackHotMiddleware;
 }

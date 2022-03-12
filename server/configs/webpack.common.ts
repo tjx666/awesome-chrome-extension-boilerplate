@@ -1,4 +1,4 @@
-import FriendlyErrorsPlugin from '@soda/friendly-errors-webpack-plugin';
+// import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -65,10 +65,10 @@ const commonConfig: Configuration = {
             ],
         }),
         new WebpackBar({
-            name: 'chrome extension',
+            name: 'Building chrome extension',
             color: '#0f9d58',
         }),
-        new FriendlyErrorsPlugin(),
+        // new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
