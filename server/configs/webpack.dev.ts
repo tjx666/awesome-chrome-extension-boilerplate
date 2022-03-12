@@ -9,7 +9,7 @@ import commonConfig from './webpack.common';
 
 const devConfig = merge(commonConfig, {
     mode: 'development',
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     plugins: [
         new HotModuleReplacementPlugin(),
         new ReactRefreshWebpackPlugin({

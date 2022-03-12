@@ -14,7 +14,7 @@ const optionsPath = resolve(src, './options/index.tsx');
 const popupPath = resolve(src, './popup/index.tsx');
 
 const devEntry: Record<string, string[]> = {
-    background: [HMRClientScript, backgroundPath],
+    background: [backgroundPath],
     options: [HMRClientScript, optionsPath],
     popup: [HMRClientScript, popupPath],
 };
