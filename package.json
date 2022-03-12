@@ -103,7 +103,7 @@
         "eslint-plugin-unicorn": "^41.0.0",
         "execa": "^5.1.1",
         "express": "^4.17.3",
-        "fork-ts-checker-webpack-plugin": "^7.2.1",
+        "fork-ts-checker-webpack-plugin": "6.5.0",
         "format-imports": "^3.0.1",
         "get-port": "^5.1.1",
         "html-webpack-plugin": "^5.5.0",
