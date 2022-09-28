@@ -38,7 +38,7 @@ module.exports = (api) => {
                 plugins: [require.resolve('react-refresh/babel')],
             },
             production: {
-                presets: ['@babel/preset-react'],
+                presets: [['@babel/preset-react', { runtime: 'automatic', development: false }]],
                 plugins: ['@babel/plugin-transform-react-constant-elements'],
             },
         },
