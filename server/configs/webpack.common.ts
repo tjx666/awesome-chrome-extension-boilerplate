@@ -18,7 +18,7 @@ function getCssLoaders(importLoaders: number) {
         {
             loader: 'css-loader',
             options: {
-                modules: false,
+                modules: true,
                 sourceMap: true,
                 importLoaders,
             },
