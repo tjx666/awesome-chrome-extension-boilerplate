@@ -7,7 +7,7 @@ module.exports = (api) => {
         {
             modules: false,
             targets: minimum_chrome_version
-                ? `Chrome > ${minimum_chrome_version}`
+                ? `Chrome >= ${minimum_chrome_version}`
                 : 'last 2 Chrome versions',
             bugfixes: true,
             useBuiltIns: 'usage',
