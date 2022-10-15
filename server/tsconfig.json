@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "target": "ES2021",
+        "target": "ES2022",
         "module": "commonjs",
 
         /* Strict Type-Checking Options */
