@@ -36,6 +36,7 @@ specifiers:
   babel-loader: ^8.2.5
   babel-plugin-import: ^1.13.5
   babel-plugin-lodash: ^3.3.4
+  browserslist: 4.21.4
   chalk: ^4.1.2
   clean-webpack-plugin: ^4.0.0
   copy-webpack-plugin: ^11.0.0
@@ -67,6 +68,7 @@ specifiers:
   jquery: ^3.6.1
   less: ^4.1.3
   less-loader: ^11.1.0
+  lightningcss: 1.16.0
   lint-staged: ^13.0.3
   lodash: ^4.17.21
   mini-css-extract-plugin: ^2.6.1
@@ -145,6 +147,7 @@ devDependencies:
   babel-loader: 8.2.5_wfdvla2jorjoj23kkavho2upde
   babel-plugin-import: 1.13.5
   babel-plugin-lodash: 3.3.4
+  browserslist: 4.21.4
   chalk: 4.1.2
   clean-webpack-plugin: 4.0.0_webpack@5.74.0
   copy-webpack-plugin: 11.0.0_webpack@5.74.0
@@ -152,7 +155,7 @@ devDependencies:
   cors: 2.8.5
   cross-env: 7.0.3
   css-loader: 6.7.1_webpack@5.74.0
-  css-minimizer-webpack-plugin: 4.2.2_webpack@5.74.0
+  css-minimizer-webpack-plugin: 4.2.2_fmbhacshgxrqdi3zp5g6mrwfdi
   eslint: 8.25.0
   eslint-config-airbnb: 19.0.4_4ces55zid76bgvayjtslcl5sne
   eslint-config-prettier: 8.5.0_eslint@8.25.0
@@ -174,6 +177,7 @@ devDependencies:
   husky: 8.0.1
   less: 4.1.3
   less-loader: 11.1.0_less@4.1.3+webpack@5.74.0
+  lightningcss: 1.16.0
   lint-staged: 13.0.3
   mini-css-extract-plugin: 2.6.1_webpack@5.74.0
   open: 8.4.0
@@ -3129,18 +3133,6 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /browserslist/4.20.0:
-    resolution: {integrity: sha512-bnpOoa+DownbciXj0jVGENf8VYQnE2LNWomhYuCsMmmx9Jd9lwq0WXODuwpSsp8AVdKM2/HorrzxAfbKvWTByQ==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001314
-      electron-to-chromium: 1.4.82
-      escalade: 3.1.1
-      node-releases: 2.0.2
-      picocolors: 1.0.0
-    dev: true
-
   /browserslist/4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -3228,10 +3220,6 @@ packages:
       caniuse-lite: 1.0.30001409
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
-    dev: true
-
-  /caniuse-lite/1.0.30001314:
-    resolution: {integrity: sha512-0zaSO+TnCHtHJIbpLroX7nsD+vYuOVjl3uzFbJO1wMVbuveJA0RK2WcQA9ZUIOiO0/ArMiMgHJLxfEZhQiC0kw==}
     dev: true
 
   /caniuse-lite/1.0.30001409:
@@ -3645,7 +3633,7 @@ packages:
       webpack: 5.74.0_@swc+core@1.3.7
     dev: true
 
-  /css-minimizer-webpack-plugin/4.2.2_webpack@5.74.0:
+  /css-minimizer-webpack-plugin/4.2.2_fmbhacshgxrqdi3zp5g6mrwfdi:
     resolution: {integrity: sha512-s3Of/4jKfw1Hj9CxEO1E5oXhQAxlayuHO2y/ML+C6I9sQ7FdzfEV6QgMLN3vI+qFsjJGIAFLKtQK7t8BOXAIyA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -3672,6 +3660,7 @@ packages:
     dependencies:
       cssnano: 5.1.13_postcss@8.4.18
       jest-worker: 29.1.2
+      lightningcss: 1.16.0
       postcss: 8.4.18
       schema-utils: 4.0.0
       serialize-javascript: 6.0.0
@@ -3922,6 +3911,12 @@ packages:
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
     dev: true
 
+  /detect-libc/1.0.3:
+    resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
+    engines: {node: '>=0.10'}
+    hasBin: true
+    dev: true
+
   /detect-node/2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
     dev: true
@@ -4018,10 +4013,6 @@ packages:
 
   /electron-to-chromium/1.4.257:
     resolution: {integrity: sha512-C65sIwHqNnPC2ADMfse/jWTtmhZMII+x6ADI9gENzrOiI7BpxmfKFE84WkIEl5wEg+7+SfIkwChDlsd1Erju2A==}
-    dev: true
-
-  /electron-to-chromium/1.4.82:
-    resolution: {integrity: sha512-Ks+ANzLoIrFDUOJdjxYMH6CMKB8UQo5modAwvSZTxgF+vEs/U7G5IbWFUp6dS4klPkTDVdxbORuk8xAXXhMsWw==}
     dev: true
 
   /electron/11.5.0:
@@ -5951,6 +5942,98 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /lightningcss-darwin-arm64/1.16.0:
+    resolution: {integrity: sha512-gIhz6eZFwsC4oVMjBGQ3QWDdLQY7vcXFyM/x91PilgHqu63B9uBa10EZA75YoTEkbKhoz0uDCqyHh/EoF1GrkQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-darwin-x64/1.16.0:
+    resolution: {integrity: sha512-kLPi+OEpDj3UGY6DC8TfjbcULJDKMP+TVKSlrEkNGn8t1YRzi2g4oy7UVTSB5AnSbT0CusUItzdVjHQ49EdoNA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-linux-arm-gnueabihf/1.16.0:
+    resolution: {integrity: sha512-oSwEbvXUPr//H/ainBRJXTxHerlheee/KgkTTmAQWiVnt8HV+bRohTBWWPBy5ZArgiGLwj7ogv45istgljPN2Q==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-linux-arm64-gnu/1.16.0:
+    resolution: {integrity: sha512-Drq9BSVIvmV9zsDJbCZWCulMvKMQWFIlYXPCKV/iwRj+ZAJ1BRngma0cNHB6uW7Wac8Jg04CJN5IA4ELE3J+cQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-linux-arm64-musl/1.16.0:
+    resolution: {integrity: sha512-1QXWStnTEo4RFQf0mfGhRyNUeEHilCZ0NA97XgwKwrYr/M7sYKU/1HWY00dPxFJ6GITR2pfJGo9xi3ScSSBxbA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-linux-x64-gnu/1.16.0:
+    resolution: {integrity: sha512-gD2eQYD5OFs1p83R0TcMCEc5HRyJES4lR4THmclv7khm3dc9vc+2VT0kFBPxO1L2AwlZuvXaaMan7X1Ul7uSfA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-linux-x64-musl/1.16.0:
+    resolution: {integrity: sha512-HJsKeYxloEvg2WCQhtYPqzZUliLu9JBJNeI5y9cPQeDR/7ayGGLbVhJaotPtzJkElOFL/SaXsS+FRuH4w+yafg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss-win32-x64-msvc/1.16.0:
+    resolution: {integrity: sha512-h4ayyAlOMLUHV9NdofcIu79aEjmly93adVxcg5wDJpkvMiwDTufEN30M8G4gGcjo1JE5jFjAcyQcRpXYkYcemA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /lightningcss/1.16.0:
+    resolution: {integrity: sha512-5+ZS9h+xeADcJTF2oRCT3yNZBlDYyOgQSdrWNBCqsIwm8ucKbF061OBVv/WHP4Zk8FToNhwFklk/hMuOngqsIg==}
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      detect-libc: 1.0.3
+    optionalDependencies:
+      lightningcss-darwin-arm64: 1.16.0
+      lightningcss-darwin-x64: 1.16.0
+      lightningcss-linux-arm-gnueabihf: 1.16.0
+      lightningcss-linux-arm64-gnu: 1.16.0
+      lightningcss-linux-arm64-musl: 1.16.0
+      lightningcss-linux-x64-gnu: 1.16.0
+      lightningcss-linux-x64-musl: 1.16.0
+      lightningcss-win32-x64-msvc: 1.16.0
+    dev: true
+
   /lilconfig/2.0.5:
     resolution: {integrity: sha512-xaYmXZtTHPAw5m+xLN8ab9C+3a8YmV3asNSPOATITbtwrfbwaLJj8h66H1WMIpALCkqsIzK3h7oQ+PdX+LQ9Eg==}
     engines: {node: '>=10'}
@@ -6409,10 +6492,6 @@ packages:
     engines: {node: '>= 8.0.0'}
     dependencies:
       clone: 2.1.2
-    dev: true
-
-  /node-releases/2.0.2:
-    resolution: {integrity: sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==}
     dev: true
 
   /node-releases/2.0.6:
@@ -9459,7 +9538,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.8.0
       acorn-import-assertions: 1.8.0_acorn@8.8.0
-      browserslist: 4.20.0
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.10.0
       es-module-lexer: 0.9.3

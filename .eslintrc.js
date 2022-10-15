@@ -75,6 +75,7 @@ module.exports = {
         'unicorn/prefer-top-level-await': OFF,
         'unicorn/prevent-abbreviations': OFF,
 
+        '@typescript-eslint/ban-ts-comment': OFF,
         '@typescript-eslint/explicit-function-return-type': OFF,
         '@typescript-eslint/no-explicit-any': OFF,
         '@typescript-eslint/no-non-null-assertion': OFF,
