@@ -7,13 +7,21 @@ const compiler = webpack(prodConfig);
 compiler.run((error, stats) => {
     if (error) {
         console.error(error);
-        return;
+        throw error;
     }
 
-    const analyzeStatsOpts = {
-        preset: 'normal',
-        colors: true,
-    };
+    if (stats) {
+        const { errors } = stats.toJson({ all: false, errors: true });
 
-    console.log(stats?.toString(ENABLE_ANALYZE ? analyzeStatsOpts : 'minimal'));
+        if (stats.hasErrors()) {
+            console.error(errors);
+            throw new Error(JSON.stringify(errors, undefined, 4));
+        }
+
+        const analyzeStatsOpts = {
+            preset: 'normal',
+            colors: true,
+        };
+        console.log(stats.toString(ENABLE_ANALYZE ? analyzeStatsOpts : 'minimal'));
+    }
 });
