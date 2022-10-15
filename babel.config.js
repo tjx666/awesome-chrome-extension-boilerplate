@@ -11,7 +11,7 @@ module.exports = (api) => {
                 : 'last 2 Chrome versions',
             bugfixes: true,
             useBuiltIns: 'usage',
-            corejs: { version: require('./package.json').devDependencies['core-js'].slice(1) },
+            corejs: { version: require('./package.json').devDependencies['core-js'] },
         },
     ];
 
