@@ -72,6 +72,7 @@ module.exports = {
         'unicorn/no-process-exit': OFF,
         'unicorn/prefer-module': OFF,
         'unicorn/prefer-node-protocol': OFF,
+        'unicorn/prefer-top-level-await': OFF,
         'unicorn/prevent-abbreviations': OFF,
 
         '@typescript-eslint/explicit-function-return-type': OFF,

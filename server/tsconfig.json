@@ -25,5 +25,9 @@
         /* Advanced Options */
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true
+    },
+    "ts-node": {
+        "files": true,
+        "swc": true
     }
 }
