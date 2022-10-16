@@ -18,7 +18,8 @@ function getCssLoaders(importLoaders: number) {
         {
             loader: 'css-loader',
             options: {
-                modules: true,
+                // disable css module by default
+                modules: false,
                 sourceMap: true,
                 importLoaders,
             },
