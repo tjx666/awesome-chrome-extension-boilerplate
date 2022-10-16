@@ -50,7 +50,7 @@ source.addEventListener(
                                 action: 'refresh current page',
                             },
                             (res) => {
-                                if (window.chrome.runtime.lastError && !res) return;
+                                if (chrome.runtime.lastError && !res) return;
 
                                 const { from, action } = res;
                                 if (
