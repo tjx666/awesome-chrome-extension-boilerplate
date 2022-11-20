@@ -14,6 +14,7 @@
         "url": "https://github.com/tjx666/awesome-chrome-extension-boilerplate/issues"
     },
     "scripts": {
+        "preinstall": "npx only-allow pnpm",
         "start": "cross-env-shell NODE_ENV=development ts-node --files ./server",
         "devtools": "pnpm start --devtools",
         "build": "cross-env-shell NODE_ENV=production ts-node --files ./server",
