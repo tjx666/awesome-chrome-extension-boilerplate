@@ -172,12 +172,6 @@ pnpm build-analyze
 
 核心原理：[使用 webpack 构建 chrome 扩展的热更新问题](https://zhuanlan.zhihu.com/p/103072251)
 
-## :dart: TODO
-
-- [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。
-- [x] 支持 webpack dev server 代理
-- [x] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
-
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-欢迎提交 PRs 和 issues。
+欢迎贡献 PRs。
