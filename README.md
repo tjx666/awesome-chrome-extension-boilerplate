@@ -58,7 +58,7 @@ pnpm
 
 `public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接放到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
 
-```js
+```json
 // manifest.dev.json
 {
   "icons": {
@@ -108,7 +108,7 @@ npm run devtools
 
 它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
-这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint `规则也集成了。
+这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint` 规则也集成了。
 
 模板使用 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 `react` 的热更新。
 
@@ -125,13 +125,15 @@ npm run devtools
 1. 添加 `content scripts` 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
    ```json
-   "content_scripts": [
+   {
+     "content_scripts": [
        {
-           "matches": ["https://www.example.com/discuss*"],
-           "css": ["css/discuss.css"],
-           "js": ["js/discuss.js"]
+         "matches": ["https://www.example.com/discuss*"],
+         "css": ["css/discuss.css"],
+         "js": ["js/discuss.js"]
        }
-   ],
+     ]
+   }
    ```
 
 2. 创建一个和上面 `content script` 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 将会被视为一个 webpack entry。 `webpack` 会通过这个 `entry` 最终产出 `js/discuss.js` 这个 `chunk`。
