@@ -1,6 +1,6 @@
 import execa from 'execa';
-import fs from 'fs';
-import { resolve } from 'path';
+import fs from 'node:fs';
+import { resolve } from 'node:path';
 
 import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
 

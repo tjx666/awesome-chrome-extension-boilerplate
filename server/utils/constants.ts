@@ -1,4 +1,5 @@
-import { resolve } from 'path';
+import { resolve } from 'node:path';
+
 import argv from './args';
 
 const HOST = '127.0.0.1';
@@ -19,13 +20,13 @@ const ENABLE_ANALYZE = argv.analyze;
 const __DEV__ = process.env.NODE_ENV !== 'production';
 
 export {
+    __DEV__,
+    COPYRIGHT,
+    ENABLE_ANALYZE,
+    ENABLE_DEVTOOLS,
+    EXTENSION_AUTO_RELOAD_PATH,
     HOST,
+    HRM_PATH,
     PORT,
     PROJECT_ROOT,
-    COPYRIGHT,
-    HRM_PATH,
-    EXTENSION_AUTO_RELOAD_PATH,
-    ENABLE_DEVTOOLS,
-    ENABLE_ANALYZE,
-    __DEV__,
 };

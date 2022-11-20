@@ -1,8 +1,8 @@
-import { RequestHandler } from 'express';
+import type { RequestHandler } from 'express';
 import { debounce } from 'lodash';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import SSEStream from 'ssestream';
-import { Compiler, Stats } from 'webpack';
+import type { Compiler, Stats } from 'webpack';
 
 export default function extensionAutoReload(compiler: Compiler): RequestHandler {
     return (req, res, next) => {

@@ -1,10 +1,10 @@
-// import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
+import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { resolve } from 'path';
-import { Configuration } from 'webpack';
+import { resolve } from 'node:path';
+import type { Configuration } from 'webpack';
 import WebpackBar from 'webpackbar';
 
 import { __DEV__, PROJECT_ROOT } from '../utils/constants';
@@ -45,8 +45,8 @@ const commonConfig: Configuration = {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
             '@': resolve(PROJECT_ROOT, 'src'),
-            utils: resolve(PROJECT_ROOT, 'src/utils'),
-            styles: resolve(PROJECT_ROOT, 'src/styles'),
+            'utils': resolve(PROJECT_ROOT, 'src/utils'),
+            'styles': resolve(PROJECT_ROOT, 'src/styles'),
         },
     },
     plugins: [
@@ -86,6 +86,7 @@ const commonConfig: Configuration = {
             filename: `css/[name].css`,
             ignoreOrder: false,
         }),
+        new FriendlyErrorsPlugin(),
     ],
     module: {
         noParse: /jquery/,

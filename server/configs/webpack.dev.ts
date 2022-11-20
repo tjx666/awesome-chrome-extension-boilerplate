@@ -1,6 +1,6 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import { HotModuleReplacementPlugin } from 'webpack';
 import merge from 'webpack-merge';
 

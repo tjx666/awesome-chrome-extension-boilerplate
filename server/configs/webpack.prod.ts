@@ -1,10 +1,9 @@
-/* eslint-disable camelcase */
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import browserslist from 'browserslist';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import lightningCss from 'lightningcss';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import TerserPlugin from 'terser-webpack-plugin';
 import webpack, { BannerPlugin } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -13,6 +12,7 @@ import merge from 'webpack-merge';
 import { __DEV__, COPYRIGHT, ENABLE_ANALYZE, PROJECT_ROOT } from '../utils/constants';
 import commonConfig from './webpack.common';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { minimum_chrome_version } = require(`../../src/manifest.${__DEV__ ? 'dev' : 'prod'}.json`);
 
 const prodConfig = merge(commonConfig, {
@@ -56,7 +56,7 @@ const prodConfig = merge(commonConfig, {
             new CssMinimizerPlugin({
                 minify: CssMinimizerPlugin.lightningCssMinify,
                 minimizerOptions: {
-                    // @ts-expect-error
+                    // @ts-expect-error webpack type define wrong
                     targets: lightningCss.browserslistToTargets(
                         browserslist(
                             minimum_chrome_version

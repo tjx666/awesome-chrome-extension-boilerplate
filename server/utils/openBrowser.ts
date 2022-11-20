@@ -1,5 +1,5 @@
 import open from 'open';
-import { Compiler, Stats } from 'webpack';
+import type { Compiler, Stats } from 'webpack';
 
 import argv from './args';
 
