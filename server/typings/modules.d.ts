@@ -83,7 +83,7 @@ declare module '@nuxt/friendly-errors-webpack-plugin' {
     export = FriendlyErrorsWebpackPlugin;
 }
 
-declare module '@lukeapage/webpack-hot-middleware' {
+declare module 'webpack-hot-middleware' {
     import webpackHotMiddleware from '@types/webpack-hot-middleware';
 
     export = webpackHotMiddleware;

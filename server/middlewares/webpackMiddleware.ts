@@ -1,6 +1,6 @@
-import webpackHotMiddleware from '@lukeapage/webpack-hot-middleware';
 import { Compiler } from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import devConfig from '../configs/webpack.dev';
 import { HRM_PATH } from '../utils/constants';
