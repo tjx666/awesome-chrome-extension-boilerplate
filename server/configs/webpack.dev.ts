@@ -1,10 +1,9 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import { resolve } from 'node:path';
 import { HotModuleReplacementPlugin } from 'webpack';
 import merge from 'webpack-merge';
 
-import { PROJECT_ROOT } from '../utils/constants';
+import { resolveSrc } from '../utils/path';
 import commonConfig from './webpack.common';
 
 const devConfig = merge(commonConfig, {
@@ -20,7 +19,7 @@ const devConfig = merge(commonConfig, {
         new ForkTsCheckerWebpackPlugin({
             typescript: {
                 memoryLimit: 1024,
-                configFile: resolve(PROJECT_ROOT, 'src/tsconfig.json'),
+                configFile: resolveSrc('tsconfig.json'),
             },
         }),
     ],

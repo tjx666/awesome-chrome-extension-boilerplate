@@ -2,12 +2,12 @@ import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { resolve } from 'node:path';
 import type { Configuration } from 'webpack';
 import WebpackBar from 'webpackbar';
 
 import { __DEV__, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
+import { resolve, resolvePublic, resolveSrc } from '../utils/path';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -34,28 +34,26 @@ const commonConfig: Configuration = {
     },
     output: {
         publicPath: '/',
-        path: resolve(PROJECT_ROOT, 'extension'),
+        path: resolve('extension'),
         filename: 'js/[name].js',
         // 将热更新临时生成的补丁放到 hot 文件夹中
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
         clean: {
-            keep: (fileName) => fileName === resolve(PROJECT_ROOT, 'extension/manifest.json'),
+            keep: (fileName) => fileName === resolveSrc('manifest.json'),
         },
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
-            '@': resolve(PROJECT_ROOT, 'src'),
-            'utils': resolve(PROJECT_ROOT, 'src/utils'),
-            'styles': resolve(PROJECT_ROOT, 'src/styles'),
+            '@': resolve('src'),
         },
     },
     plugins: [
         new CopyPlugin({
             patterns: [
                 {
-                    from: resolve(PROJECT_ROOT, 'public'),
+                    from: resolvePublic(),
                     globOptions: {
                         ignore: ['**/public/*.html'],
                     },
@@ -71,13 +69,13 @@ const commonConfig: Configuration = {
             chunks: ['options'],
             filename: 'options.html',
             title: 'options page',
-            template: resolve(PROJECT_ROOT, 'public/options.html'),
+            template: resolvePublic('options.html'),
         }),
         new HtmlWebpackPlugin({
             chunks: ['popup'],
             filename: 'popup.html',
             title: 'popup page',
-            template: resolve(PROJECT_ROOT, 'public/popup.html'),
+            template: resolvePublic('popup.html'),
         }),
         new MiniCssExtractPlugin({
             filename: `css/[name].css`,

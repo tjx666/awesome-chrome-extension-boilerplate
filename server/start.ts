@@ -2,15 +2,13 @@ import chalk from 'chalk';
 import express from 'express';
 import webpack from 'webpack';
 
-import devConfig from '../configs/webpack.dev';
-import setupMiddlewares from '../middlewares';
-import { HOST, PORT as DEFAULT_PORT } from '../utils/constants';
-import getPort from '../utils/getPort';
-import openBrowser from '../utils/openBrowser';
+import devConfig from './configs/webpack.dev';
+import setupMiddlewares from './middlewares';
+import { HOST, PORT as DEFAULT_PORT } from './utils/constants';
+import getPort from './utils/getPort';
 
 async function start() {
     const compiler = webpack(devConfig);
-    openBrowser(compiler);
     const devServer = express();
 
     setupMiddlewares(devServer, compiler);

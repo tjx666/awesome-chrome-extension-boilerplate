@@ -1,11 +1,9 @@
-import fs from 'node:fs/promises';
-import { resolve } from 'node:path';
 import type { Manifest } from 'webextension-polyfill';
 
 import pkg from '../package.json';
-import { __DEV__, PROJECT_ROOT } from '../server/utils/constants';
+import { __DEV__ } from '../server/utils/constants';
 
-export const manifest: Manifest.WebExtensionManifest = {
+const manifest: Manifest.WebExtensionManifest = {
     name: pkg.displayName,
     version: pkg.version,
     description: pkg.description,
@@ -52,10 +50,4 @@ export const manifest: Manifest.WebExtensionManifest = {
     },
 };
 
-export async function generateManifest() {
-    return fs.writeFile(
-        resolve(PROJECT_ROOT, 'extension/manifest.json'),
-        JSON.stringify(manifest, null, 4),
-        'utf8',
-    );
-}
+export default manifest;
