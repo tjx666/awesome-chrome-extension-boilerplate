@@ -1,21 +1,15 @@
-import { exec } from 'node:child_process';
 import chokidar from 'chokidar';
 
-import { PROJECT_ROOT } from './utils/constants';
+import exec from './utils/exec';
 import { resolveProject, resolveSrc } from './utils/path';
 
-function generateManifestInAnotherProcess() {
-    exec(
-        'npx ts-node ./server/generateManifest.ts',
-        {
-            cwd: PROJECT_ROOT,
-        },
-        () => {
-            // ignore
-        },
-    );
+function generateManifest() {
+    return exec('npx ts-node ./server/generateManifest.ts').promise.catch(() => {
+        // ignore, mainly is ts compile error
+    });
 }
-generateManifestInAnotherProcess();
+// run once when start
+generateManifest();
 chokidar.watch([resolveSrc('manifest.ts'), resolveProject('package.json')]).on('change', () => {
-    generateManifestInAnotherProcess();
+    generateManifest();
 });

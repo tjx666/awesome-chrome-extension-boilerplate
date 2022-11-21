@@ -1,3 +1,4 @@
+import console from 'consola';
 import type { RequestHandler } from 'express';
 import { debounce } from 'lodash';
 import SSEStream from 'ssestream';

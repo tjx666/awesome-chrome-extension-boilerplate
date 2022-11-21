@@ -1,3 +1,4 @@
+import console from 'consola';
 import webpack from 'webpack';
 
 import prodConfig from './configs/webpack.prod';

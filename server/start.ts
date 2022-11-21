@@ -1,4 +1,5 @@
-import chalk from 'chalk';
+import chalk from 'ansi-colors';
+import console from 'consola';
 import express from 'express';
 import webpack from 'webpack';
 
@@ -17,9 +18,7 @@ async function start() {
     const PORT = await getPort(HOST, DEFAULT_PORT);
     const httpServer = devServer.listen(PORT, HOST, () => {
         const coloredAddress = chalk.magenta.underline(`http://${HOST}:${PORT}`);
-        console.log(
-            `${chalk.bgYellow.black(' INFO ')} DevServer is running at ${coloredAddress} ✔`,
-        );
+        console.info(`DevServer is running at ${coloredAddress} ✔`);
     });
 
     ['SIGINT', 'SIGTERM'].forEach((signal: any) => {

@@ -1,7 +1,8 @@
-import { exec } from 'node:child_process';
 import fs from 'node:fs';
+import console from 'consola';
 
-import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT, PROJECT_ROOT } from './constants';
+import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
+import exec from './exec';
 import { resolveServer, resolveSrc } from './path';
 
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
@@ -27,16 +28,10 @@ const entry = __DEV__ ? devEntry : prodEntry;
 if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
-    exec(
-        'npx react-devtools',
-        {
-            cwd: PROJECT_ROOT,
-        },
-        (error) => {
-            console.error('Startup react-devtools occur error');
-            error && console.error(error);
-        },
-    );
+    exec('npx react-devtools').promise.catch((error) => {
+        console.error('Startup react-devtools occur error');
+        console.error(error);
+    });
 }
 
 const contentsDirs = fs.readdirSync(resolveSrc('contents'));

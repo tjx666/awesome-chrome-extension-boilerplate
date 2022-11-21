@@ -64,7 +64,6 @@ const commonConfig: Configuration = {
             name: 'Building chrome extension',
             color: '#0f9d58',
         }),
-        // new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
@@ -81,7 +80,9 @@ const commonConfig: Configuration = {
             filename: `css/[name].css`,
             ignoreOrder: false,
         }),
-        new FriendlyErrorsPlugin(),
+        new FriendlyErrorsPlugin({
+            clearConsole: false,
+        }),
     ],
     module: {
         noParse: /jquery/,

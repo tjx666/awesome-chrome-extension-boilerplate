@@ -1,4 +1,5 @@
-import chalk from 'chalk';
+import chalk from 'ansi-colors';
+import console from 'consola';
 import type { Express } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
@@ -12,7 +13,7 @@ export default function proxyMiddleware(server: Express): void {
     Object.entries(proxyTable).forEach(([path, options]) => {
         const from = path;
         const to = options.target as string;
-        console.log(`proxy ${link(from)} ${chalk.green('->')} ${link(to)}`);
+        console.info(`proxy ${link(from)} ${chalk.green('->')} ${link(to)}`);
 
         if (!options.logLevel) options.logLevel = 'warn';
         server.use(path, createProxyMiddleware(options));
