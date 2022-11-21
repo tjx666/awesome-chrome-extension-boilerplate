@@ -40,7 +40,7 @@ const commonConfig: Configuration = {
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
         clean: {
-            keep: (fileName) => fileName === resolveExtension('manifest.json'),
+            keep: (filename) => filename === 'manifest.json',
         },
     },
     resolve: {
