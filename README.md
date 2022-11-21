@@ -31,7 +31,7 @@ pnpm
 
 #### 修改清单文件
 
-在 src 目录下有两个清单文件：`manifest.dev.json` 和 `manifest.prod.json`，分别是开发环境和生产环境的配置文件。
+使用 `src/manifest.ts` 编写 `manifest.json`，它其实是一个 node 脚本，因此你可以使用 `server` 下面的所有模块，可以使用环境变量处理不同开发环境的配置。
 
 **注意**：任何注入了 `content scripts` 的页面也必须被注入 `js/all.js` 和 `css/all.css` ，为了实现这一点，它俩的 `matches` 应该是其它所有 `content scripts` 的 `matches` 的父集。
 
