@@ -3,10 +3,10 @@ import express from 'express';
 import webpack from 'webpack';
 
 import devConfig from '../configs/webpack.dev';
+import setupMiddlewares from '../middlewares';
 import { HOST, PORT as DEFAULT_PORT } from '../utils/constants';
 import getPort from '../utils/getPort';
 import openBrowser from '../utils/openBrowser';
-import setupMiddlewares from '../middlewares';
 
 async function start() {
     const compiler = webpack(devConfig);

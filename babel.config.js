@@ -1,13 +1,10 @@
 module.exports = (api) => {
-    const isProd = api.env('production');
-    const { minimum_chrome_version } = require(`./src/manifest.${isProd ? 'prod' : 'dev'}.json`);
+    api.cache(true);
+
     const envPreset = [
         '@babel/env',
         {
             modules: false,
-            targets: minimum_chrome_version
-                ? `Chrome >= ${minimum_chrome_version}`
-                : 'last 2 Chrome versions',
             bugfixes: true,
             useBuiltIns: 'usage',
             corejs: { version: require('./package.json').devDependencies['core-js'] },

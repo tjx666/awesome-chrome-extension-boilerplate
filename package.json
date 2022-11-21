@@ -1,7 +1,9 @@
 {
     "name": "awesome-chrome-extension-boilerplate",
+    "displayName": "awesome chrome extension boilerplate",
     "version": "1.0.0",
-    "description": "an awesome boilerplate for chrome extension development!",
+    "browserslist": "Chrome >= 61.0.3163.91",
+    "description": "made by awesome-chrome-extension-boilerplate",
     "private": true,
     "author": "YuTengjing",
     "license": "MIT",
@@ -47,7 +49,8 @@
         "normalize.css": "8.0.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-router-dom": "6.4.3"
+        "react-router-dom": "6.4.3",
+        "webextension-polyfill": "0.10.0"
     },
     "devDependencies": {
         "@babel/core": "7.20.2",
@@ -71,6 +74,7 @@
         "@types/react": "18.0.25",
         "@types/react-dom": "18.0.9",
         "@types/react-router-dom": "5.3.3",
+        "@types/webextension-polyfill": "0.9.1",
         "@types/webpack": "5.28.0",
         "@types/webpack-bundle-analyzer": "4.6.0",
         "@types/webpack-hot-middleware": "2.25.6",
@@ -84,7 +88,6 @@
         "babel-plugin-lodash": "3.3.4",
         "browserslist": "4.21.4",
         "chalk": "4.1.2",
-        "clean-webpack-plugin": "4.0.0",
         "copy-webpack-plugin": "11.0.0",
         "core-js": "3.26.1",
         "cors": "2.8.5",

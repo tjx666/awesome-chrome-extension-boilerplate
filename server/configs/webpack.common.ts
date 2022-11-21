@@ -1,5 +1,4 @@
 import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -40,6 +39,9 @@ const commonConfig: Configuration = {
         // 将热更新临时生成的补丁放到 hot 文件夹中
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
+        clean: {
+            keep: (fileName) => fileName === resolve(PROJECT_ROOT, 'extension/manifest.json'),
+        },
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
@@ -50,7 +52,6 @@ const commonConfig: Configuration = {
         },
     },
     plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new CopyPlugin({
             patterns: [
                 {
@@ -58,10 +59,6 @@ const commonConfig: Configuration = {
                     globOptions: {
                         ignore: ['**/public/*.html'],
                     },
-                },
-                {
-                    from: resolve(PROJECT_ROOT, `src/manifest.${__DEV__ ? 'dev' : 'prod'}.json`),
-                    to: 'manifest.json',
                 },
             ],
         }),

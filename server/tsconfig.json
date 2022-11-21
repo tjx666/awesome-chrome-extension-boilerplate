@@ -26,6 +26,7 @@
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true
     },
+    "include": ["./**.ts", "../src/manifest.ts"],
     "ts-node": {
         "files": true,
         "swc": true
