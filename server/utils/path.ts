@@ -2,18 +2,22 @@ import { resolve as _resolve } from 'node:path';
 
 import { PROJECT_ROOT } from './constants';
 
-export function resolve(...args: string[]) {
+export function resolveProject(...args: string[]) {
     return _resolve(PROJECT_ROOT, ...args);
 }
 
-export function resolvePublic(...args: string[]) {
-    return resolve('public', ...args);
+export function resolveExtension(...args: string[]) {
+    return resolveProject('extension', ...args);
 }
 
-export function resolveSrc(...args: string[]) {
-    return resolve('src', ...args);
+export function resolvePublic(...args: string[]) {
+    return resolveProject('public', ...args);
 }
 
 export function resolveServer(...args: string[]) {
-    return resolve('server', ...args);
+    return resolveProject('server', ...args);
+}
+
+export function resolveSrc(...args: string[]) {
+    return resolveProject('src', ...args);
 }

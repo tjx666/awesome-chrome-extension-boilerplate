@@ -7,6 +7,8 @@ import setupMiddlewares from './middlewares';
 import { HOST, PORT as DEFAULT_PORT } from './utils/constants';
 import getPort from './utils/getPort';
 
+import './watcher';
+
 async function start() {
     const compiler = webpack(devConfig);
     const devServer = express();

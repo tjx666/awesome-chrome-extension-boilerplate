@@ -7,7 +7,7 @@ import WebpackBar from 'webpackbar';
 
 import { __DEV__, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
-import { resolve, resolvePublic, resolveSrc } from '../utils/path';
+import { resolveExtension, resolvePublic, resolveSrc } from '../utils/path';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -34,19 +34,19 @@ const commonConfig: Configuration = {
     },
     output: {
         publicPath: '/',
-        path: resolve('extension'),
+        path: resolveExtension(),
         filename: 'js/[name].js',
         // 将热更新临时生成的补丁放到 hot 文件夹中
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
         clean: {
-            keep: (fileName) => fileName === resolveSrc('manifest.json'),
+            keep: (fileName) => fileName === resolveExtension('manifest.json'),
         },
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
-            '@': resolve('src'),
+            '@': resolveSrc(),
         },
     },
     plugins: [
