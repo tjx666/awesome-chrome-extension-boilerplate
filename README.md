@@ -4,6 +4,8 @@
 
 > 一个超棒的基于 React & TypeScript & webpack 的 chrome 扩展开发模板
 
+manifest v3 版本 :point_right: [manifest-v3](https://github.com/tjx666/awesome-chrome-extension-boilerplate/tree/manifest-v3)
+
 ## :sparkles: 特性
 
 - :fire: 支持修改 `content scripts` 代码自动重载扩展和刷新注入了 `content scripts`的页面，再也不用修改了 `content scripts` 后手动刷新扩展和页面了。
