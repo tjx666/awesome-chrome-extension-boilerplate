@@ -1,3 +1,7 @@
-console.log('This is background page!');
+import { onMessage } from 'webext-bridge';
 
-export {};
+onMessage('hello-from-content-script', (msg) => {
+    console.log(msg);
+});
+
+console.log('This is background page!');
