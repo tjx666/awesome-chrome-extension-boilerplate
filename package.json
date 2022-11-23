@@ -102,6 +102,7 @@
         "format-imports": "3.1.2",
         "get-port": "5.1.1",
         "html-webpack-plugin": "5.5.0",
+        "html-webpack-tags-plugin": "3.0.2",
         "http-proxy-middleware": "2.0.6",
         "husky": "8.0.2",
         "less": "4.1.3",
