@@ -1,16 +1,33 @@
+import fs from 'node:fs/promises';
 import chalk from 'ansi-colors';
+import axios from 'axios';
 import console from 'consola';
 import express from 'express';
+import waitOn from 'wait-on';
 import webpack from 'webpack';
 
 import devConfig from './configs/webpack.dev';
 import setupMiddlewares from './middlewares';
-import { HOST, PORT as DEFAULT_PORT } from './utils/constants';
+import { ENABLE_DEVTOOLS, HOST, PORT as DEFAULT_PORT } from './utils/constants';
+import exec from './utils/exec';
 import getPort from './utils/getPort';
+import { resolveExtension } from './utils/path';
 
 import './watcher';
 
 async function start() {
+    if (ENABLE_DEVTOOLS) {
+        exec('npx react-devtools').promise.catch((error) => {
+            console.error('Startup react-devtools occur error');
+            console.error(error);
+        });
+        const reactDevtoolsJSAddress = 'http://localhost:8097';
+        waitOn({ resources: [reactDevtoolsJSAddress, resolveExtension('js')] }).then(async () => {
+            const { data } = await axios.get(reactDevtoolsJSAddress);
+            fs.writeFile(resolveExtension('js/react-devtools.js'), data, 'utf8');
+        });
+    }
+
     const compiler = webpack(devConfig);
     const devServer = express();
 
