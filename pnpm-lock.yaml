@@ -9,7 +9,7 @@ specifiers:
   '@babel/preset-react': 7.18.6
   '@babel/preset-typescript': 7.18.6
   '@nuxt/friendly-errors-webpack-plugin': 2.5.2
-  '@pmmmwh/react-refresh-webpack-plugin': 0.5.9
+  '@pmmmwh/react-refresh-webpack-plugin': 0.5.10
   '@swc/core': 1.3.19
   '@types/chrome': 0.0.203
   '@types/cors': 2.8.12
@@ -51,7 +51,7 @@ specifiers:
   eslint: 8.28.0
   express: 4.18.2
   fork-ts-checker-webpack-plugin: 7.2.13
-  format-imports: 3.1.2
+  format-imports: 3.1.3
   get-port: 5.1.1
   html-webpack-plugin: 5.5.0
   html-webpack-tags-plugin: 3.0.2
@@ -61,7 +61,7 @@ specifiers:
   less: 4.1.3
   less-loader: 11.1.0
   lightningcss: 1.16.1
-  lint-staged: 13.0.3
+  lint-staged: 13.0.4
   lodash: 4.17.21
   mini-css-extract-plugin: 2.7.0
   normalize.css: 8.0.1
@@ -119,7 +119,7 @@ devDependencies:
   '@babel/preset-react': 7.18.6_@babel+core@7.20.2
   '@babel/preset-typescript': 7.18.6_@babel+core@7.20.2
   '@nuxt/friendly-errors-webpack-plugin': 2.5.2_webpack@5.75.0
-  '@pmmmwh/react-refresh-webpack-plugin': 0.5.9_i37nu3inj4mau7izq5stih36li
+  '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_i37nu3inj4mau7izq5stih36li
   '@swc/core': 1.3.19
   '@types/chrome': 0.0.203
   '@types/cors': 2.8.12
@@ -158,7 +158,7 @@ devDependencies:
   eslint: 8.28.0
   express: 4.18.2
   fork-ts-checker-webpack-plugin: 7.2.13_vfotqvx6lgcbf3upbs6hgaza4q
-  format-imports: 3.1.2
+  format-imports: 3.1.3
   get-port: 5.1.1
   html-webpack-plugin: 5.5.0_webpack@5.75.0
   html-webpack-tags-plugin: 3.0.2_vjsxgketla6kqcty7l6z2i2ilm
@@ -167,7 +167,7 @@ devDependencies:
   less: 4.1.3
   less-loader: 11.1.0_less@4.1.3+webpack@5.75.0
   lightningcss: 1.16.1
-  lint-staged: 13.0.3
+  lint-staged: 13.0.4
   mini-css-extract-plugin: 2.7.0_webpack@5.75.0
   open: 8.4.0
   postcss-less: 6.0.0
@@ -1808,8 +1808,8 @@ packages:
       webpack: 5.75.0_@swc+core@1.3.19
     dev: true
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.9_i37nu3inj4mau7izq5stih36li:
-    resolution: {integrity: sha512-7QV4cqUwhkDIHpMAZ9mestSJ2DMIotVTbOUwbiudhjCRTAWWKIaBecELiEM2LT3AHFeOAaHIcFu4dbXjX+9GBA==}
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.10_i37nu3inj4mau7izq5stih36li:
+    resolution: {integrity: sha512-j0Ya0hCFZPd4x40qLzbhGsh9TMtdb+CJQiso+WxLOPNasohq9cc5SNUcwsZaRH6++Xh91Xkm/xHCkuIiIu0LUA==}
     engines: {node: '>= 10.13'}
     peerDependencies:
       '@types/webpack': 4.x || 5.x
@@ -3866,7 +3866,7 @@ packages:
       postcss: ^8.2.15
     dependencies:
       cssnano-preset-default: 5.2.12_postcss@8.4.18
-      lilconfig: 2.0.5
+      lilconfig: 2.0.6
       postcss: 8.4.18
       yaml: 1.10.2
     dev: true
@@ -4925,8 +4925,8 @@ packages:
       mime-types: 2.1.34
     dev: false
 
-  /format-imports/3.1.2:
-    resolution: {integrity: sha512-JpchwcrRvaZ7wAyiW9HotLuT39pN815dXz8qAjzNaAYW2XK/lpTmkNALrXUr6d+zaufj9hqWIeg4cDBa0B/dRA==}
+  /format-imports/3.1.3:
+    resolution: {integrity: sha512-33EE1chbKrLeotHt2ElHzSZIqiwMUdEfbHO5GQLsI1MAbs34fvHv2CX4iKO7ZbZLqLr8lYXBw+HZBk7TR5MB6A==}
     hasBin: true
     dependencies:
       '@dozerg/condition': 1.0.3
@@ -6120,8 +6120,8 @@ packages:
       lightningcss-win32-x64-msvc: 1.16.1
     dev: true
 
-  /lilconfig/2.0.5:
-    resolution: {integrity: sha512-xaYmXZtTHPAw5m+xLN8ab9C+3a8YmV3asNSPOATITbtwrfbwaLJj8h66H1WMIpALCkqsIzK3h7oQ+PdX+LQ9Eg==}
+  /lilconfig/2.0.6:
+    resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
     dev: true
 
@@ -6129,8 +6129,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/13.0.3:
-    resolution: {integrity: sha512-9hmrwSCFroTSYLjflGI8Uk+GWAwMB4OlpU4bMJEAT5d/llQwtYKoim4bLOyLCuWFAhWEupE0vkIFqtw/WIsPug==}
+  /lint-staged/13.0.4:
+    resolution: {integrity: sha512-HxlHCXoYRsq9QCby5wFozmZW00hMs/9e3l+/dz6Qr8Kle4UH0kJTdABAbqhzG+3pcG6QjL9kz7NgGBfph+a5dw==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -6139,8 +6139,8 @@ packages:
       commander: 9.4.1
       debug: 4.3.4
       execa: 6.1.0
-      lilconfig: 2.0.5
-      listr2: 4.0.5
+      lilconfig: 2.0.6
+      listr2: 5.0.5
       micromatch: 4.0.5
       normalize-path: 3.0.0
       object-inspect: 1.12.2
@@ -6152,9 +6152,9 @@ packages:
       - supports-color
     dev: true
 
-  /listr2/4.0.5:
-    resolution: {integrity: sha512-juGHV1doQdpNT3GSTs9IUN43QJb7KHdF9uqg7Vufs/tG9VTzpFphqF4pm/ICdAABGQxsyNn9CiYA3StkI6jpwA==}
-    engines: {node: '>=12'}
+  /listr2/5.0.5:
+    resolution: {integrity: sha512-DpBel6fczu7oQKTXMekeprc0o3XDgGMkD7JNYyX+X0xbwK+xgrx9dcyKoXKqpLSUvAWfmoePS7kavniOcq3r4w==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
       enquirer: '>= 2.3.0 < 3'
     peerDependenciesMeta:
@@ -6166,7 +6166,7 @@ packages:
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.0
-      rxjs: 7.5.5
+      rxjs: 7.5.7
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
@@ -8367,6 +8367,12 @@ packages:
 
   /rxjs/7.5.5:
     resolution: {integrity: sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==}
+    dependencies:
+      tslib: 2.4.0
+    dev: true
+
+  /rxjs/7.5.7:
+    resolution: {integrity: sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==}
     dependencies:
       tslib: 2.4.0
     dev: true
