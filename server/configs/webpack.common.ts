@@ -1,5 +1,4 @@
 import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
-import type { Pattern } from 'copy-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
@@ -9,7 +8,7 @@ import WebpackBar from 'webpackbar';
 
 import { __DEV__, ENABLE_DEVTOOLS, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
-import { resolveExtension, resolvePublic, resolveServer, resolveSrc } from '../utils/path';
+import { resolveExtension, resolvePublic, resolveSrc } from '../utils/path';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -27,20 +26,6 @@ function getCssLoaders(importLoaders: number) {
         },
     ];
 }
-const copyPatterns: Pattern[] = [
-    {
-        from: resolvePublic(),
-        globOptions: {
-            ignore: ['**/public/*.html'],
-        },
-    },
-];
-if (ENABLE_DEVTOOLS) {
-    copyPatterns.push({
-        from: resolveServer('client/react-devtools.js'),
-        to: resolveExtension('js/react-devtools.js'),
-    });
-}
 
 const commonConfig: Configuration = {
     context: PROJECT_ROOT,
@@ -56,7 +41,9 @@ const commonConfig: Configuration = {
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
         clean: {
-            keep: (filename) => filename === 'manifest.json',
+            keep: (filename) => {
+                return filename === 'manifest.json' || filename === 'js/react-devtools.js';
+            },
         },
     },
     resolve: {
@@ -67,7 +54,14 @@ const commonConfig: Configuration = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: copyPatterns,
+            patterns: [
+                {
+                    from: resolvePublic(),
+                    globOptions: {
+                        ignore: ['**/public/*.html'],
+                    },
+                },
+            ],
         }),
         new WebpackBar({
             name: 'Building chrome extension',

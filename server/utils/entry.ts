@@ -1,8 +1,6 @@
 import fs from 'node:fs';
-import console from 'consola';
 
-import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
-import exec from './exec';
+import { __DEV__, HOST, HRM_PATH, PORT } from './constants';
 import { resolveServer, resolveSrc } from './path';
 
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
@@ -24,13 +22,6 @@ const prodEntry: Record<string, string[]> = {
     popup: [popupPath],
 };
 const entry = __DEV__ ? devEntry : prodEntry;
-
-if (ENABLE_DEVTOOLS) {
-    exec('npx react-devtools').promise.catch((error) => {
-        console.error('Startup react-devtools occur error');
-        console.error(error);
-    });
-}
 
 const contentsDirs = fs.readdirSync(resolveSrc('contents'));
 const validExtensions = ['tsx', 'ts'];
