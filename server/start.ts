@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import chalk from 'ansi-colors';
-import axios from 'axios';
 import console from 'consola';
 import express from 'express';
 import waitOn from 'wait-on';
@@ -23,7 +22,8 @@ async function start() {
         });
         const reactDevtoolsJSAddress = 'http://localhost:8097';
         waitOn({ resources: [reactDevtoolsJSAddress, resolveExtension('js')] }).then(async () => {
-            const { data } = await axios.get(reactDevtoolsJSAddress);
+            const resp = await fetch(reactDevtoolsJSAddress);
+            const data = await resp.text();
             fs.writeFile(resolveExtension('js/react-devtools.js'), data, 'utf8');
         });
     }
