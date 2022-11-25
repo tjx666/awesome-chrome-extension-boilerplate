@@ -101,6 +101,7 @@
         "css-loader": "6.7.2",
         "css-minimizer-webpack-plugin": "4.2.2",
         "eslint": "8.28.0",
+        "exit-hook": "2.2.1",
         "express": "4.18.2",
         "fork-ts-checker-webpack-plugin": "7.2.13",
         "format-imports": "3.1.3",

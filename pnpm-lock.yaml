@@ -48,6 +48,7 @@ specifiers:
   css-minimizer-webpack-plugin: 4.2.2
   dayjs: 1.11.6
   eslint: 8.28.0
+  exit-hook: 2.2.1
   express: 4.18.2
   fork-ts-checker-webpack-plugin: 7.2.13
   format-imports: 3.1.3
@@ -154,6 +155,7 @@ devDependencies:
   css-loader: 6.7.2_webpack@5.75.0
   css-minimizer-webpack-plugin: 4.2.2_3cvwaxcgn4v2lvgp65nwgdyvc4
   eslint: 8.28.0
+  exit-hook: 2.2.1
   express: 4.18.2
   fork-ts-checker-webpack-plugin: 7.2.13_vfotqvx6lgcbf3upbs6hgaza4q
   format-imports: 3.1.3
@@ -4686,6 +4688,11 @@ packages:
       onetime: 6.0.0
       signal-exit: 3.0.7
       strip-final-newline: 3.0.0
+    dev: true
+
+  /exit-hook/2.2.1:
+    resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
+    engines: {node: '>=6'}
     dev: true
 
   /express/4.18.2:
