@@ -1,14 +1,13 @@
 import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
 import type { Configuration } from 'webpack';
 import { DefinePlugin } from 'webpack';
 import WebpackBar from 'webpackbar';
 
-import { __DEV__, ENABLE_DEVTOOLS, PROJECT_ROOT } from '../utils/constants';
+import { __DEV__, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
 import { resolveExtension, resolvePublic, resolveSrc } from '../utils/path';
 
@@ -158,15 +157,5 @@ const commonConfig: Configuration = {
         ],
     },
 };
-
-if (ENABLE_DEVTOOLS) {
-    commonConfig.plugins!.push(
-        new HtmlWebpackTagsPlugin({
-            tags: ['js/vue-devtools.js'],
-            append: false,
-            files: ['options.html', 'popup.html'],
-        }),
-    );
-}
 
 export default commonConfig;
