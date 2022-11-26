@@ -3,7 +3,9 @@ import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
 import type { Configuration } from 'webpack';
+import { DefinePlugin } from 'webpack';
 import WebpackBar from 'webpackbar';
 
 import { __DEV__, ENABLE_DEVTOOLS, PROJECT_ROOT } from '../utils/constants';
@@ -47,12 +49,16 @@ const commonConfig: Configuration = {
         },
     },
     resolve: {
-        extensions: ['.js', '.ts', '.tsx', '.json'],
+        extensions: ['.js', '.ts', '.vue', '.tsx', '.json'],
         alias: {
             '@': resolveSrc(),
         },
     },
     plugins: [
+        new DefinePlugin({
+            __VUE_OPTIONS_API__: 'false',
+            __VUE_PROD_DEVTOOLS__: `${__DEV__}`,
+        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -86,10 +92,15 @@ const commonConfig: Configuration = {
         new FriendlyErrorsPlugin({
             clearConsole: false,
         }),
+        new VueLoaderPlugin(),
     ],
     module: {
-        noParse: /jquery/,
+        noParse: /^(vue|vue-router|pinia|jquery)$/,
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
             {
                 test: /\.(js|ts|tsx)$/,
                 loader: 'babel-loader',

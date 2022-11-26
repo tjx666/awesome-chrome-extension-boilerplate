@@ -1,3 +1,9 @@
+declare module '*.vue' {
+    import { defineComponent } from 'vue';
+    const Component: ReturnType<typeof defineComponent>;
+    export default Component;
+}
+
 declare type StyleSheetModule = { [key: string]: string };
 
 declare module '*.scss' {

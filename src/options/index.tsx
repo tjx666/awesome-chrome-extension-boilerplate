@@ -1,14 +1,5 @@
-import { createRoot } from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { createApp } from 'vue';
 
-import App from './App';
+import App from './App.vue';
 
-import './App.scss';
-
-const container = document.querySelector('#root');
-const root = createRoot(container!);
-root.render(
-    <HashRouter>
-        <App />
-    </HashRouter>,
-);
+createApp(App).mount('#root');
