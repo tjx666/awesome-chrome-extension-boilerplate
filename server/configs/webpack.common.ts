@@ -49,7 +49,7 @@ const commonConfig: Configuration = {
         },
     },
     resolve: {
-        extensions: ['.js', '.ts', '.vue', '.tsx', '.json'],
+        extensions: ['.js', '.ts', '.vue', '.json'],
         alias: {
             '@': resolveSrc(),
         },
@@ -102,7 +102,7 @@ const commonConfig: Configuration = {
                 loader: 'vue-loader',
             },
             {
-                test: /\.(js|ts|tsx)$/,
+                test: /\.(js|ts)$/,
                 loader: 'babel-loader',
                 options: { cacheDirectory: true },
                 exclude: /node_modules/,

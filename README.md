@@ -58,7 +58,7 @@ pnpm
 
 `public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接放到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
 
-```json
+```jsonc
 // manifest.dev.json
 {
   "icons": {
@@ -106,7 +106,7 @@ npm run devtools
 
 #### [options](https://developer.chrome.com/extensions/options) 和 [popup](https://developer.chrome.com/extensions/browserAction#popups)
 
-它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
+它俩的 webpack entry 分别是 `src/options/index.ts` 和 `src/popup/index.ts`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
 这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint` 规则也集成了。
 
@@ -114,7 +114,7 @@ npm run devtools
 
 #### [content scripts](https://developer.chrome.com/extensions/content_scripts)
 
-这个模板会扫描 `src/contents` 文件夹，将所有子文件夹中的 `index.tsx` 或 `index.ts` 作为 `webpack entry`。
+这个模板会扫描 `src/contents` 文件夹，将所有子文件夹中的 `index.ts` 作为 `webpack entry`。
 
 `content scripts` 都放在 `src/contents` 目录下。默认有个 `all.ts`，也是个 webpack entry，它不能被删除，因为这个 webpack entry 被用于注入实现 chrome 扩展自动刷新功能的补丁。
 
@@ -136,7 +136,7 @@ npm run devtools
    }
    ```
 
-2. 创建一个和上面 `content script` 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 将会被视为一个 webpack entry。 `webpack` 会通过这个 `entry` 最终产出 `js/discuss.js` 这个 `chunk`。
+2. 创建一个和上面 `content script` 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.ts` 将会被视为一个 webpack entry。 `webpack` 会通过这个 `entry` 最终产出 `js/discuss.js` 这个 `chunk`。
 
    `mini-css-extract-plugin` 会将所有被 `discuss/index.ts` 导入的样式文件合并再分离到 `extension/css/discuss.css`，这也是为什么上面的 `manifest` 中 content CSS script 可以使用 `css/discuss.css` 的原因
 

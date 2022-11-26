@@ -8,8 +8,8 @@ const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
 const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=true&overlay=true`;
 
 const backgroundPath = resolveSrc('background/index.ts');
-const optionsPath = resolveSrc('options/index.tsx');
-const popupPath = resolveSrc('popup/index.tsx');
+const optionsPath = resolveSrc('options/index.ts');
+const popupPath = resolveSrc('popup/index.ts');
 
 const devEntry: Record<string, string[]> = {
     background: [backgroundPath],
@@ -24,7 +24,7 @@ const prodEntry: Record<string, string[]> = {
 const entry = __DEV__ ? devEntry : prodEntry;
 
 const contentsDirs = fs.readdirSync(resolveSrc('contents'));
-const validExtensions = ['tsx', 'ts'];
+const validExtensions = ['ts'];
 contentsDirs.forEach((contentScriptDir) => {
     const hasValid = validExtensions.some((ext) => {
         const abs = resolveSrc(`contents/${contentScriptDir}/index.${ext}`);
@@ -38,7 +38,11 @@ contentsDirs.forEach((contentScriptDir) => {
 
     if (!hasValid) {
         const dir = resolveSrc(`contents/${contentScriptDir}`);
-        throw new Error(`You must put index.tsx or index.ts under directory: ${dir}`);
+        throw new Error(
+            `You must put ${validExtensions
+                .map((ext) => `index.${ext}`)
+                .join(' or ')} under directory: ${dir}`,
+        );
     }
 });
 

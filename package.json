@@ -26,21 +26,21 @@
         "build:analyze": "pnpm build --analyze",
         "test": "pnpm build",
         "lint": "pnpm lint:es && pnpm lint:style",
-        "lint:es": "eslint -c .eslintrc.js --ext .ts,.tsx  ./src/**/*.tsx ./{src,server}/**/*.ts",
+        "lint:es": "eslint -c .eslintrc.js .",
         "lint:style": "stylelint --config .stylelintrc.json src/**/*.{css,less,scss}",
         "clean": "rimraf -rf ./extension ./dist ./*.zip ./*.crx",
         "reinstall": "rimraf -rf ./node_modules && pnpm",
         "prepare": "husky install"
     },
     "lint-staged": {
-        "*.{ts,tsx,js}": [
+        "*.{ts,js}": [
             "eslint -c .eslintrc.js",
             "format-imports --config .vscode/import-sorter.json"
         ],
         "*.{css,less,scss}": [
             "stylelint --config .stylelintrc.json"
         ],
-        "*.{ts,tsx,json,js,css,less,scss,md}": [
+        "*.{ts,json,js,css,less,scss,md}": [
             "prettier --write"
         ]
     },
@@ -85,7 +85,7 @@
         "@types/webpack-hot-middleware": "2.25.6",
         "@types/webpackbar": "4.0.3",
         "@types/yargs": "17.0.14",
-        "@yutengjing/eslint-config-vue": "0.0.8",
+        "@yutengjing/eslint-config-vue": "0.0.9",
         "@yutengjing/prettier-config": "0.0.1",
         "ansi-colors": "4.1.3",
         "antd-dayjs-webpack-plugin": "1.0.6",
