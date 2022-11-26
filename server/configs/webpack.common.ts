@@ -44,7 +44,7 @@ const commonConfig: Configuration = {
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
         clean: {
             keep: (filename) => {
-                return filename === 'manifest.json' || filename === 'js/react-devtools.js';
+                return filename === 'manifest.json';
             },
         },
     },
@@ -117,16 +117,7 @@ const commonConfig: Configuration = {
                     ...getCssLoaders(1),
                     {
                         loader: 'less-loader',
-                        options: {
-                            sourceMap: true,
-                            lessOptions: {
-                                javascriptEnabled: true,
-                                modifyVars: {
-                                    // 修改 antd 主题
-                                    // '@primary-color': '#1DA57A',
-                                },
-                            },
-                        },
+                        options: { sourceMap: true },
                     },
                 ],
             },
@@ -171,7 +162,7 @@ const commonConfig: Configuration = {
 if (ENABLE_DEVTOOLS) {
     commonConfig.plugins!.push(
         new HtmlWebpackTagsPlugin({
-            tags: ['js/react-devtools.js'],
+            tags: ['js/vue-devtools.js'],
             append: false,
             files: ['options.html', 'popup.html'],
         }),

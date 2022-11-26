@@ -1,4 +1,3 @@
-import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
 import browserslist from 'browserslist';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -32,13 +31,12 @@ const prodConfig = merge(commonConfig, {
             hashDigest: 'hex',
             hashDigestLength: 20,
         }),
-        new AntdDayjsWebpackPlugin(),
     ],
     optimization: {
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: /[/\\]node_modules[/\\](react|react-dom)[/\\]/,
+                    test: /[/\\]node_modules[/\\]/,
                     name: 'vendor',
                     chunks: 'all',
                 },
