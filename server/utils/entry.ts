@@ -1,8 +1,6 @@
 import fs from 'node:fs';
-import console from 'consola';
 
-import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
-import exec from './exec';
+import { __DEV__, HOST, HRM_PATH, PORT } from './constants';
 import { resolveServer, resolveSrc } from './path';
 
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
@@ -25,15 +23,6 @@ const prodEntry: Record<string, string[]> = {
 };
 const entry = __DEV__ ? devEntry : prodEntry;
 
-if (ENABLE_DEVTOOLS) {
-    entry.options.unshift('react-devtools');
-    entry.popup.unshift('react-devtools');
-    exec('npx react-devtools').promise.catch((error) => {
-        console.error('Startup react-devtools occur error');
-        console.error(error);
-    });
-}
-
 const contentsDirs = fs.readdirSync(resolveSrc('contents'));
 const validExtensions = ['tsx', 'ts'];
 contentsDirs.forEach((contentScriptDir) => {
@@ -55,8 +44,8 @@ contentsDirs.forEach((contentScriptDir) => {
 
 // NOTE: 有可能用户没打算开发 content script，所以 contents/all 这个文件夹可能不存在
 if (entry.all && __DEV__) {
-    entry.all.unshift(resolveServer('utils/allTabClient.ts'));
-    entry.background.unshift(resolveServer('utils/backgroundClient.ts'));
+    entry.all.unshift(resolveServer('client/allTabClient.ts'));
+    entry.background.unshift(resolveServer('client/backgroundClient.ts'));
 }
 
 export default entry;
