@@ -24,6 +24,10 @@ const manifest: Manifest.WebExtensionManifest = {
     },
     content_scripts: [
         {
+            matches: ['<all_urls>'],
+            js: [...(__DEV__ ? [] : ['js/vendor.js'])],
+        },
+        {
             matches: ['https://github.com/*'],
             css: ['css/all.css'],
             js: ['js/all.js', ...(__DEV__ ? [] : ['js/all.js'])],
