@@ -24,10 +24,6 @@ const manifest: Manifest.WebExtensionManifest = {
     },
     content_scripts: [
         {
-            matches: ['<all_urls>'],
-            js: [...(__DEV__ ? [] : ['js/vendor.js'])],
-        },
-        {
             matches: ['https://github.com/*'],
             css: ['css/all.css'],
             js: ['js/all.js', ...(__DEV__ ? [] : ['js/all.js'])],
@@ -53,5 +49,11 @@ const manifest: Manifest.WebExtensionManifest = {
         '128': 'icons/extension-icon-x128.png',
     },
 };
+if (!__DEV__) {
+    manifest.content_scripts?.unshift({
+        matches: ['<all_urls>'],
+        js: ['js/vendor.js'],
+    });
+}
 
 export default manifest;
