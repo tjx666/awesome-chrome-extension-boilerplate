@@ -49,5 +49,11 @@ const manifest: Manifest.WebExtensionManifest = {
         '128': 'icons/extension-icon-x128.png',
     },
 };
+if (!__DEV__) {
+    manifest.content_scripts?.unshift({
+        matches: ['<all_urls>'],
+        js: ['js/vendor.js'],
+    });
+}
 
 export default manifest;
