@@ -1,6 +1,8 @@
 {
+    "wrappingStyle": "prettier",
+    "nodeProtocol": "always",
     "groupRules": [
-        ["^[@][^/]", {}],
+        [{ "builtin": true }, "^[@][^/]", {}],
         [
             "^@(/|$)",
             "^actions?(/|$)",
@@ -19,6 +21,5 @@
         ],
         { "flags": "named", "regex": "^[.]" },
         [{ "flags": "scripts" }, { "flags": "scripts", "regex": "[.]((css)|(less)|(scss))$" }]
-    ],
-    "wrappingStyle": "prettier"
+    ]
 }

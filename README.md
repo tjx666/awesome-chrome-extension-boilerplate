@@ -1,6 +1,6 @@
 # awesome-chrome-extension-boilerplate
 
-[![Build Status](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate.svg?branch=master)](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate) [![Known Vulnerabilities](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate?targetFile=package.json) [![Percentage of issues still open](https://isitmaintained.com/badge/open/tjx666/awesome-chrome-extension-boilerplate.svg)](http://isitmaintained.com/project/tjx666/awesome-chrome-extension-boilerplate)
+[![test](https://github.com/tjx666/awesome-chrome-extension-boilerplate/actions/workflows/test.yml/badge.svg)](https://github.com/tjx666/awesome-chrome-extension-boilerplate/actions/workflows/test.yml) [![Known Vulnerabilities](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate?targetFile=package.json) [![Percentage of issues still open](https://isitmaintained.com/badge/open/tjx666/awesome-chrome-extension-boilerplate.svg)](http://isitmaintained.com/project/tjx666/awesome-chrome-extension-boilerplate) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/tjx666/react-typescript-boilerplate/pulls)
 
 > 一个超棒的基于 React & TypeScript & webpack 的 chrome 扩展开发模板
 
@@ -33,7 +33,7 @@ pnpm
 
 #### 修改清单文件
 
-在 src 目录下有两个清单文件：`manifest.dev.json` 和 `manifest.prod.json`，分别是开发环境和生产环境的配置文件。
+使用 `src/manifest.ts` 编写 `manifest.json`，它其实是一个 node 脚本，因此你可以使用 `server` 下面的所有模块，可以使用环境变量处理不同开发环境的配置。
 
 **注意**：任何注入了 `content scripts` 的页面也必须被注入 `js/all.js` 和 `css/all.css` ，为了实现这一点，它俩的 `matches` 应该是其它所有 `content scripts` 的 `matches` 的父集。
 
@@ -60,7 +60,7 @@ pnpm
 
 `public` 下的文件会被打包到扩展的根目录，`manifest` 中用到的图标等资源可以直接放到 `public` 文件夹下面。模板在 `public/icons` 放了一些默认的图标，因此可以在 `manifest` 中这样引用图标：
 
-```js
+```json
 // manifest.dev.json
 {
   "icons": {
@@ -110,7 +110,7 @@ npm run devtools
 
 它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
-这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint `规则也集成了。
+这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint` 规则也集成了。
 
 模板使用 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 `react` 的热更新。
 
@@ -127,13 +127,15 @@ npm run devtools
 1. 添加 `content scripts` 和页面 URL 之间的映射到 `manifest.dev.json` 和 `manifest.prod.json`:
 
    ```json
-   "content_scripts": [
+   {
+     "content_scripts": [
        {
-           "matches": ["https://www.example.com/discuss*"],
-           "css": ["css/discuss.css"],
-           "js": ["js/discuss.js"]
+         "matches": ["https://www.example.com/discuss*"],
+         "css": ["css/discuss.css"],
+         "js": ["js/discuss.js"]
        }
-   ],
+     ]
+   }
    ```
 
 2. 创建一个和上面 `content script` 路径对应的文件夹 `src/contents/discuss`。`src/discuss/index.tsx` 或者 `src/discuss/index.ts` 将会被视为一个 webpack entry。 `webpack` 会通过这个 `entry` 最终产出 `js/discuss.js` 这个 `chunk`。
@@ -174,12 +176,6 @@ pnpm build-analyze
 
 核心原理：[使用 webpack 构建 chrome 扩展的热更新问题](https://zhuanlan.zhihu.com/p/103072251)
 
-## :dart: TODO
-
-- [x] 给 manifest.json 增加 JSON 校验，目前使用的是 [SchemaStore](https://github.com/SchemaStore/schemastore) 提供的 schema，有极少部分内容已经过时了，有时间要去提个 PR。
-- [x] 支持 webpack dev server 代理
-- [x] 针对 chrome 扩展本身是个多页面应用的特点，提取多个页面的公共依赖到单独的 chunk
-
 ## :handshake: 贡献 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-欢迎提交 PRs 和 issues。
+欢迎贡献 PRs。

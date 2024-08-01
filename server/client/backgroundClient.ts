@@ -50,7 +50,7 @@ source.addEventListener(
                                 action: 'refresh current page',
                             },
                             (res) => {
-                                if (window.chrome.runtime.lastError && !res) return;
+                                if (chrome.runtime.lastError && !res) return;
 
                                 const { from, action } = res;
                                 if (
@@ -77,7 +77,8 @@ source.addEventListener(
     'error',
     (event: EventSourceEvent) => {
         if (event.target!.readyState === 0) {
-            console.error('You need to open devServer first!');
+            // ignore because too annoying
+            // console.error('You need to open devServer first!');
         } else {
             console.error(event);
         }

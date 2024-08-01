@@ -1,14 +1,14 @@
-// import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { resolve } from 'path';
-import { Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 import WebpackBar from 'webpackbar';
 
-import { __DEV__, PROJECT_ROOT } from '../utils/constants';
+import { __DEV__, ENABLE_DEVTOOLS, PROJECT_ROOT } from '../utils/constants';
 import entry from '../utils/entry';
+import { resolveExtension, resolvePublic, resolveSrc } from '../utils/path';
 
 function getCssLoaders(importLoaders: number) {
     return [
@@ -18,6 +18,7 @@ function getCssLoaders(importLoaders: number) {
         {
             loader: 'css-loader',
             options: {
+                // disable css module by default
                 modules: false,
                 sourceMap: true,
                 importLoaders,
@@ -34,33 +35,31 @@ const commonConfig: Configuration = {
     },
     output: {
         publicPath: '/',
-        path: resolve(PROJECT_ROOT, 'extension'),
+        path: resolveExtension(),
         filename: 'js/[name].js',
         // 将热更新临时生成的补丁放到 hot 文件夹中
         hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: 'hot/[runtime].[fullhash].hot-update.json',
+        clean: {
+            keep: (filename) => {
+                return filename === 'manifest.json' || filename === 'js/react-devtools.js';
+            },
+        },
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
         alias: {
-            '@': resolve(PROJECT_ROOT, 'src'),
-            utils: resolve(PROJECT_ROOT, 'src/utils'),
-            styles: resolve(PROJECT_ROOT, 'src/styles'),
+            '@': resolveSrc(),
         },
     },
     plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new CopyPlugin({
             patterns: [
                 {
-                    from: resolve(PROJECT_ROOT, 'public'),
+                    from: resolvePublic(),
                     globOptions: {
                         ignore: ['**/public/*.html'],
                     },
-                },
-                {
-                    from: resolve(PROJECT_ROOT, `src/manifest.${__DEV__ ? 'dev' : 'prod'}.json`),
-                    to: 'manifest.json',
                 },
             ],
         }),
@@ -68,22 +67,24 @@ const commonConfig: Configuration = {
             name: 'Building chrome extension',
             color: '#0f9d58',
         }),
-        // new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
             chunks: ['options'],
             filename: 'options.html',
             title: 'options page',
-            template: resolve(PROJECT_ROOT, 'public/options.html'),
+            template: resolvePublic('options.html'),
         }),
         new HtmlWebpackPlugin({
             chunks: ['popup'],
             filename: 'popup.html',
             title: 'popup page',
-            template: resolve(PROJECT_ROOT, 'public/popup.html'),
+            template: resolvePublic('popup.html'),
         }),
         new MiniCssExtractPlugin({
             filename: `css/[name].css`,
             ignoreOrder: false,
+        }),
+        new FriendlyErrorsPlugin({
+            clearConsole: false,
         }),
     ],
     module: {
@@ -155,5 +156,15 @@ const commonConfig: Configuration = {
         ],
     },
 };
+
+if (ENABLE_DEVTOOLS) {
+    commonConfig.plugins!.push(
+        new HtmlWebpackTagsPlugin({
+            tags: ['js/react-devtools.js'],
+            append: false,
+            files: ['options.html', 'popup.html'],
+        }),
+    );
+}
 
 export default commonConfig;

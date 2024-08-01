@@ -27,7 +27,12 @@
         "skipLibCheck": true,
 
         // 下面这些选项对 babel 编译 TypeScript 没有作用但是可以让 VSCode 等编辑器正确提示错误
-        "target": "ES2020",
-        "module": "ESNext"
-    }
+        "target": "ES2022",
+        "module": "ESNext",
+        "paths": {
+            "@/*": ["./*"]
+        }
+    },
+
+    "exclude": ["manifest.ts"]
 }

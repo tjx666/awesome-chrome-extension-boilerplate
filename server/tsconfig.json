@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "target": "ES2021",
+        "target": "ES2022",
         "module": "commonjs",
 
         /* Strict Type-Checking Options */
@@ -25,5 +25,10 @@
         /* Advanced Options */
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true
+    },
+    "include": ["./**/**.ts", "../src/manifest.ts"],
+    "ts-node": {
+        "files": true,
+        "swc": true
     }
 }

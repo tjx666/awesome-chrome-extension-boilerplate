@@ -1,11 +1,11 @@
-import { Compiler } from 'webpack';
-import { Express } from 'express';
 import cors from 'cors';
+import type { Express } from 'express';
+import type { Compiler } from 'webpack';
 
-import webpackMiddleware from './webpackMiddleware';
+import { EXTENSION_AUTO_RELOAD_PATH } from '../utils/constants';
 import extensionAutoReload from './extensionAutoReload';
 import proxyMiddleware from './proxyMiddleware';
-import { EXTENSION_AUTO_RELOAD_PATH } from '../utils/constants';
+import webpackMiddleware from './webpackMiddleware';
 
 export default function setupMiddlewares(devServer: Express, compiler: Compiler): void {
     proxyMiddleware(devServer);

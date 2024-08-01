@@ -1,8 +1,10 @@
-import { RequestHandler } from 'express';
+import console from 'consola';
+import type { RequestHandler } from 'express';
 import { debounce } from 'lodash';
-import { resolve } from 'path';
 import SSEStream from 'ssestream';
-import { Compiler, Stats } from 'webpack';
+import type { Compiler, Stats } from 'webpack';
+
+import { resolveSrc } from '../utils/path';
 
 export default function extensionAutoReload(compiler: Compiler): RequestHandler {
     return (req, res, next) => {
@@ -19,7 +21,7 @@ export default function extensionAutoReload(compiler: Compiler): RequestHandler 
             const shouldReload =
                 !stats.hasErrors() &&
                 updatedJsModules?.some((module) =>
-                    module.nameForCondition?.startsWith(resolve(__dirname, '../../src/contents')),
+                    module.nameForCondition?.startsWith(resolveSrc('contents')),
                 );
             if (shouldReload) {
                 sseStream.write(
