@@ -2,9 +2,10 @@
 
 [![Build Status](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate.svg?branch=master)](https://travis-ci.org/tjx666/awesome-chrome-extension-boilerplate) [![Known Vulnerabilities](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/tjx666/awesome-chrome-extension-boilerplate?targetFile=package.json) [![Percentage of issues still open](https://isitmaintained.com/badge/open/tjx666/awesome-chrome-extension-boilerplate.svg)](http://isitmaintained.com/project/tjx666/awesome-chrome-extension-boilerplate)
 
-> 一个超棒的基于 React & TypeScript & webpack 的 chrome 扩展开发模板
+一个超棒的基于 React & TypeScript & webpack 的 chrome 扩展开发模板
 
-manifest v3 版本 :point_right: [manifest-v3](https://github.com/tjx666/awesome-chrome-extension-boilerplate/tree/manifest-v3)
+> [!WARNING]
+> This manifest v2 version is not maintained anymore
 
 ## :sparkles: 特性
 
@@ -110,7 +111,7 @@ npm run devtools
 
 它俩的 webpack entry 分别是 `src/options/index.tsx` 和 `src/popup/index.tsx`。这两个页面很相似，都只是一个普通的 web 页面，因此你可以像开发一个 react **SPA** 一样开发它们。
 
-这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint `规则也集成了。
+这个模板使用了 `react` 的最新版本，因此你可以使用 `react hooks` 去开发函数组件，`react hooks` 的 `eslint`规则也集成了。
 
 模板使用 [React Fast Refresh](https://github.com/facebook/react/issues/16604) 支持 `react` 的热更新。
 
